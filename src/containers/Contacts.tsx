@@ -9,10 +9,14 @@ const Contacts = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedSection, setSelectedSection] = useState(0);
+  const [hasMounted, sethasMounted] = useState(false);
 
   useEffect(() => {
-    navigate("/contacts/leads");
-  }, []);
+    if (!hasMounted) {
+      navigate("/contacts/leads");
+      sethasMounted(true);
+    }
+  }, [hasMounted, navigate]);
 
   const handleSelected = (index: number, value: string) => {
     setSelectedSection(index);

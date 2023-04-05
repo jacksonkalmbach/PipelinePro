@@ -1,17 +1,20 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import SectionNavbar from "./components/section-navigation/SectionNavbar";
 import Contacts from "./containers/Contacts";
-import Leads from "./containers/lead-container/Leads";
 import NavBar from "./routes/navigation/NavBar";
 
 const App: React.FC = () => {
   const navigate = useNavigate();
+  const [hasMounted, sethasMounted] = useState(false);
 
   useEffect(() => {
-    navigate("/dashboard");
-  }, []);
+    if (!hasMounted) {
+      navigate("/dashboard");
+      sethasMounted(true);
+    }
+  }, [hasMounted, navigate]);
 
   return (
     <>
