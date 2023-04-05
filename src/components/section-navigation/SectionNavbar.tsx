@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { setSectionNavigation } from "../../store/reducers/navigation/sectionNavigationSlice";
 
 import "./SectionNavbar.styles.scss";
@@ -22,8 +23,9 @@ const SectionNavbar = () => {
           }`}
           onClick={() => handleSelectedSection(0, "Dashboard")}
         >
-          <span className="material-symbols-outlined">home</span>
-          <div className="selected-bar"></div>
+          <Link to="/dashboard" className="link">
+            <span className="material-symbols-outlined">home</span>
+          </Link>
         </div>
         <div
           className={`section-icon ${
@@ -31,9 +33,11 @@ const SectionNavbar = () => {
           }`}
           onClick={() => handleSelectedSection(1, "Contacts")}
         >
-          <span className="material-symbols-outlined">
-            perm_contact_calendar
-          </span>
+          <Link to="/contacts" className="link">
+            <span className="material-symbols-outlined">
+              perm_contact_calendar
+            </span>
+          </Link>
         </div>
         <div
           className={`section-icon ${
@@ -41,7 +45,9 @@ const SectionNavbar = () => {
           }`}
           onClick={() => handleSelectedSection(2, "Calendar")}
         >
-          <span className="material-symbols-outlined">calendar_month</span>
+          <Link to="/calendar" className="link">
+            <span className="material-symbols-outlined">calendar_month</span>
+          </Link>
         </div>
       </div>
       <div
@@ -51,7 +57,9 @@ const SectionNavbar = () => {
         onClick={() => handleSelectedSection(3, "Settings")}
       >
         <div className="section-icon">
-          <span className="material-symbols-outlined">settings</span>
+          <Link to="/settings" className="link">
+            <span className="material-symbols-outlined">settings</span>
+          </Link>
         </div>
       </div>
     </div>

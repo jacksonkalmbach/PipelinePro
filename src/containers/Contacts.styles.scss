@@ -3,7 +3,7 @@
 .contacts-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - 4rem - 33px);
 
   .contacts-sections {
     padding-left: 2rem;
@@ -21,12 +21,19 @@
       color: $theme-grey;
       font-weight: 600;
 
+      .link {
+        text-decoration: none;
+        color: $theme-grey;
+      }
+
       &:hover {
         cursor: pointer;
       }
 
       &.selected {
-        color: $primary-color;
+        .link {
+          color: $primary-color;
+        }
       }
     }
   }
