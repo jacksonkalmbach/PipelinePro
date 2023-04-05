@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setContactsNavigation } from "../store/reducers/navigation/contactsNavigationSlice";
 
@@ -57,6 +57,7 @@ const Contacts = () => {
           </Link>
         </div>
       </div>
+      <Outlet />
     </div>
   );
 };
