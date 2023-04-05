@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import sectionNavigationSlice from "./reducers/navigation/sectionNavigationSlice";
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    sectionNavigation: sectionNavigationSlice,
+  },
 });
 
 export default store;
