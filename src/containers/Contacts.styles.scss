@@ -1,0 +1,33 @@
+@import "../styles/variables";
+
+.contacts-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  .contacts-sections {
+    padding-left: 2rem;
+    align-items: center;
+    display: flex;
+    justify-content: flex-start;
+    gap: 4rem;
+    width: 100%;
+    border-bottom: 1px solid $theme-lightgrey;
+    height: 6vh;
+
+    .contacts-section {
+      font-family: $font-family;
+      font-size: 14px;
+      color: $theme-grey;
+      font-weight: 600;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.selected {
+        color: $primary-color;
+      }
+    }
+  }
+}
