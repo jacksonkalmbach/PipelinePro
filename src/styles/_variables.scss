@@ -1,0 +1,13 @@
+//colors
+$primary-color: #ff7043;
+$secondary-color: #2e66f6;
+$theme-black: #263238;
+$theme-grey: #78889b;
+$theme-lightgrey: #e0e0e0;
+
+@font-face {
+  font-family: "Strawford";
+  src: url("./fonts/Strawford-Regular-&-Italic/Webfont/Strawford\ Regular\ &\ Italic\ webfont/strawford-regular-webfont.ttf");
+}
+
+$font-family: "Strawford", sans-serif;
