@@ -8,6 +8,13 @@
   gap: 30px;
   height: calc(100vh - 11rem);
 
+  .leads-count {
+    font-family: $font-family;
+    font-size: 32px;
+    font-weight: 600;
+    color: #000;
+    padding: 20px 20px;
+  }
   .leads-filter-container {
     border: 1px solid black;
     height: 5rem;
