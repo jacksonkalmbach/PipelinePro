@@ -16,6 +16,10 @@
       align-items: center;
       border: 1px solid $theme-lightgrey;
       padding: 5px 10px;
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 
