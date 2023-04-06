@@ -31,6 +31,7 @@ const CreateLead = () => {
           </div>
         </div>
         <form className="create-lead-form">
+          <div className="lead-name">Name</div>
           <div className="form-group">
             <input
               type="text"
