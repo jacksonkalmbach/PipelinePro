@@ -23,11 +23,13 @@ const App: React.FC = () => {
       <div className="main-container">
         <SectionNavbar />
         <Routes>
+          <Route path="/dashboard" element={<div>Dashboard</div>} />
           <Route path="/contacts/*" element={<Contacts />}>
             <Route path="leads" element={<Leads />} />
             <Route path="contacts" element={<div>Contacts</div>} />
             <Route path="companies" element={<div>Companies</div>} />
           </Route>
+          <Route path="/calendar" element={<div>Calendar</div>} />
         </Routes>
       </div>
     </>
