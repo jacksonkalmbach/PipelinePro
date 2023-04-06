@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.lead-row-item {
+  display: flex;
+  padding: 20px 0;
+  border: 1px solid $theme-lightgrey;
+  justify-content: space-around;
+  align-items: center;
+
+  .lead-row-item__name {
+    font-weight: bold;
+  }
+
+  .lead-row-item__contact {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+    .lead-row-item__contact_email {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .lead-row-item__contact_phone {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+  }
+}

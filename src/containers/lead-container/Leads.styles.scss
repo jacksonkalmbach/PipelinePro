@@ -1,0 +1,48 @@
+@import "../../styles/variables";
+
+.leads-container {
+  display: flex;
+  margin-top: 0;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 30px;
+  height: calc(100vh - 11rem);
+
+  .leads-count {
+    font-family: $font-family;
+    font-size: 32px;
+    font-weight: 600;
+    color: #000;
+    padding: 20px 20px;
+  }
+  .leads-filter-container {
+    border: 1px solid black;
+    height: 5rem;
+  }
+
+  .leads-list-container {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    border: 1px solid black;
+    max-height: calc(100vh - 11rem - 4rem - 4rem - 30px);
+    width: 96%;
+
+    .leads-list-filters {
+      display: flex;
+      height: 4rem;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .leads-list {
+      display: flex;
+      flex-direction: column;
+      overflow-y: scroll;
+      height: calc(100vh - 11rem - 4rem - 4rem - 30px - 4rem);
+
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+  }
+}
