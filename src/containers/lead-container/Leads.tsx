@@ -3,9 +3,10 @@ import LeadRowItem from "../../components/lead-row-item/LeadRowItem";
 
 import "./Leads.styles.scss";
 import LeadsData from "../../LEAD_DATA.json";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
 import FilterAddLead from "../../components/filter-add-leads/FilterAddLeads";
+import CreateLead from "../../components/create-lead/CreateLead";
 
 const Leads = () => {
   const leadCount = 567;
@@ -20,6 +21,7 @@ const Leads = () => {
 
   return (
     <div className="leads-container">
+      <CreateLead />
       <div className="leads-count">{leadCount} Leads</div>
       <FilterAddLead />
       <div className="leads-list-container">

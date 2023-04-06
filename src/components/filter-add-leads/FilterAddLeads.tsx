@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setShowCreateLead } from "../../store/reducers/leads/showCreateLeadSlice";
 
 import "./FilterAddLeads.styles.scss";
 
 const FilterAddLead = () => {
+  const dispatch = useDispatch();
+
   const handleCreateLead = () => {
-    console.log("Create Lead");
+    dispatch(setShowCreateLead());
   };
 
   return (

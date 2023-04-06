@@ -1,0 +1,175 @@
+@import "../../styles/variables";
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9998;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.create-lead-container {
+  position: fixed;
+  width: 50vw;
+  height: 93vh;
+  background-color: white;
+  z-index: 9999;
+  right: -50vw;
+  bottom: 0;
+  animation-name: slideInFromRight;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* Add styles for the .slide-out class */
+
+.slide-out {
+  animation-name: slideOutToRight;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+/* Add styles for the overlay when the component is shown */
+
+.create-lead-showing .overlay {
+  display: block;
+}
+
+.create-lead-showing .create-lead-container {
+  right: 0;
+}
+
+.create-lead-showing .create-lead-header,
+.create-lead-showing .create-lead-form {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.create-lead-showing .create-lead-form {
+  transform: translateY(0);
+}
+
+.create-lead-showing .create-lead-button {
+  opacity: 1;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.create-lead-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  width: 50vw;
+  height: 93vh;
+  background-color: white;
+  z-index: 9999;
+  right: -50vw;
+  bottom: 0;
+  animation-name: slideInFromRight;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+
+  &.slide-out {
+    animation-name: slideOutToRight;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+  }
+
+  .create-lead-header {
+    padding: 1rem 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $theme-lightgrey;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      padding-left: 3rem;
+    }
+
+    .close-create-lead-button {
+      padding-right: 3rem;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    right: -50vw;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideOutToRight {
+  from {
+    right: 0;
+  }
+  to {
+    right: -50vw;
+  }
+}
+
+.create-lead-form {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: space-between;
+  width: 80%;
+  height: 50%;
+
+  .create-lead-button-container {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .create-lead-button {
+    background-color: $primary-color;
+    border: transparent;
+    color: white;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+
+input {
+  border: 1px solid $theme-lightgrey;
+  outline: none;
+  font-size: 1rem;
+  font-family: inherit;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  width: 100%;
+
+  &:focus {
+    border: 2px solid $secondary-color;
+  }
+
+  &:hover {
+    background-color: #f5f5f5;
+  }
+}
