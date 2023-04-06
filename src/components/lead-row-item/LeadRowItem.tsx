@@ -1,5 +1,6 @@
 import React from "react";
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
+import { useSelector } from "react-redux";
 
 import "./LeadRowItem.styles.scss";
 
@@ -18,12 +19,18 @@ const LeadRowItem = ({
   phone,
   owner,
 }: LeadRowItemProps) => {
+  const checkAll = useSelector((state: any) => state.selectAllLeads.value);
+
   return (
     <div className="lead-row-item">
-      <div className="lead-row-item__checkbox">
-        <span className="material-symbols-outlined">
-          check_box_outline_blank
-        </span>
+      <div className={`lead-row-item__checkbox ${checkAll ? "checkAll" : ""}`}>
+        {checkAll ? (
+          <span className="material-symbols-outlined">check_box</span>
+        ) : (
+          <span className="material-symbols-outlined">
+            check_box_outline_blank
+          </span>
+        )}
       </div>
       <div className="lead-row-item__name">{firstName + " " + lastName}</div>
       <div className="lead-row-item__contact">

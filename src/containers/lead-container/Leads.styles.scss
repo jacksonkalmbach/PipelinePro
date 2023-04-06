@@ -28,10 +28,18 @@
     max-height: calc(100vh - 11rem - 4rem - 4rem - 30px);
     width: 96%;
 
+    .leads-list-search {
+      display: flex;
+      height: 4rem;
+      align-items: center;
+      border-bottom: 1px solid $theme-lightgrey;
+    }
+
     .leads-list-filters {
       display: flex;
       height: 4rem;
       align-items: center;
+      background-color: rgb(248, 248, 248);
 
       .leads-list-filters__checkbox {
         color: $theme-lightgrey;
@@ -41,6 +49,14 @@
         font-weight: bold;
         height: 100%;
         width: 10%;
+
+        &.checkAll {
+          color: $secondary-color;
+
+          .material-symbols-outlined {
+            font-variation-settings: "FILL" 100, "wght" 400, "GRAD" 0, "opsz" 48;
+          }
+        }
 
         :hover {
           cursor: pointer;
@@ -57,6 +73,10 @@
         font-size: 12px;
         height: 100%;
         width: calc(90% / 4);
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .leads-list-filters__contact {
@@ -70,6 +90,10 @@
         font-weight: bold;
         height: 100%;
         width: calc(90% / 4);
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .leads-list-filters__status {
@@ -82,6 +106,10 @@
         font-size: 12px;
         height: 100%;
         width: calc(90% / 4);
+
+        &:hover {
+          cursor: pointer;
+        }
       }
 
       .leads-list-filters__owner {
@@ -94,6 +122,10 @@
         font-weight: bold;
         height: 100%;
         width: calc(90% / 4);
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
