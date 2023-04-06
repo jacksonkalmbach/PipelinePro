@@ -19,7 +19,7 @@ const CreateLead = () => {
   const [initalRender, setInitialRender] = useState<boolean>(true);
 
   const [formFields, setFormFields] = useState(defaultCreateLeadState);
-  const { fullName, email, phone, company, jobTitle, leadStatus } = formFields;
+  const { leadStatus } = formFields;
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -40,6 +40,26 @@ const CreateLead = () => {
 
   const handleCloseCreateLead = () => {
     dispatch(setShowCreateLead());
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const response = await fetch("/api/leads", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formFields),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to create lead");
+    } else {
+      console.log("New lead created successfully");
+      setFormFields(defaultCreateLeadState);
+      handleCloseCreateLead();
+    }
   };
 
   return (
@@ -65,7 +85,7 @@ const CreateLead = () => {
             <input
               required
               type="text"
-              id="full-name-input"
+              id="name-input"
               name="fullName"
               placeholder="e.g. John Doe"
               onChange={handleInputChange}
@@ -105,8 +125,8 @@ const CreateLead = () => {
             Job Title
             <input
               type="text"
-              id="job-title-input"
-              name="jobTitle"
+              id="jobTitle-input"
+              name="job_title"
               placeholder="e.g. Project Manager"
               onChange={handleInputChange}
             />
@@ -144,7 +164,12 @@ const CreateLead = () => {
             <button className="create-lead-and-another-button">
               Create and Add another
             </button>
-            <button className="create-lead-button">Create</button>
+            <button
+              className="create-lead-button"
+              onSubmit={() => handleSubmit}
+            >
+              Create
+            </button>
           </div>
         </form>
       </div>
