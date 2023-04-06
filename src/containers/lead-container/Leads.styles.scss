@@ -24,33 +24,93 @@
     display: flex;
     flex-direction: column;
     align-self: center;
-    border: 1px solid black;
+    border: 1px solid $theme-lightgrey;
     max-height: calc(100vh - 11rem - 4rem - 4rem - 30px);
     width: 96%;
 
     .leads-list-filters {
       display: flex;
       height: 4rem;
-      justify-content: space-around;
       align-items: center;
-    }
 
-    .leads-list-filters__checkbox {
-      color: $theme-lightgrey;
+      .leads-list-filters__checkbox {
+        color: $theme-lightgrey;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        height: 100%;
+        width: 10%;
 
-      :hover {
-        cursor: pointer;
+        :hover {
+          cursor: pointer;
+        }
+      }
+
+      .leads-list-filters__name {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 20px;
+        align-items: center;
+        font-weight: bold;
+        color: $theme-grey;
+        font-size: 12px;
+        height: 100%;
+        width: calc(90% / 4);
+      }
+
+      .leads-list-filters__contact {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 20px;
+        align-items: center;
+        font-weight: bold;
+        color: $theme-grey;
+        font-size: 12px;
+        font-weight: bold;
+        height: 100%;
+        width: calc(90% / 4);
+      }
+
+      .leads-list-filters__status {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 50px;
+        align-items: center;
+        font-weight: bold;
+        color: $theme-grey;
+        font-size: 12px;
+        height: 100%;
+        width: calc(90% / 4);
+      }
+
+      .leads-list-filters__owner {
+        display: flex;
+        justify-content: flex-start;
+        padding-left: 20px;
+        align-items: center;
+        color: $theme-grey;
+        font-size: 12px;
+        font-weight: bold;
+        height: 100%;
+        width: calc(90% / 4);
       }
     }
 
     .leads-list {
       display: flex;
       flex-direction: column;
+      border: 1px solid $theme-lightgrey;
       overflow-y: scroll;
       height: calc(100vh - 11rem - 4rem - 4rem - 30px - 4rem);
+    }
 
-      scrollbar-width: none;
+    .leads-list {
       -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .leads-list::-webkit-scrollbar {
+      display: none;
     }
   }
 }

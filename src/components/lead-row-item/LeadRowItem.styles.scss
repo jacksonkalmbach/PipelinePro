@@ -4,11 +4,15 @@
   display: flex;
   padding: 20px 0;
   border: 1px solid $theme-lightgrey;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 
   .lead-row-item__checkbox {
     color: $theme-lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
 
     :hover {
       cursor: pointer;
@@ -16,12 +20,29 @@
   }
 
   .lead-row-item__name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
     font-weight: bold;
+    padding-left: 20px;
+    height: 100%;
+    width: calc(90% / 4);
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .lead-row-item__contact {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20px;
+    font-weight: bold;
+    height: 100%;
+    width: calc(90% / 4);
+
     gap: 5px;
 
     .lead-row-item__contact_email {
@@ -34,5 +55,25 @@
       align-items: center;
       gap: 5px;
     }
+  }
+
+  .lead-row-item__status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 50px;
+    font-weight: bold;
+    height: 100%;
+    width: calc(90% / 4);
+  }
+
+  .lead-row-item__owner {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
+    align-items: center;
+    font-weight: bold;
+    height: 100%;
+    width: calc(90% / 4);
   }
 }

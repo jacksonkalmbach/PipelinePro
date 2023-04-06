@@ -20,10 +20,10 @@ const Leads = () => {
               check_box_outline_blank
             </span>
           </div>
-          <div className="leads-list-filters__name">Name</div>
-          <div className="leads-list-filters__contact">Contact</div>
-          <div className="leads-list-filters__status">Status</div>
-          <div className="leads-list-filters__owner">Owner</div>
+          <div className="leads-list-filters__name">NAME</div>
+          <div className="leads-list-filters__contact">CONTACT</div>
+          <div className="leads-list-filters__status">STATUS</div>
+          <div className="leads-list-filters__owner">LEAD OWNER</div>
         </div>
         <div className="leads-list">
           {leads.map((lead: any) => {
