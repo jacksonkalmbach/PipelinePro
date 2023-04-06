@@ -86,10 +86,10 @@ const CreateLead = () => {
           <div>
             Lead Status
             <div className="lead-progress">
-              <LeadRowStatus status="New" />
-              <LeadRowStatus status="Open" />
-              <LeadRowStatus status="Closed" />
-              <LeadRowStatus status="Warm" />
+              <LeadRowStatus status="New" clickable={true} />
+              <LeadRowStatus status="Open" clickable={true} />
+              <LeadRowStatus status="Closed" clickable={true} />
+              <LeadRowStatus status="Warm" clickable={true} />
             </div>
           </div>
           <div className="create-lead-button-container">
