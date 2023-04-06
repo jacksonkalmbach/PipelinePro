@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 import { useSelector } from "react-redux";
 
@@ -19,12 +19,26 @@ const LeadRowItem = ({
   phone,
   owner,
 }: LeadRowItemProps) => {
+  const [isSelected, setisSelected] = useState(false);
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
 
+  useEffect(() => {
+    setisSelected(checkAll);
+  }, [checkAll]);
+
+  const toggleSelected = () => {
+    setisSelected(!isSelected);
+  };
+
   return (
-    <div className="lead-row-item">
-      <div className={`lead-row-item__checkbox ${checkAll ? "checkAll" : ""}`}>
-        {checkAll ? (
+    <div className={`lead-row-item ${isSelected ? "selected" : ""}`}>
+      <div
+        className={`lead-row-item__checkbox ${
+          checkAll || isSelected ? "selected" : ""
+        } ${isSelected ? "selected" : ""}}`}
+        onClick={toggleSelected}
+      >
+        {checkAll || isSelected ? (
           <span className="material-symbols-outlined">check_box</span>
         ) : (
           <span className="material-symbols-outlined">

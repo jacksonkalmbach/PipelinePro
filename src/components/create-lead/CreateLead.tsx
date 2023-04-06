@@ -72,9 +72,10 @@ const CreateLead = () => {
             />
           </div>
           <div className="create-lead-button-container">
-            <button className="create-lead-button" type="submit">
-              Submit
+            <button className="create-lead-and-another-button">
+              Create and Add another
             </button>
+            <button className="create-lead-button">Create</button>
           </div>
         </form>
       </div>

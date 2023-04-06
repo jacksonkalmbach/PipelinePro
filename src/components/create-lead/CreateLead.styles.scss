@@ -25,38 +25,11 @@
   animation-fill-mode: forwards;
 }
 
-/* Add styles for the .slide-out class */
-
 .slide-out {
   animation-name: slideOutToRight;
   animation-duration: 0.5s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
-}
-
-/* Add styles for the overlay when the component is shown */
-
-.create-lead-showing .overlay {
-  display: block;
-}
-
-.create-lead-showing .create-lead-container {
-  right: 0;
-}
-
-.create-lead-showing .create-lead-header,
-.create-lead-showing .create-lead-form {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
-}
-
-.create-lead-showing .create-lead-form {
-  transform: translateY(0);
-}
-
-.create-lead-showing .create-lead-button {
-  opacity: 1;
-  transition: opacity 0.2s ease-in-out;
 }
 
 .create-lead-container {
@@ -136,22 +109,42 @@
   .create-lead-button-container {
     display: flex;
     justify-content: flex-end;
-  }
+    gap: 1rem;
 
-  .create-lead-button {
-    background-color: $primary-color;
-    border: transparent;
-    color: white;
-    font-weight: bold;
-    padding: 10px 15px;
-    border-radius: 5px;
+    .create-lead-and-another-button {
+      background-color: white;
+      border: transparent;
+      color: $theme-grey;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+      border: 2px solid $theme-grey;
 
-    &:hover {
-      cursor: pointer;
+      &:hover {
+        background-color: $theme-lightgrey;
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
 
-    &:active {
-      transform: scale(0.95);
+    .create-lead-button {
+      background-color: $primary-color;
+      border: transparent;
+      color: white;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
   }
 }
