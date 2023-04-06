@@ -1,36 +1,94 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
+
+import {
+  setSortAZ,
+  setSortZA,
+  setSortStatus,
+  setSortLeadOwner,
+} from "../../store/reducers/leads/sortLeadsSlice";
+
 import Dropdown from "../dropdown/Dropdown";
 import LeadRowItem from "../lead-row-item/LeadRowItem";
 import LeadRowItemPlaceholder from "../lead-row-item/LeadRowItemPlaceholder";
-import LEAD_DATA from "../../LEAD_DATA.json";
 
+import LEAD_DATA from "../../LEAD_DATA.json";
 import "./LeadList.styles.scss";
 
 const LeadList = () => {
+  const { leads } = LEAD_DATA;
   const placeholders = [];
+  const leadCount = 567;
 
   for (let i = 0; i < 10; i++) {
     placeholders.push(<LeadRowItemPlaceholder key={i} />);
   }
 
-  const leadCount = 567;
-  const { leads } = LEAD_DATA;
   const dispatch = useDispatch();
   const [checkAll, setCheckAll] = useState(false);
   const [dataLoad, setDataLoad] = useState(false);
 
-  const leadsPerPage = [10, 20, 50];
+  const [sortedAZ, setSortedAZ] = useState(false);
+  const [sortedLeads, setSortedLeads] = useState(leads);
 
-  const handleSortClick = () => {
-    console.log("handleSortClick");
-  };
+  const [sortedStatus, setSortedStatus] = useState(false);
+  const [sortedOwner, setSortedOwner] = useState(false);
+
+  const leadsPerPage = [10, 20, 50];
 
   const toggleCheckAll = () => {
     setCheckAll(!checkAll);
     dispatch(setSelectAllLeads());
   };
+
+  const handleSortClick = (type: string): void => {
+    switch (type) {
+      case "nameAZ":
+        setSortedAZ(!sortedAZ);
+        break;
+      case "status":
+        setSortedStatus(!sortedStatus);
+        break;
+      case "owner":
+        setSortedOwner(!sortedOwner);
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    if (sortedAZ) {
+      dispatch(setSortAZ());
+      const sorted = [...leads].sort((a: any, b: any) => {
+        const nameA = a.lastName.toUpperCase();
+        const nameB = b.lastName.toUpperCase();
+        if (nameA < nameB) {
+          return -1;
+        }
+        if (nameA > nameB) {
+          return 1;
+        }
+        return 0;
+      });
+      setSortedLeads(sorted);
+    } else if (sortedStatus) {
+      dispatch(setSortStatus());
+      const sorted = [...sortedLeads].sort((a: any, b: any) => {
+        const statusA = a.leadStatus.toUpperCase();
+        const statusB = b.leadStatus.toUpperCase();
+        if (statusA < statusB) {
+          return -1;
+        }
+        if (statusA > statusB) {
+          return 1;
+        }
+        return 0;
+      });
+      setSortedLeads(sorted);
+    }
+  }, [sortedAZ, sortedStatus, leads, sortedLeads, dispatch]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -66,25 +124,31 @@ const LeadList = () => {
             </span>
           )}
         </div>
-        <div className="leads-list-filters__name" onClick={handleSortClick}>
+        <div
+          className="leads-list-filters__name"
+          onClick={() => handleSortClick("nameAZ")}
+        >
           <span className="material-symbols-outlined">unfold_more</span>NAME
         </div>
-        <div className="leads-list-filters__contact" onClick={handleSortClick}>
+        <div className="leads-list-filters__contact">
           <span className="material-symbols-outlined">unfold_more</span>
           CONTACT
         </div>
-        <div className="leads-list-filters__status" onClick={handleSortClick}>
+        <div
+          className="leads-list-filters__status"
+          onClick={() => handleSortClick("status")}
+        >
           <span className="material-symbols-outlined">unfold_more</span>
           STATUS
         </div>
-        <div className="leads-list-filters__owner" onClick={handleSortClick}>
+        <div className="leads-list-filters__owner">
           <span className="material-symbols-outlined">unfold_more</span>
           LEAD OWNER
         </div>
       </div>
       <div className="leads-list">
         {dataLoad
-          ? leads.map((lead: any) => {
+          ? sortedLeads.map((lead: any) => {
               const {
                 id,
                 firstName,

@@ -12,27 +12,6 @@
 }
 
 .create-lead-container {
-  position: fixed;
-  width: 50vw;
-  height: 93vh;
-  background-color: white;
-  z-index: 9999;
-  right: -50vw;
-  bottom: 0;
-  animation-name: slideInFromRight;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-}
-
-.slide-out {
-  animation-name: slideOutToRight;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-}
-
-.create-lead-container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;

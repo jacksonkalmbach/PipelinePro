@@ -1,22 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCreateLead } from "../../store/reducers/leads/showCreateLeadSlice";
-import Dropdown from "../dropdown/Dropdown";
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
+
+const defaultCreateLeadState = {
+  fullName: "",
+  email: "",
+  phone: "",
+  company: "",
+  jobTitle: "",
+  leadStatus: "",
+};
 
 const CreateLead = () => {
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState<string>("");
-  const [lastName, setLastName] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [company, setCompany] = useState<string>("");
-  const [leadOwner, setleadOwner] = useState<string>("");
+  const [initalRender, setInitialRender] = useState<boolean>(true);
+
+  const [formFields, setFormFields] = useState(defaultCreateLeadState);
+  const { fullName, email, phone, company, jobTitle, leadStatus } = formFields;
+
+  const handleInputChange = (event: any) => {
+    const { name, value } = event.target;
+    setFormFields({ ...formFields, [name]: value });
+  };
+
+  const handleLeadStatusChange = (status: string): void => {
+    setFormFields({ ...formFields, leadStatus: status });
+  };
 
   const showCreateLead = useSelector(
     (state: any) => state.showCreateLead.value
   );
+
+  useEffect(() => {
+    setInitialRender(false);
+  }, []);
 
   const handleCloseCreateLead = () => {
     dispatch(setShowCreateLead());
@@ -26,7 +46,9 @@ const CreateLead = () => {
     <>
       <div className={showCreateLead ? "overlay" : ""}></div>
       <div
-        className={`create-lead-container ${showCreateLead ? "" : "slide-out"}`}
+        className={`create-lead-container ${
+          initalRender ? "hidden" : showCreateLead ? "" : "slide-out"
+        }`}
       >
         <div className="create-lead-header">
           <h1>Create Lead</h1>
@@ -41,10 +63,12 @@ const CreateLead = () => {
           <div className="form-group">
             Full Name
             <input
+              required
               type="text"
-              id="first-name-input"
-              name="first-name"
+              id="full-name-input"
+              name="fullName"
               placeholder="e.g. John Doe"
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
@@ -54,6 +78,7 @@ const CreateLead = () => {
               id="email-input"
               name="email"
               placeholder="e.g. mail@example.com"
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
@@ -63,6 +88,7 @@ const CreateLead = () => {
               id="phone-input"
               name="phone"
               placeholder="Enter Number"
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
@@ -72,24 +98,46 @@ const CreateLead = () => {
               id="company-input"
               name="company"
               placeholder="e.g. Google"
+              onChange={handleInputChange}
             />
           </div>
           <div className="form-group">
             Job Title
             <input
               type="text"
-              id="company-input"
-              name="company"
+              id="job-title-input"
+              name="jobTitle"
               placeholder="e.g. Project Manager"
+              onChange={handleInputChange}
             />
           </div>
           <div>
             Lead Status
             <div className="lead-progress">
-              <LeadRowStatus status="New" clickable={true} />
-              <LeadRowStatus status="Open" clickable={true} />
-              <LeadRowStatus status="Closed" clickable={true} />
-              <LeadRowStatus status="Warm" clickable={true} />
+              <LeadRowStatus
+                status="New"
+                clickable={true}
+                onClick={() => handleLeadStatusChange("New")}
+                selected={leadStatus === "New" ? true : false}
+              />
+              <LeadRowStatus
+                status="Open"
+                clickable={true}
+                onClick={() => handleLeadStatusChange("Open")}
+                selected={leadStatus === "Open" ? true : false}
+              />
+              <LeadRowStatus
+                status="Closed"
+                clickable={true}
+                onClick={() => handleLeadStatusChange("Closed")}
+                selected={leadStatus === "Closed" ? true : false}
+              />
+              <LeadRowStatus
+                status="Warm"
+                clickable={true}
+                onClick={() => handleLeadStatusChange("Warm")}
+                selected={leadStatus === "Warm" ? true : false}
+              />
             </div>
           </div>
           <div className="create-lead-button-container">
