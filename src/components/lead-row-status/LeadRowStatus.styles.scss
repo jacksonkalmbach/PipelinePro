@@ -1,5 +1,27 @@
 .lead-row-staus-container {
-  background-color: rgb(0, 196, 0);
+  margin-top: 10px;
   border-radius: 15px;
-  padding: 5px 10px;
+  padding: 5px 15px;
+  color: white;
+  font-weight: bold;
+
+  &.new {
+    background-color: #3cb371;
+  }
+
+  &.open {
+    background-color: #1e90ff;
+  }
+
+  &.closed {
+    background-color: #ff6347;
+  }
+
+  &.warm {
+    background-color: #fad24f;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 }

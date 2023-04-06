@@ -58,7 +58,7 @@ const LeadRowItem = ({
         </div>
       </div>
       <div className="lead-row-item__status">
-        <LeadRowStatus />
+        <LeadRowStatus status="New" />
       </div>
       <div className="lead-row-item__owner">{owner}</div>
     </div>

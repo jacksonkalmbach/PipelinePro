@@ -2,8 +2,16 @@ import React from "react";
 
 import "./LeadRowStatus.styles.scss";
 
-const LeadRowStatus = () => {
-  return <div className="lead-row-staus-container">New</div>;
+interface LeadRowStatusProps {
+  status: string;
+}
+
+const LeadRowStatus = ({ status }: LeadRowStatusProps) => {
+  return (
+    <div className={`lead-row-staus-container ${status.toLowerCase()}`}>
+      {status}
+    </div>
+  );
 };
 
 export default LeadRowStatus;

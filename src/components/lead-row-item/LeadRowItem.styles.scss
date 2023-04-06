@@ -7,6 +7,11 @@
   justify-content: center;
   align-items: center;
 
+  &:hover {
+    cursor: pointer;
+    background-color: #f6f7fd;
+  }
+
   &.selected {
     background-color: #f6f7fd;
   }
@@ -20,6 +25,7 @@
 
     :hover {
       cursor: pointer;
+      background-color: #f6f7fd;
     }
 
     &.selected {
@@ -46,6 +52,7 @@
   }
 
   .lead-row-item__contact {
+    color: $theme-grey;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -54,7 +61,6 @@
     font-weight: bold;
     height: 100%;
     width: calc(90% / 4);
-
     gap: 5px;
 
     .lead-row-item__contact_email {
@@ -82,6 +88,7 @@
   .lead-row-item__owner {
     display: flex;
     justify-content: flex-start;
+    color: $theme-grey;
     padding-left: 20px;
     align-items: center;
     font-weight: bold;

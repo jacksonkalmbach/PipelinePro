@@ -45,7 +45,9 @@ const Leads = () => {
             onClick={toggleCheckAll}
           >
             {checkAll ? (
-              <span className="material-symbols-outlined">check_box</span>
+              <span className="material-symbols-outlined">
+                indeterminate_check_box
+              </span>
             ) : (
               <span className="material-symbols-outlined">
                 check_box_outline_blank

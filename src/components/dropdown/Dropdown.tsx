@@ -6,6 +6,7 @@ interface DropdownProps {
   options: (string | number)[];
   moreFilters?: boolean;
   numberFilter?: boolean;
+  type?: string;
 }
 
 const Dropdown = ({
