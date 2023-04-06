@@ -3,6 +3,7 @@ import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 import { useSelector } from "react-redux";
 
 import "./LeadRowItem.styles.scss";
+import AccoutManagerSelect from "../employees/AccountManagerSelect";
 
 interface LeadRowItemProps {
   firstName: string;
@@ -10,6 +11,7 @@ interface LeadRowItemProps {
   email: string;
   phone: string;
   owner: string;
+  status: string;
 }
 
 const LeadRowItem = ({
@@ -18,6 +20,7 @@ const LeadRowItem = ({
   email,
   phone,
   owner,
+  status,
 }: LeadRowItemProps) => {
   const [isSelected, setisSelected] = useState(false);
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
@@ -58,9 +61,15 @@ const LeadRowItem = ({
         </div>
       </div>
       <div className="lead-row-item__status">
-        <LeadRowStatus status="New" />
+        <LeadRowStatus status={status} />
       </div>
-      <div className="lead-row-item__owner">{owner}</div>
+      <div className="lead-row-item__owner">
+        <AccoutManagerSelect
+          firstName="Mike"
+          lastName="Johnson"
+          profilePic="https://www.eikonphoto.com/wp-content/uploads/2017/03/male-headshot-e1515783468636.jpg"
+        />
+      </div>
     </div>
   );
 };

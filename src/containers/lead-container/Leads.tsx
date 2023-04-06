@@ -3,7 +3,7 @@ import LeadRowItem from "../../components/lead-row-item/LeadRowItem";
 
 import "./Leads.styles.scss";
 import LeadsData from "../../LEAD_DATA.json";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
 import FilterAddLead from "../../components/filter-add-leads/FilterAddLeads";
 import CreateLead from "../../components/create-lead/CreateLead";
@@ -14,7 +14,7 @@ const Leads = () => {
   const placeholders = [];
 
   for (let i = 0; i < 10; i++) {
-    placeholders.push(<LeadRowItemPlaceholder />);
+    placeholders.push(<LeadRowItemPlaceholder key={i} />);
   }
 
   const leadCount = 567;
@@ -87,8 +87,15 @@ const Leads = () => {
         <div className="leads-list">
           {dataLoad
             ? leads.map((lead: any) => {
-                const { id, firstName, lastName, email, phone, leadOwner } =
-                  lead;
+                const {
+                  id,
+                  firstName,
+                  lastName,
+                  email,
+                  phone,
+                  leadOwner,
+                  leadStatus,
+                } = lead;
                 return (
                   <LeadRowItem
                     key={id}
@@ -97,6 +104,7 @@ const Leads = () => {
                     email={email}
                     phone={phone}
                     owner={leadOwner}
+                    status={leadStatus}
                   />
                 );
               })
