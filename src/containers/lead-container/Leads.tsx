@@ -5,6 +5,7 @@ import "./Leads.styles.scss";
 import LeadsData from "../../LEAD_DATA.json";
 import { useDispatch } from "react-redux";
 import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
+import FilterAddLead from "../../components/filter-add-leads/FilterAddLeads";
 
 const Leads = () => {
   const leadCount = 567;
@@ -20,7 +21,7 @@ const Leads = () => {
   return (
     <div className="leads-container">
       <div className="leads-count">{leadCount} Leads</div>
-      {/* <LeadFilters /> */}
+      <FilterAddLead />
       <div className="leads-list-container">
         <div className="leads-list-search"></div>
         <div className="leads-list-filters">

@@ -1,0 +1,38 @@
+@import "../../styles/variables";
+
+.filter-add-lead-container {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 30px;
+  padding-right: 50px;
+
+  .filter-leads-container {
+    display: flex;
+    gap: 20px;
+
+    .filter-leads {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $theme-lightgrey;
+      padding: 5px 10px;
+    }
+  }
+
+  .create-lead-button {
+    background-color: $primary-color;
+    border: transparent;
+    color: white;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
