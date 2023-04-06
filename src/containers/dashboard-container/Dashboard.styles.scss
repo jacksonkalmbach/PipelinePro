@@ -1,2 +1,30 @@
 @import "../../styles/variables";
 
+.dashboard-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: calc(100vw - 4rem);
+  padding: 20px;
+
+  .my-leads {
+    display: flex;
+    padding: 30px;
+    border-radius: 30px;
+    flex-direction: column;
+    border: 1px solid $theme-lightgrey;
+    max-height: 40%;
+
+    .my-leads-list {
+      overflow-y: hidden;
+    }
+
+    .my-leads-list {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    .my-leads-list::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

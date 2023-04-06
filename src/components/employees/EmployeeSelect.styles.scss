@@ -1,0 +1,45 @@
+@import "../../styles/variables";
+
+.employee-select-container {
+  display: flex;
+  height: 3vh;
+  width: fit-content;
+  gap: 13px;
+  align-items: center;
+  padding: 10px 15px;
+
+  .profile-pic-container {
+    height: 2rem;
+    width: 2rem;
+
+    img {
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+  }
+
+  .employee-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    .fullname {
+      display: flex;
+      font-size: 1.5vh;
+      margin: auto 0;
+      font-size: 16px;
+      color: $theme-grey;
+
+      &.nav {
+        color: white;
+      }
+    }
+    .employee-title {
+      font-size: 12px;
+      color: $theme-lightgrey;
+      font-weight: 100;
+    }
+  }
+}

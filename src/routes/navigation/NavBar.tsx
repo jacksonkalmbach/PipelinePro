@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AccoutManagerSelect from "../../components/employees/AccountManagerSelect";
+import AccoutManagerSelect from "../../components/employees/EmployeeSelect";
 import "./NavBar.scss";
 
 const NavBar = () => {
@@ -16,10 +16,12 @@ const NavBar = () => {
         <li className="navbar-link">{currentSection}</li>
         <li className="navbar-link">
           <AccoutManagerSelect
+            id={1}
             firstName="Mike"
             lastName="Johnson"
             profilePic="https://www.eikonphoto.com/wp-content/uploads/2017/03/male-headshot-e1515783468636.jpg"
             nav={true}
+            title={"Account Manager"}
           />
         </li>
       </ul>

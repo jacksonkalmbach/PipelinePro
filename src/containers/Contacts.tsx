@@ -52,7 +52,7 @@ const Contacts = () => {
           }`}
           onClick={() => handleSelected(2, "Company")}
         >
-          <Link to="/contacts/companies" className="link">
+          <Link to="/contacts/company" className="link">
             Company
           </Link>
         </div>

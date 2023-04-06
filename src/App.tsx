@@ -5,6 +5,7 @@ import SectionNavbar from "./components/section-navigation/SectionNavbar";
 import Contacts from "./containers/Contacts";
 import NavBar from "./routes/navigation/NavBar";
 import Leads from "./containers/lead-container/Leads";
+import Dashboard from "./containers/dashboard-container/Dashboard";
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -23,11 +24,15 @@ const App: React.FC = () => {
       <div className="main-container">
         <SectionNavbar />
         <Routes>
-          <Route path="/dashboard" element={<div>Dashboard</div>} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/contacts/*" element={<Contacts />}>
             <Route path="leads" element={<Leads />} />
             <Route path="contacts" element={<div>Contacts</div>} />
-            <Route path="companies" element={<div>Companies</div>} />
+            <Route path="company" element={<div>Companies</div>}>
+              <Route path="employees" element={<div>Employees</div>}>
+                <Route path=":id" element={<div>Employee</div>} />
+              </Route>
+            </Route>
           </Route>
           <Route path="/calendar" element={<div>Calendar</div>} />
         </Routes>

@@ -3,14 +3,14 @@ import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 import { useSelector } from "react-redux";
 
 import "./LeadRowItem.styles.scss";
-import AccoutManagerSelect from "../employees/AccountManagerSelect";
+import AccoutManagerSelect from "../employees/EmployeeSelect";
 
 interface LeadRowItemProps {
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
-  owner: string;
+  owner?: string;
   status: string;
 }
 
@@ -65,6 +65,7 @@ const LeadRowItem = ({
       </div>
       <div className="lead-row-item__owner">
         <AccoutManagerSelect
+          id={1}
           firstName="Mike"
           lastName="Johnson"
           profilePic="https://www.eikonphoto.com/wp-content/uploads/2017/03/male-headshot-e1515783468636.jpg"
