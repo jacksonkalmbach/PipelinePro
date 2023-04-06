@@ -35,6 +35,14 @@
       align-items: center;
     }
 
+    .leads-list-filters__checkbox {
+      color: $theme-lightgrey;
+
+      :hover {
+        cursor: pointer;
+      }
+    }
+
     .leads-list {
       display: flex;
       flex-direction: column;

@@ -7,6 +7,14 @@
   justify-content: space-around;
   align-items: center;
 
+  .lead-row-item__checkbox {
+    color: $theme-lightgrey;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
   .lead-row-item__name {
     font-weight: bold;
   }
