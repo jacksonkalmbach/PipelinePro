@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LeadRowItem from "../../components/lead-row-item/LeadRowItem";
 
 import "./Leads.styles.scss";
@@ -8,12 +8,20 @@ import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlic
 import FilterAddLead from "../../components/filter-add-leads/FilterAddLeads";
 import CreateLead from "../../components/create-lead/CreateLead";
 import Dropdown from "../../components/dropdown/Dropdown";
+import LeadRowItemPlaceholder from "../../components/lead-row-item/LeadRowItemPlaceholder";
 
 const Leads = () => {
+  const placeholders = [];
+
+  for (let i = 0; i < 10; i++) {
+    placeholders.push(<LeadRowItemPlaceholder />);
+  }
+
   const leadCount = 567;
   const { leads } = LeadsData;
   const dispatch = useDispatch();
   const [checkAll, setCheckAll] = useState(false);
+  const [dataLoad, setDataLoad] = useState(false);
 
   const leadsPerPage = [10, 20, 50];
 
@@ -21,6 +29,12 @@ const Leads = () => {
     setCheckAll(!checkAll);
     dispatch(setSelectAllLeads());
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setDataLoad(true);
+    }, 1000);
+  }, [dataLoad]);
 
   return (
     <div className="leads-container">
@@ -71,19 +85,22 @@ const Leads = () => {
           </div>
         </div>
         <div className="leads-list">
-          {leads.map((lead: any) => {
-            const { id, firstName, lastName, email, phone, leadOwner } = lead;
-            return (
-              <LeadRowItem
-                key={id}
-                firstName={firstName}
-                lastName={lastName}
-                email={email}
-                phone={phone}
-                owner={leadOwner}
-              />
-            );
-          })}
+          {dataLoad
+            ? leads.map((lead: any) => {
+                const { id, firstName, lastName, email, phone, leadOwner } =
+                  lead;
+                return (
+                  <LeadRowItem
+                    key={id}
+                    firstName={firstName}
+                    lastName={lastName}
+                    email={email}
+                    phone={phone}
+                    owner={leadOwner}
+                  />
+                );
+              })
+            : placeholders}
         </div>
       </div>
     </div>

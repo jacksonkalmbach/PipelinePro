@@ -1,0 +1,106 @@
+@import "../../styles/variables.scss";
+
+@keyframes flashing {
+  0% {
+    background-color: $theme-lightgrey;
+  }
+  50% {
+    background-color: #eeeeee;
+  }
+  100% {
+    background-color: $theme-lightgrey;
+  }
+}
+
+.lead-row-item-placeholder {
+  display: flex;
+  padding: 20px 0;
+  border: 1px solid $theme-lightgrey;
+  justify-content: center;
+  align-items: center;
+
+  .lead-row-item__checkbox {
+    color: $theme-lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+  }
+
+  .lead-row-item__name {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+    height: 100%;
+    width: calc(90% / 4);
+
+    .name-placeholder {
+      width: 70%;
+      height: 20px;
+      background-color: $theme-lightgrey;
+      border-radius: 5px;
+      animation: flashing 1s infinite;
+    }
+  }
+
+  .lead-row-item__contact {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 20px;
+    height: 100%;
+    width: calc(90% / 4);
+    gap: 10px;
+
+    .email-placeholder {
+      width: 70%;
+      height: 10px;
+      background-color: $theme-lightgrey;
+      border-radius: 5px;
+      animation: flashing 1s infinite;
+    }
+    .phone-placeholder {
+      width: 70%;
+      height: 10px;
+      background-color: $theme-lightgrey;
+      border-radius: 5px;
+      animation: flashing 1s infinite;
+    }
+  }
+
+  .lead-row-item__status {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 50px;
+    height: 100%;
+    width: calc(90% / 4);
+
+    .status-placeholder {
+      width: 30%;
+      height: 20px;
+      background-color: $theme-lightgrey;
+      border-radius: 5px;
+      animation: flashing 1s infinite;
+    }
+  }
+
+  .lead-row-item__owner {
+    display: flex;
+    justify-content: flex-start;
+    padding-left: 20px;
+    align-items: center;
+    height: 100%;
+    width: calc(90% / 4);
+
+    .owner-placeholder {
+      width: 70%;
+      height: 20px;
+      background-color: $theme-lightgrey;
+      border-radius: 5px;
+      animation: flashing 1s infinite;
+    }
+  }
+}
