@@ -17,33 +17,26 @@ import {
   setUserEmail,
   setUserDisplayName,
 } from "./store/reducers/user/userAuthSlice";
+import AuthContainer from "./containers/auth-container/AuthContainer";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const userIsSignedIn = useSelector((state: any) => state.userAuth.isSignedIn);
+  const isDemo = useSelector((state: any) => state.userAuth.isDemo);
 
   const [hasMounted, sethasMounted] = useState(false);
 
   useEffect(() => {
     if (!hasMounted) {
-      navigate("/dashboard");
+      navigate("/login");
       sethasMounted(true);
     }
   }, [hasMounted, navigate]);
 
-  const handleGoogleSignIn = async () => {
-    const { user } = await signInWithGooglePopup();
-    dispatch(userSignIn());
-    dispatch(setUserDisplayName(user.displayName));
-    dispatch(setUserEmail(user.email));
-    dispatch(setUserPhoto(user.photoURL));
-    dispatch(setUserUid(user.uid));
-  };
-
   return (
     <>
-      {userIsSignedIn ? (
+      {userIsSignedIn || isDemo ? (
         <>
           <NavBar />
           <div className="main-container">
@@ -64,7 +57,7 @@ const App: React.FC = () => {
           </div>
         </>
       ) : (
-        <button onClick={handleGoogleSignIn}>sign in with GOOGLE</button>
+        <AuthContainer />
       )}
     </>
   );
