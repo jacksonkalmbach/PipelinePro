@@ -10,6 +10,7 @@ interface LeadRowItemProps {
   lastName: string;
   email: string;
   phone: string;
+  photoURL: string;
   owner?: string;
   status: string;
 }
@@ -19,11 +20,19 @@ const LeadRowItem = ({
   lastName,
   email,
   phone,
+  photoURL,
   owner,
   status,
 }: LeadRowItemProps) => {
   const [isSelected, setisSelected] = useState(false);
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
+  let ownerFirstName = "";
+  let ownerLastName = "";
+
+  if (owner !== undefined) {
+    ownerFirstName = owner.split(" ")[0];
+    ownerLastName = owner.split(" ")[1];
+  }
 
   useEffect(() => {
     setisSelected(checkAll);
@@ -66,9 +75,9 @@ const LeadRowItem = ({
       <div className="lead-row-item__owner">
         <AccoutManagerSelect
           id={1}
-          firstName="Mike"
-          lastName="Johnson"
-          profilePic="https://www.eikonphoto.com/wp-content/uploads/2017/03/male-headshot-e1515783468636.jpg"
+          firstName={ownerFirstName}
+          lastName={ownerLastName}
+          profilePic={photoURL}
         />
       </div>
     </div>

@@ -14,7 +14,32 @@ import LeadRowItem from "../lead-row-item/LeadRowItem";
 import LeadRowItemPlaceholder from "../lead-row-item/LeadRowItemPlaceholder";
 
 import LEAD_DATA from "../../LEAD_DATA.json";
+import EMPLOYEE_DATA from "../../EMPLOYEE_DATA.json";
 import "./LeadList.styles.scss";
+
+interface Employee {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  img: string;
+  title: string;
+}
+
+interface EmployeeHash {
+  [id: number]: { fullName: string; photoURL: string };
+}
+
+const employeeHash: EmployeeHash = {};
+
+const createEmployeeHash = (array: Employee[]) => {
+  array.forEach((employee) => {
+    employeeHash[employee.id] = {
+      fullName: employee.firstName + " " + employee.lastName,
+      photoURL: employee.img,
+    };
+  });
+};
 
 const LeadList = () => {
   const { leads } = LEAD_DATA;
@@ -25,13 +50,13 @@ const LeadList = () => {
     placeholders.push(<LeadRowItemPlaceholder key={i} />);
   }
 
+  createEmployeeHash(EMPLOYEE_DATA.employees);
   const dispatch = useDispatch();
   const [checkAll, setCheckAll] = useState(false);
   const [dataLoad, setDataLoad] = useState(false);
 
   const [sortedAZ, setSortedAZ] = useState(false);
   const [sortedLeads, setSortedLeads] = useState(leads);
-
   const [sortedStatus, setSortedStatus] = useState(false);
   const [sortedOwner, setSortedOwner] = useState(false);
 
@@ -165,7 +190,8 @@ const LeadList = () => {
                   lastName={lastName}
                   email={email}
                   phone={phone}
-                  owner={leadOwner}
+                  photoURL={employeeHash[leadOwner].photoURL}
+                  owner={employeeHash[leadOwner].fullName}
                   status={leadStatus}
                 />
               );

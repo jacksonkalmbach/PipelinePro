@@ -18,6 +18,19 @@
       object-fit: cover;
       border-radius: 50%;
     }
+
+    .profile-pic-initials {
+      display: flex;
+      height: 100%;
+      width: 100%;
+      background-color: $secondary-color;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24;
+    }
   }
 
   .employee-details {

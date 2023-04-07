@@ -35,10 +35,15 @@ const AccoutManagerSelect = ({
   };
 
   return (
-    
     <div className="employee-select-container" onClick={handleClick}>
       <div className="profile-pic-container">
-        <img src={profilePic} alt="profile" />
+        {profilePic.length > 2 ? (
+          <img src={profilePic} alt="profile" />
+        ) : (
+          <div className="profile-pic-initials">
+            {firstName[0] + lastName[0]}
+          </div>
+        )}
       </div>
       <div className="employee-details">
         <div className={`fullname ${nav ? "nav" : ""}`}>

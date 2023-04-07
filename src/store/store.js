@@ -4,6 +4,7 @@ import contactsNavigationSlice from "./reducers/navigation/contactsNavigationSli
 import selectAllLeadsSlice from "./reducers/leads/selectAllLeadsSlice";
 import showCreateLeadSlice from "./reducers/leads/showCreateLeadSlice";
 import sortLeadsSlice from "./reducers/leads/sortLeadsSlice";
+import userAuthSlice from "./reducers/user/userAuthSlice";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     selectAllLeads: selectAllLeadsSlice,
     showCreateLead: showCreateLeadSlice,
     sortLeads: sortLeadsSlice,
+    userAuth: userAuthSlice,
   },
 });
 

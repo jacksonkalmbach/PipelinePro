@@ -8,6 +8,16 @@ const NavBar = () => {
     (state: any) => state.sectionNavigation.value
   );
 
+  const displayName = useSelector((state: any) => state.userAuth.displayName);
+  const firstName = displayName.split(" ")[0];
+  const lastName = displayName.split(" ")[1];
+  const photoURL = useSelector((state: any) => state.userAuth.photoURL);
+  const uid = useSelector((state: any) => state.userAuth.uid);
+  // const photoURL = null;
+
+  console.log(uid);
+  console.log(firstName);
+
   return (
     <nav className="navbar-container">
       <div className="navbar-logo">LOGO</div>
@@ -16,10 +26,10 @@ const NavBar = () => {
         <li className="navbar-link">{currentSection}</li>
         <li className="navbar-link">
           <AccoutManagerSelect
-            id={1}
-            firstName="Mike"
-            lastName="Johnson"
-            profilePic="https://www.eikonphoto.com/wp-content/uploads/2017/03/male-headshot-e1515783468636.jpg"
+            id={uid}
+            firstName={firstName}
+            lastName={lastName}
+            profilePic={photoURL ? photoURL : firstName[0] + lastName[0]}
             nav={true}
             title={"Account Manager"}
           />
