@@ -5,7 +5,6 @@ import {
   signInWithPopup,
   createUserWithEmailAndPassword,
   signOut,
-  signInWithRedirect,
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -17,7 +16,6 @@ const firebaseConfig = {
   appId: process.env.FIREBASE_APP_ID,
   measurementId: process.env.FIREBASE_MEASUREMENT_ID,
 };
-
 initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 

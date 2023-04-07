@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
 
@@ -118,7 +118,7 @@ const LeadList = () => {
   useEffect(() => {
     setTimeout(() => {
       setDataLoad(true);
-    }, 1000);
+    }, 500);
   }, [dataLoad]);
 
   return (
