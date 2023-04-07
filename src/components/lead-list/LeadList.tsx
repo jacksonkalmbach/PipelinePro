@@ -186,6 +186,7 @@ const LeadList = () => {
               return (
                 <LeadRowItem
                   key={id}
+                  id={id}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}

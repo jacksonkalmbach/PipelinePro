@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowCreateLead } from "../../store/reducers/leads/showCreateLeadSlice";
+import { setShowCreateLead } from "../../store/reducers/leads/showLeadSlice";
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 
 const defaultCreateLeadState = {
@@ -71,7 +71,7 @@ const CreateLead = () => {
         }`}
       >
         <div className="create-lead-header">
-          <h1>Create Lead</h1>
+          <h1>Create Lead </h1>
           <div
             className="close-create-lead-button"
             onClick={handleCloseCreateLead}

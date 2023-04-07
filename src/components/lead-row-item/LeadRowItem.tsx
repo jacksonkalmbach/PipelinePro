@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from "react";
-import LeadRowStatus from "../lead-row-status/LeadRowStatus";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setShowLeadPreview,
+  setPreviewId,
+  setShowCreateLead,
+} from "../../store/reducers/leads/showLeadSlice";
 
-import "./LeadRowItem.styles.scss";
+import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 import AccoutManagerSelect from "../employees/EmployeeSelect";
 
+import "./LeadRowItem.styles.scss";
+
 interface LeadRowItemProps {
+  id: number | null;
   firstName: string;
   lastName: string;
   email: string;
@@ -16,6 +23,7 @@ interface LeadRowItemProps {
 }
 
 const LeadRowItem = ({
+  id,
   firstName,
   lastName,
   email,
@@ -24,6 +32,8 @@ const LeadRowItem = ({
   owner,
   status,
 }: LeadRowItemProps) => {
+  const dispatch = useDispatch();
+
   const [isSelected, setisSelected] = useState(false);
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
   let ownerFirstName = "";
@@ -38,12 +48,21 @@ const LeadRowItem = ({
     setisSelected(checkAll);
   }, [checkAll]);
 
-  const toggleSelected = () => {
+  const toggleSelected = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setisSelected(!isSelected);
   };
 
+  const handleLeadPreviewClick = () => {
+    dispatch(setShowLeadPreview(true));
+    dispatch(setPreviewId(id));
+  };
+
   return (
-    <div className={`lead-row-item ${isSelected ? "selected" : ""}`}>
+    <div
+      className={`lead-row-item ${isSelected ? "selected" : ""}`}
+      onClick={handleLeadPreviewClick}
+    >
       <div
         className={`lead-row-item__checkbox ${
           checkAll || isSelected ? "selected" : ""
