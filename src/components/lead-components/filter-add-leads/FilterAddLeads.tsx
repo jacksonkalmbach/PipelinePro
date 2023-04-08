@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { setShowCreateLead } from "../../store/reducers/leads/showLeadSlice";
-import Dropdown from "../dropdown/Dropdown";
+import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
+import Dropdown from "../../dropdown/Dropdown";
 
 import "./FilterAddLeads.styles.scss";
 

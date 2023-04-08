@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setContactsNavigation } from "../store/reducers/navigation/contactsNavigationSlice";
 
-import "./Contacts.styles.scss";
+interface SectionNavbarProps {
+  section: string;
+  sectionTitles: string[];
+}
 
-const Contacts = () => {
+const SectionNavbar = ({ section, sectionTitles }: SectionNavbarProps) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedSection, setSelectedSection] = useState(0);
@@ -13,18 +15,18 @@ const Contacts = () => {
 
   useEffect(() => {
     if (!hasMounted) {
-      navigate("/contacts/leads");
+      navigate(`${section}`);
       sethasMounted(true);
     }
   }, [hasMounted, navigate]);
 
   const handleSelected = (index: number, value: string) => {
     setSelectedSection(index);
-    dispatch(setContactsNavigation(value));
+    // dispatch(setContactsNavigation(value));
   };
 
   return (
-    <div className="contacts-container">
+    <>
       <div className="contacts-sections">
         <div
           className={`contacts-section ${
@@ -58,8 +60,8 @@ const Contacts = () => {
         </div>
       </div>
       <Outlet />
-    </div>
+    </>
   );
 };
 
-export default Contacts;
+export default SectionNavbar;

@@ -5,12 +5,15 @@ import { useSpring, animated } from "react-spring";
 
 import "./App.css";
 import SectionNavbar from "./components/section-navigation/SectionNavbar";
-import Contacts from "./containers/Contacts";
 import NavBar from "./routes/navigation/NavBar";
 import Leads from "./containers/lead-container/Leads";
 import Dashboard from "./containers/dashboard-container/Dashboard";
 
+// Containers
+import Contacts from "./containers/contacts-container/Contacts";
 import AuthContainer from "./containers/auth-container/AuthContainer";
+import Settings from "./containers/settings-container/Settings";
+import Calendar from "./containers/calendar-container/Calendar";
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -34,12 +37,12 @@ const App: React.FC = () => {
     }
   }, [isDemo]);
 
-  useEffect(() => {
-    if (!hasMounted) {
-      navigate("/login");
-      sethasMounted(true);
-    }
-  }, [hasMounted, navigate]);
+  // useEffect(() => {
+  //   if (!hasMounted) {
+  //     navigate("/login");
+  //     sethasMounted(true);
+  //   }
+  // }, [hasMounted, navigate]);
 
   return (
     <>
@@ -81,7 +84,8 @@ const App: React.FC = () => {
                       </Route>
                     </Route>
                   </Route>
-                  <Route path="/calendar" element={<div>Calendar</div>} />
+                  <Route path="/calendar" element={<Calendar />} />
+                  <Route path="/settings" element={<Settings />} />
                 </Routes>
               </div>
             </animated.div>

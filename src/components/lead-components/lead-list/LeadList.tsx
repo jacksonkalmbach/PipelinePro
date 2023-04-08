@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
+import { setSelectAllLeads } from "../../../store/reducers/leads/selectAllLeadsSlice";
 
 import {
   setSortAZ,
   setSortZA,
   setSortStatus,
   setSortLeadOwner,
-} from "../../store/reducers/leads/sortLeadsSlice";
+} from "../../../store/reducers/leads/sortLeadsSlice";
 
-import Dropdown from "../dropdown/Dropdown";
+import Dropdown from "../../dropdown/Dropdown";
 import LeadRowItem from "../lead-row-item/LeadRowItem";
 import LeadRowItemPlaceholder from "../lead-row-item/LeadRowItemPlaceholder";
 
-import LEAD_DATA from "../../LEAD_DATA.json";
-import EMPLOYEE_DATA from "../../EMPLOYEE_DATA.json";
+import LEAD_DATA from "../../../LEAD_DATA.json";
+import EMPLOYEE_DATA from "../../../EMPLOYEE_DATA.json";
 import "./LeadList.styles.scss";
 
 interface Employee {

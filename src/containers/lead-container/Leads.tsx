@@ -1,8 +1,8 @@
 import React from "react";
 
-import FilterAddLead from "../../components/filter-add-leads/FilterAddLeads";
-import CreateLead from "../../components/create-lead/CreateLead";
-import LeadList from "../../components/lead-list/LeadList";
+import FilterAddLead from "../../components/lead-components/filter-add-leads/FilterAddLeads";
+import CreateLead from "../../components/lead-components/create-lead/CreateLead";
+import LeadList from "../../components/lead-components/lead-list/LeadList";
 
 import "./Leads.styles.scss";
 
@@ -11,8 +11,8 @@ const Leads = () => {
 
   return (
     <div className="leads-container">
-      <CreateLead />
       <div className="leads-count">{leadCount} Leads</div>
+      <CreateLead />
       <FilterAddLead />
       <LeadList />
     </div>

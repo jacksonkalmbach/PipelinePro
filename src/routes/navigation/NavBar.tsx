@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AccoutManagerSelect from "../../components/employees/EmployeeSelect";
+import AccoutManagerSelect from "../../components/employee-components/employee-select/EmployeeSelect";
 import "./NavBar.scss";
 
 const NavBar = () => {

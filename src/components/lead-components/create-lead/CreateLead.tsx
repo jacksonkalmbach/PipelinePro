@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowCreateLead } from "../../store/reducers/leads/showLeadSlice";
+import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 
 const defaultCreateLeadState = {

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { setSectionNavigation } from "../../store/reducers/navigation/sectionNavigationSlice";
+import { setSectionNavigation } from "../../../store/reducers/navigation/sectionNavigationSlice";
 
 import "./EmployeeSelect.styles.scss";
 

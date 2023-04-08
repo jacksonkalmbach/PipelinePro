@@ -4,10 +4,10 @@ import {
   setShowLeadPreview,
   setPreviewId,
   setShowCreateLead,
-} from "../../store/reducers/leads/showLeadSlice";
+} from "../../../store/reducers/leads/showLeadSlice";
 
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
-import AccoutManagerSelect from "../employees/EmployeeSelect";
+import AccoutManagerSelect from "../../employee-components/employee-select/EmployeeSelect";
 
 import "./LeadRowItem.styles.scss";
 
