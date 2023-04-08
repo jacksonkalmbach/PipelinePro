@@ -2,14 +2,7 @@ import React from "react";
 import SectionNavbar from "../subsection-navbar/SectionNavbar";
 
 const Calendar = () => {
-  return (
-    <div>
-      <SectionNavbar
-        section={"calendar"}
-        sectionTitles={["calendar1", "calendar2"]}
-      />
-    </div>
-  );
+  return <div>Calendar Container</div>;
 };
 
 export default Calendar;

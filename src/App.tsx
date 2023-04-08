@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useSpring, animated } from "react-spring";
 
 import "./App.css";
-import SectionNavbar from "./components/section-navigation/SectionNavbar";
+import SectionNavbar from "./components/navigation-components/main-section-navbar/MainSectionsNavbar";
 import NavBar from "./routes/navigation/NavBar";
 import Leads from "./containers/lead-container/Leads";
 import Dashboard from "./containers/dashboard-container/Dashboard";

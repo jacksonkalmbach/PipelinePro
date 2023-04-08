@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { setSectionNavigation } from "../../store/reducers/navigation/sectionNavigationSlice";
+import { setSectionNavigation } from "../../../store/reducers/navigation/sectionNavigationSlice";
 
-import "./SectionNavbar.styles.scss";
+import "./MainSectionsNavbar.styles.scss";
 
 const SectionNavbar = () => {
   const dispatch = useDispatch();
