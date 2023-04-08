@@ -1,13 +1,16 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import SubSectionNavbar from "../subsection-navbar/SectionNavbar";
+import SubSectionNavbar from "../../components/navigation-components/subsection-navbar/SubsectionNavbar";
+
+import "./Settings.styles.scss";
 
 const Settings = () => {
   return (
-    <>
-      <div>Settings Container</div>
-      <Outlet />
-    </>
+    <div className="settings-container">
+      <SubSectionNavbar
+        title={"Settings"}
+        options={["Account", "Notifications", "Billing"]}
+      />
+    </div>
   );
 };
 

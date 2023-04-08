@@ -5,7 +5,7 @@ import { setSectionNavigation } from "../../../store/reducers/navigation/section
 
 import "./MainSectionsNavbar.styles.scss";
 
-const SectionNavbar = () => {
+const MainSectionNavbar = () => {
   const dispatch = useDispatch();
   const [selectedSectionIndex, setSelectedSectionIndex] = useState(0);
 
@@ -66,4 +66,4 @@ const SectionNavbar = () => {
   );
 };
 
-export default SectionNavbar;
+export default MainSectionNavbar;
