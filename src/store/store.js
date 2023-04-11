@@ -11,7 +11,7 @@ const store = configureStore({
     sectionNavigation: sectionNavigationSlice,
     contactsNavigation: contactsNavigationSlice,
     selectAllLeads: selectAllLeadsSlice,
-    showCreateLead: showCreateLeadSlice,
+    showLead: showCreateLeadSlice,
     sortLeads: sortLeadsSlice,
     userAuth: userAuthSlice,
   },

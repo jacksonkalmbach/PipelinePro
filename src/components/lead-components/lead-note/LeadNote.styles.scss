@@ -1,0 +1,11 @@
+.lead-notes-container {
+  display: flex;
+  height: 250px;
+  width: 60%;
+  border: 1px solid gray;
+
+  .lead-note-header {
+    display: flex;
+    justify-content: space-between;
+  }
+}

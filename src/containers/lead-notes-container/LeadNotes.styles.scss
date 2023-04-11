@@ -1,0 +1,43 @@
+@import "../../styles/variables";
+
+.lead-notes-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .new-note-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid $theme-lightgrey;
+    width: 60%;
+    padding: 10px;
+
+    .note-title {
+      width: 100%;
+      height: 50px;
+      border: transparent;
+      font-size: 24px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .note-body {
+      vertical-align: top;
+      width: 100%;
+      height: 200px;
+      border: transparent;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .add-note-button {
+      width: fit-content;
+      align-self: flex-end;
+    }
+  }
+}

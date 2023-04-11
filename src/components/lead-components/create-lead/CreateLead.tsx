@@ -30,9 +30,7 @@ const CreateLead = () => {
     setFormFields({ ...formFields, leadStatus: status });
   };
 
-  const showCreateLead = useSelector(
-    (state: any) => state.showCreateLead.value
-  );
+  const showCreateLead = useSelector((state: any) => state.showLead.value);
 
   useEffect(() => {
     setInitialRender(false);

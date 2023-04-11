@@ -1,1 +1,62 @@
 @import "../../../styles/variables";
+
+.lead-preview-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  position: fixed;
+  width: 50vw;
+  height: 93vh;
+  background-color: white;
+  z-index: 9999;
+  bottom: 0;
+  right: 0;
+
+  .lead-preview-buttons-container {
+    width: 100%;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+
+    .back-to-leads-button {
+      display: flex;
+      justify-content: center;
+      margin-left: 20px;
+      align-items: center;
+      padding: 5px 10px;
+      font-size: 12px;
+      border: 1px solid $theme-grey;
+      align-self: flex-start;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .full-lead-details-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      padding: 5px 10px;
+      font-size: 12px;
+      border: 1px solid $theme-grey;
+      align-self: flex-end;
+      text-decoration: none;
+      color: $theme-black;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+}

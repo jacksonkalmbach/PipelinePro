@@ -5,6 +5,7 @@ import CreateLead from "../../components/lead-components/create-lead/CreateLead"
 import LeadList from "../../components/lead-components/lead-list/LeadList";
 
 import "./Leads.styles.scss";
+import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
 
 const Leads = () => {
   const leadCount = 567;
@@ -13,6 +14,7 @@ const Leads = () => {
     <div className="leads-container">
       <div className="leads-count">{leadCount} Leads</div>
       <CreateLead />
+      <LeadPreview />
       <FilterAddLead />
       <LeadList />
     </div>
