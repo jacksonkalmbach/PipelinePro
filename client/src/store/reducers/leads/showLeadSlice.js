@@ -4,6 +4,7 @@ const initialState = {
   value: false,
   previewLead: false,
   previewId: null,
+
 };
 
 export const showLeadSlice = createSlice({

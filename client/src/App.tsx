@@ -17,7 +17,6 @@ import Calendar from "./containers/calendar-container/Calendar";
 import AccountSettings from "./containers/settings-container/account/AccountSettings";
 import NotificationSettings from "./containers/settings-container/notifications/NotificationSettings";
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
-import LeadDetails from "./containers/lead-details-container/LeadDetails";
 
 const App: React.FC = () => {
   const navigate = useNavigate();
@@ -118,7 +117,6 @@ const App: React.FC = () => {
                 </Route>
               </Route>
             </Route>
-            <Route path="/contacts/leads/:id" element={<LeadDetails />} />
             <Route path="/calendar/*" element={<Calendar />} />
             <Route path="/settings/*" element={<Settings />}>
               <Route path="Account" element={<AccountSettings />} />

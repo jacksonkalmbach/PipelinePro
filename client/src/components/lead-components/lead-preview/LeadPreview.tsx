@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { setShowLeadPreview } from "../../../store/reducers/leads/showLeadSlice";
 
 import "./LeadPreview.styles.scss";
+import LeadNote from "../lead-note/LeadNote";
+import NewNote from "../new-note/NewNote";
 
 interface Lead {
   id: number;
@@ -26,6 +28,8 @@ const LeadPreview = () => {
   const [company, setCompany] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [status, setStatus] = useState("");
+
+  const [addNote, setAddNote] = useState(false);
 
   const previewLead = useSelector((state: any) => state.showLead.previewLead);
   const leadId = useSelector((state: any) => state.showLead.previewId);
@@ -61,6 +65,10 @@ const LeadPreview = () => {
     dispatch(setShowLeadPreview(false));
   };
 
+  const handleAddNote = () => {
+    setAddNote(true);
+  };
+
   return (
     previewLead && (
       <>
@@ -68,32 +76,30 @@ const LeadPreview = () => {
         <div className="lead-preview-container">
           <div className="lead-preview-buttons-container">
             <div
-              className="back-to-leads-button"
+              className="close-lead-details-button"
               onClick={handleCloseLeadPreview}
             >
-              <span className="material-symbols-outlined">first_page</span>
-              Back to leads
+              <span className="material-symbols-outlined">close</span>
+              Close
             </div>
-            <Link
-              to={`/contacts/leads/${leadId}`}
-              className="full-lead-details-button"
-              onClick={handleCloseLeadPreview}
-            >
-              View full details
-              <span className="material-symbols-outlined">arrow_right_alt</span>
-            </Link>
           </div>
           <div className="lead-preview-header">
             <div className="lead-preview-name-container">
-              <div className="lead-preview-name">
-                {firstName !== "" ? firstName : <div>Loading...</div>}{" "}
-                {lastName !== "" ? lastName : <div>Loading...</div>}
+              <div className="lead-name-and-options">
+                <div className="lead-preview-name">
+                  {firstName !== "" ? firstName : <div>Loading...</div>}{" "}
+                  {lastName !== "" ? lastName : <div>Loading...</div>}
+                </div>
+                <div className="lead-edit">
+                  <span className="material-symbols-outlined">more_horiz</span>
+                </div>
               </div>
               <div className="lead-preview-contact-info">
                 <div className="lead-preview-email">
                   <span className="material-symbols-outlined">mail</span>
                   {email !== "" ? email : <div>Loading...</div>}
                 </div>
+                <div>&#x2022;</div>
                 <div className="lead-preview-phone">
                   <span className="material-symbols-outlined">call</span>
                   {phone !== "" ? (
@@ -155,8 +161,23 @@ const LeadPreview = () => {
             </div>
           </div>
           <div className="lead-notes-and-activity">
-            <div className="lead-activity-container">Upcoming Activity</div>
-            <div className="lead-notes-container">Notes</div>
+            <div className="lead-notes-container">
+              {addNote && <NewNote />}
+              <div className="note-title-and-add-button">
+                <h4>Notes</h4>
+                {!addNote && (
+                  <div className="add-note-button" onClick={handleAddNote}>
+                    + Add note
+                  </div>
+                )}
+              </div>
+              <LeadNote
+                noteTitle="Test"
+                noteAuthor="Mike Smith"
+                noteBody="body text"
+                noteCreatedAt="3/13/23"
+              />
+            </div>
           </div>
         </div>
       </>
