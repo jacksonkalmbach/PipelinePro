@@ -9,7 +9,7 @@ interface AccoutManagerSelectProps {
   id: number;
   firstName: string;
   lastName: string;
-  profilePic: string;
+  profilePic?: string;
   title?: string;
   nav?: boolean;
 }
@@ -37,7 +37,7 @@ const AccoutManagerSelect = ({
   return (
     <div className="employee-select-container" onClick={handleClick}>
       <div className="profile-pic-container">
-        {profilePic.length > 2 ? (
+        {profilePic ? (
           <img src={profilePic} alt="profile" />
         ) : (
           <div className="profile-pic-initials">

@@ -10,10 +10,9 @@
 
   .leads-count {
     font-family: $font-family;
-    font-size: 32px;
+    font-size: 40px;
     font-weight: 600;
     color: #000;
-    padding: 20px 20px;
   }
   .leads-filter-container {
     border: 1px solid black;
@@ -38,7 +37,6 @@
       .searchbar-leads {
         width: 30%;
         margin-left: 20px;
-
         border: 1px solid $theme-lightgrey;
         outline: none;
         font-size: 1rem;

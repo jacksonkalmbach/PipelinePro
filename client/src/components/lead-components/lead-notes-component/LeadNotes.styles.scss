@@ -1,14 +1,18 @@
-@import "../../styles/variables";
+@import "../../../styles/variables";
 
 .lead-notes-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
 
   .new-note-container {
     display: flex;
     flex-direction: column;
     border: 1px solid $theme-lightgrey;
+    border-radius: 5px;
     width: 60%;
     padding: 10px;
 
@@ -24,11 +28,14 @@
     }
 
     .note-body {
-      vertical-align: top;
       width: 100%;
-      height: 200px;
-      border: transparent;
+      height: 150px;
+      resize: none;
       font-size: 16px;
+      display: flex;
+      border: transparent;
+      align-items: flex-start;
+      font-family: $font-family;
 
       &:focus {
         outline: none;
@@ -36,8 +43,22 @@
     }
 
     .add-note-button {
+      background-color: $primary-color;
       width: fit-content;
+      border: transparent;
       align-self: flex-end;
+      color: white;
+      font-weight: bold;
+      padding: 10px 15px;
+      border-radius: 5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
   }
 }

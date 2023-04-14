@@ -17,7 +17,7 @@ interface LeadRowItemProps {
   lastName: string;
   email: string;
   phone: string;
-  photoURL: string;
+  photoURL?: string;
   owner?: string;
   status: string;
 }
@@ -36,6 +36,8 @@ const LeadRowItem = ({
 
   const [isSelected, setisSelected] = useState(false);
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
+  const leadPreviewId = useSelector((state: any) => state.showLead);
+
   let ownerFirstName = "";
   let ownerLastName = "";
 
@@ -85,7 +87,12 @@ const LeadRowItem = ({
         </div>
         <div className="lead-row-item__contact_phone">
           <span className="material-symbols-outlined">call</span>
-          {phone}
+          {"(" +
+            phone.slice(0, 3) +
+            ") " +
+            phone.slice(3, 6) +
+            "-" +
+            phone.slice(6, 10)}
         </div>
       </div>
       <div className="lead-row-item__status">

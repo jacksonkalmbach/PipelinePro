@@ -19,3 +19,13 @@ CREATE TABLE leads(
   job_title VARCHAR(50) NOT NULL,
   lead_status VARCHAR(50) NOT NULL
 );
+
+CREATE TABLE notes(
+  note_id SERIAL PRIMARY KEY,
+  note_title VARCHAR(50) NOT NULL,
+  note_body VARCHAR(255) NOT NULL,
+  lead_id INT NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW(),
+  created_by INT NOT NULL,
+  FOREIGN KEY (lead_id) REFERENCES leads(lead_id)
+);

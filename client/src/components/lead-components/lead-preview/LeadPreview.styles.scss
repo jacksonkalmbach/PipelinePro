@@ -3,10 +3,11 @@
 .lead-preview-container {
   display: flex;
   flex-direction: column;
+  gap: 20px;
   justify-content: flex-start;
   align-items: center;
   position: fixed;
-  width: 50vw;
+  width: 45vw;
   height: 93vh;
   background-color: white;
   z-index: 9999;
@@ -18,6 +19,8 @@
     padding: 20px 0;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid $theme-lightgrey;
+    margin-bottom: 20px;
 
     .back-to-leads-button {
       display: flex;
@@ -57,6 +60,152 @@
       &:active {
         transform: scale(0.95);
       }
+    }
+  }
+
+  .lead-preview-header {
+    width: 90%;
+    height: 25%;
+    border: 1px solid $theme-lightgrey;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 5px;
+
+    .lead-preview-name-container {
+      width: 100%;
+      height: 50%;
+      padding: 15px;
+
+      .lead-preview-name {
+        font-size: 30px;
+        font-weight: 800;
+        margin: 10px;
+      }
+    }
+
+    .lead-preview-contact-info {
+      display: flex;
+      gap: 1rem;
+      margin: 10px;
+      align-items: center;
+      font-size: 16px;
+
+      .lead-preview-email {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $theme-grey;
+      }
+
+      .lead-preview-phone {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: $theme-grey;
+      }
+    }
+
+    .additional-lead-details {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      border-top: 1px solid $theme-lightgrey;
+
+      .lead-owner-container {
+        width: calc(100% / 3);
+        color: $theme-grey;
+        padding: 10px;
+        border-right: 1px solid $theme-lightgrey;
+      }
+
+      .lead-company-container {
+        width: calc(100% / 3);
+        color: $theme-grey;
+        padding: 10px;
+        border-right: 1px solid $theme-lightgrey;
+
+        .detail {
+          font-weight: 600;
+          font-size: 18px;
+          color: $theme-black;
+          margin-top: 1rem;
+        }
+      }
+
+      .lead-job-title-container {
+        width: calc(100% / 3);
+        color: $theme-grey;
+        padding: 10px;
+
+        .detail {
+          font-weight: 600;
+          font-size: 18px;
+          color: $theme-black;
+          margin-top: 1rem;
+        }
+      }
+    }
+  }
+
+  .lead-status-container {
+    display: flex;
+    width: 90%;
+    height: fit-content;
+    gap: 5px;
+    margin-top: 10px;
+
+    .lead-status {
+      width: 100%;
+      height: 10%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $theme-lightgrey;
+      font-size: 14px;
+      font-weight: 400;
+      color: $theme-black;
+      padding: 15px 20px;
+
+      &.selected {
+        background-color: #62c352;
+        color: white;
+      }
+    }
+  }
+
+  .lead-notes-and-activity {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    border-top: 1px solid $theme-lightgrey;
+    padding-top: 20px;
+
+    .lead-activity-container {
+      display: flex;
+      width: 90%;
+      height: 50%;
+      font-size: 18px;
+      font-weight: 600;
+      font-size: 22px;
+      flex-direction: column;
+      justify-content: flex-start;
+      border: transparent;
+    }
+
+    .lead-notes-container {
+      display: flex;
+      width: 90%;
+      border: transparent;
+      height: 50%;
+      font-size: 22px;
+      font-weight: 600;
+      flex-direction: column;
+      justify-content: flex-start;
     }
   }
 }

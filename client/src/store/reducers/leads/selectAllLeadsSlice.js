@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: false,
+  leadCount: 0,
 };
 
 export const selectAllLeadsSlice = createSlice({
@@ -11,9 +12,12 @@ export const selectAllLeadsSlice = createSlice({
     setSelectAllLeads: (state) => {
       state.value = !state.value;
     },
+    setLeadCount: (state, action) => {
+      state.leadCount = action.payload;
+    },
   },
 });
 
-export const { setSelectAllLeads } = selectAllLeadsSlice.actions;
+export const { setSelectAllLeads, setLeadCount } = selectAllLeadsSlice.actions;
 
 export default selectAllLeadsSlice.reducer;
