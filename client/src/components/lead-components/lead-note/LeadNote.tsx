@@ -18,8 +18,14 @@ const LeadNote = ({
   return (
     <div className="lead-note-container">
       <div className="lead-note-header">
-        <div className="note-create">Created {noteCreatedAt}</div>
-        <div className="note-author">{noteAuthor}</div>
+        <div className="note-author">
+          <span className="material-symbols-outlined">description</span>
+          Note by {noteAuthor}
+        </div>
+        <div className="note-create">
+          <span className="material-symbols-outlined">calendar_today</span>
+          Created {noteCreatedAt}
+        </div>
       </div>
       <div className="note">
         <div className="lead-note-title">{noteTitle}</div>

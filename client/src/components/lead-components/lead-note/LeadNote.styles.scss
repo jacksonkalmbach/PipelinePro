@@ -11,8 +11,22 @@
   .lead-note-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid $theme-lightgrey;
     padding: 20px;
+
+    .note-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+    }
+
+    .note-create {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
   }
 
   .note {
