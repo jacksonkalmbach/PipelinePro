@@ -66,7 +66,7 @@ const LeadPreview = () => {
   };
 
   const handleAddNote = () => {
-    setAddNote(true);
+    setAddNote(!addNote);
   };
 
   return (
@@ -160,17 +160,25 @@ const LeadPreview = () => {
               Closed
             </div>
           </div>
-          <div className="lead-notes-and-activity">
+          <div className="lead-notes-feed">
             <div className="lead-notes-container">
-              {addNote && <NewNote />}
               <div className="note-title-and-add-button">
                 <h4>Notes</h4>
-                {!addNote && (
-                  <div className="add-note-button" onClick={handleAddNote}>
-                    + Add note
-                  </div>
-                )}
+                <div className="add-note-button" onClick={handleAddNote}>
+                  {!addNote ? (
+                    <div className="add-note-button">
+                      <span className="material-symbols-outlined">add</span>Add
+                      note
+                    </div>
+                  ) : (
+                    <div className="close">
+                      <span className="material-symbols-outlined">close</span>
+                      Close
+                    </div>
+                  )}
+                </div>
               </div>
+              {addNote && <NewNote />}
               <LeadNote
                 noteTitle="Test"
                 noteAuthor="Mike Smith"

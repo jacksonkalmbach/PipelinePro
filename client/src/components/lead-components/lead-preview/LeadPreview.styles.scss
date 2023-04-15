@@ -7,7 +7,7 @@
   justify-content: flex-start;
   align-items: center;
   position: fixed;
-  width: 45vw;
+  width: 50vw;
   height: 93vh;
   background-color: white;
   z-index: 9999;
@@ -40,19 +40,18 @@
   }
 
   .lead-preview-buttons-container {
-    width: 100%;
+    width: calc(100% - 20px);
     padding: 20px 0;
     display: flex;
     border-bottom: 1px solid $theme-lightgrey;
     margin-bottom: 20px;
-    padding-left: 40px;
+    padding-left: 20px;
     justify-content: flex-start;
 
     .close-lead-details-button {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-right: 20px;
       padding: 5px 10px;
       gap: 5px;
       border: 1px solid $theme-lightgrey;
@@ -91,7 +90,7 @@
 
   .lead-preview-header {
     width: 90%;
-    height: 25%;
+    height: 35%;
     border: 1px solid $theme-lightgrey;
     display: flex;
     flex-direction: column;
@@ -140,6 +139,7 @@
 
       .lead-owner-container {
         width: calc(100% / 3);
+        height: calc(100% - 20px);
         color: $theme-grey;
         padding: 10px;
         border-right: 1px solid $theme-lightgrey;
@@ -200,7 +200,7 @@
     }
   }
 
-  .lead-notes-and-activity {
+  .lead-notes-feed {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -210,6 +210,7 @@
     height: 100%;
     border-top: 1px solid $theme-lightgrey;
     padding-top: 20px;
+    overflow-y: scroll;
 
     .lead-notes-container {
       display: flex;
@@ -225,13 +226,38 @@
 
       .note-title-and-add-button {
         display: flex;
-        justify-content: space-between;
         align-items: center;
         width: 100%;
+
+        h4 {
+          font-size: 24px;
+          font-weight: 600;
+          margin: 10px;
+        }
+
+        .close {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $primary-color;
+          font-size: 16px;
+          font-family: $font-family;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
 
         .add-note-button {
           color: $primary-color;
           font-size: 16px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
 
           &:hover {
             cursor: pointer;
@@ -242,6 +268,21 @@
           }
         }
       }
+
+      .note-title-and-add-button {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+      }
     }
+  }
+
+  .lead-notes-feed {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .lead-notes-feed::-webkit-scrollbar {
+    display: none;
   }
 }

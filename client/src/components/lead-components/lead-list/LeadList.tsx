@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { useDispatch } from "react-redux";
 import {
   setSelectAllLeads,
@@ -59,12 +59,12 @@ const LeadList = () => {
       });
   }, []);
 
-  const socket = io("http://localhost:5001");
+  // const socket = io("http://localhost:5001");
 
-  socket.on("new lead", (data) => {
-    setLeads((leads) => [data, ...leads]);
-    dispatch(setLeadCount(leads.length + 1));
-  });
+  // socket.on("new lead", (data) => {
+  //   setLeads((leads) => [data, ...leads]);
+  //   dispatch(setLeadCount(leads.length + 1));
+  // });
 
   const placeholders = [];
   const leadCount = leads ? leads.length : 0;

@@ -12,7 +12,7 @@ const SubsectionNavbar = ({ title, options }: SubsectionNavbarProps) => {
 
   for (let i = 0; i < options.length; i++) {
     subSections.push(
-      <Link to={options[i]} className="subsection-link">
+      <Link key={i} to={options[i]} className="subsection-link">
         {options[i]}
       </Link>
     );

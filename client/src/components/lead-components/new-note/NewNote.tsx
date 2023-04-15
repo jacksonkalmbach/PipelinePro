@@ -22,6 +22,8 @@ const NewNote = () => {
 
   const resetNote = () => {
     setNewNote(defaultNewNote);
+    setNoteTitle("");
+    setNoteBody("");
   };
 
   const handleAddNote = () => {
@@ -29,8 +31,6 @@ const NewNote = () => {
     newNote["noteBody"] = noteBody;
     console.log(newNote);
     resetNote();
-    setNoteTitle("");
-    setNoteBody("");
   };
 
   return (
@@ -48,7 +48,9 @@ const NewNote = () => {
         placeholder="Note body"
       />
       <div className="new-note-buttons-container">
-        <p className="cancel-button">Cancel</p>
+        <button onClick={resetNote} className="cancel-button">
+          Clear
+        </button>
         <button onClick={handleAddNote} className="add-note-button">
           Add note
         </button>

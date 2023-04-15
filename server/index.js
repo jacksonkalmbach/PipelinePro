@@ -1,7 +1,11 @@
+const http = require("http");
 const express = require("express");
 const app = express();
+const socketio = require("socket.io");
 const cors = require("cors");
 const pool = require("./db");
+const server = http.createServer(app);
+const io = socketio(server);
 
 app.use(cors());
 app.use(express.json());
@@ -30,7 +34,7 @@ app.get("/leads", async (req, res) => {
     const allLeads = await pool.query("SELECT * FROM leads");
     res.json(allLeads.rows);
   } catch (err) {
-    console.error(err.message);
+    console.error(`Error getting all leads, ${err.message}`);
   }
 });
 
@@ -85,6 +89,13 @@ app.delete("/leads/:id", async (req, res) => {
     console.error(err.message);
   }
 });
+
+// SOCKET.IO //
+// io.on("connection", (socket) => {
+//   socket.on("newLead", (data) => {
+//     io.emit("newLead", data);
+//   });
+// });
 
 app.listen(5001, () => {
   console.log("Server is running on port 5001");
