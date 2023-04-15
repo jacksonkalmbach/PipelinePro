@@ -26,6 +26,5 @@ CREATE TABLE notes(
   note_body VARCHAR(255) NOT NULL,
   lead_id INT NOT NULL,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
-  created_by INT NOT NULL,
-  FOREIGN KEY (lead_id) REFERENCES leads(lead_id)
+  created_by INT NOT NULL
 );
