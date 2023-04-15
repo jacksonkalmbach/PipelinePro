@@ -3,12 +3,12 @@ const router = express.Router();
 const pool = require("../db");
 
 // Create a note
-router.post("/notes", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const { note, lead_id } = req.body;
+    const { noteAuthor, leadId, noteTitle, noteBody, createdAt } = req.body;
     const newNote = await pool.query(
-      "INSERT INTO notes (note, lead_id) VALUES($1, $2) RETURNING *",
-      [note, lead_id]
+      "INSERT INTO notes (note_title, note_body, lead_id, created_at, created_by) VALUES($1, $2, $3, $4, $5) RETURNING *",
+      [noteTitle, noteBody, leadId, createdAt, createdBy]
     );
 
     res.json(newNote.rows[0]);
@@ -17,8 +17,18 @@ router.post("/notes", async (req, res) => {
   }
 });
 
+// Get all notes
+router.get("/", async (req, res) => {
+  try {
+    const allNotes = await pool.query("SELECT * FROM notes");
+    res.json(allNotes.rows);
+  } catch (err) {
+    console.error(`Error getting all notes, ${err.message}`);
+  }
+});
+
 // Get all notes for a lead
-router.get("/notes/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const allNotes = await pool.query(
@@ -32,7 +42,7 @@ router.get("/notes/:id", async (req, res) => {
 });
 
 // Update a note
-router.put("/notes/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { note, lead_id } = req.body;
@@ -48,7 +58,7 @@ router.put("/notes/:id", async (req, res) => {
 });
 
 // Delete a note
-router.delete("/notes/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const deleteNote = await pool.query(
