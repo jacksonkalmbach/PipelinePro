@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import io from "socket.io-client";
 import { useDispatch } from "react-redux";
 import {
   setSelectAllLeads,
@@ -36,8 +37,18 @@ const createEmployeeHash = (array: Employee[]) => {
   });
 };
 
+interface LeadData {
+  lead_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  leadOwner: number;
+  lead_status: string;
+}
+
 const LeadList = () => {
-  const [leads, setLeads] = useState([]);
+  const [leads, setLeads] = useState<LeadData[]>([]);
 
   useEffect(() => {
     fetch("http://localhost:5001/leads")
@@ -47,6 +58,13 @@ const LeadList = () => {
         dispatch(setLeadCount(data.length));
       });
   }, []);
+
+  const socket = io("http://localhost:5001");
+
+  socket.on("new lead", (data) => {
+    setLeads((leads) => [data, ...leads]);
+    dispatch(setLeadCount(leads.length + 1));
+  });
 
   const placeholders = [];
   const leadCount = leads ? leads.length : 0;

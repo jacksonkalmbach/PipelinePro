@@ -57,6 +57,7 @@ const CreateLead = () => {
 
       console.log(response);
       resetFormFields();
+      dispatch(setShowCreateLead());
     } catch (err) {
       console.log(err);
     }
@@ -118,6 +119,7 @@ const CreateLead = () => {
               type="tel"
               id="phone-input"
               name="phone"
+              maxLength={10}
               placeholder="Enter Number"
               onChange={handleInputChange}
             />
