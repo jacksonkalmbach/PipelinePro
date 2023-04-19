@@ -8,6 +8,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 const leadsRouter = require("./routes/leads");
 const notesRouter = require("./routes/notes");
+const employeesRouter = require("./routes/employees");
 
 app.use(cors());
 app.use(express.json());
@@ -16,13 +17,7 @@ app.use(express.json());
 
 app.use("/leads", leadsRouter);
 app.use("/notes", notesRouter);
-
-// SOCKET.IO //
-// io.on("connection", (socket) => {
-//   socket.on("newLead", (data) => {
-//     io.emit("newLead", data);
-//   });
-// });
+app.use("/employees", employeesRouter);
 
 app.listen(5001, () => {
   console.log("Server is running on port 5001");

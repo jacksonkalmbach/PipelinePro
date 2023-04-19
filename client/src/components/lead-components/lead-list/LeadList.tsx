@@ -59,13 +59,6 @@ const LeadList = () => {
       });
   }, []);
 
-  // const socket = io("http://localhost:5001");
-
-  // socket.on("new lead", (data) => {
-  //   setLeads((leads) => [data, ...leads]);
-  //   dispatch(setLeadCount(leads.length + 1));
-  // });
-
   const placeholders = [];
   const leadCount = leads ? leads.length : 0;
 
@@ -137,7 +130,7 @@ const LeadList = () => {
                 last_name: lastName,
                 email,
                 phone,
-                // leadOwner,
+                lead_owner: leadOwner,
                 lead_status: leadStatus,
               } = lead;
               return (
@@ -148,8 +141,7 @@ const LeadList = () => {
                   lastName={lastName}
                   email={email}
                   phone={phone}
-                  // photoURL={employeeHash[leadOwner].photoURL}
-                  // owner={employeeHash[leadOwner].fullName}
+                  leadOwner={leadOwner}
                   status={leadStatus}
                 />
               );

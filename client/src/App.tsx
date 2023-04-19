@@ -48,84 +48,67 @@ const App: React.FC = () => {
   // }, [hasMounted, navigate]);
 
   return (
-    // <>
-    //   {userIsSignedIn || isDemo ? (
-    //     <>
-    //       {isDemo && !isLoaded ? (
-    //         <div
-    //           style={{
-    //             display: "flex",
-    //             justifyContent: "center",
-    //             alignItems: "center",
-    //             height: "100vh",
-    //           }}
-    //         >
-    //           <div
-    //             style={{
-    //               width: "6rem",
-    //               height: "6rem",
-    //               border: "5px solid #ff7043",
-    //               borderTopColor: "transparent",
-    //               borderRadius: "50%",
-    //               animation: "spin 1s ease-in-out infinite",
-    //             }}
-    //           ></div>
-    //         </div>
-    //       ) : (
-    //         <animated.div style={props}>
-    //           <NavBar />
-    //           <div className="main-container">
-    //             <MainSectionsNavbar />
-    //             <Routes>
-    //               <Route path="/dashboard" element={<Dashboard />} />
-    //               <Route path="/contacts/*" element={<Contacts />}>
-    //                 <Route path="leads" element={<Leads />} />
-    //                 <Route path="contacts" element={<div>Contacts</div>} />
-    //                 <Route path="company" element={<div>Companies</div>}>
-    //                   <Route path="employees" element={<div>Employees</div>}>
-    //                     <Route path=":id" element={<div>Employee</div>} />
-    //                   </Route>
-    //                 </Route>
-    //               </Route>
-    //               <Route path="/calendar/*" element={<Calendar />} />
-    //               <Route path="/settings/*" element={<Settings />} />
-    //             </Routes>
-    //           </div>
-    //         </animated.div>
-    //       )}
-    //     </>
-    //   ) : (
-    //     <AuthContainer />
-    //   )}
-    // </>
-
     <>
-      <animated.div style={props}>
-        <NavBar />
-        <div className="main-container">
-          <MainSectionsNavbar />
-          <Routes>
-            <Route path="/dashboard/*" element={<Dashboard />}></Route>
-            <Route path="/contacts/*" element={<Contacts />}>
-              <Route path="leads" element={<Leads />}>
-                <Route path=":id" element={<div>Full Lead Details</div>} />
-              </Route>
-              <Route path="contacts" element={<div>Contacts</div>} />
-              <Route path="company" element={<div>Companies</div>}>
-                <Route path="employees" element={<div>Employees</div>}>
-                  <Route path=":id" element={<div>Employee</div>} />
-                </Route>
-              </Route>
-            </Route>
-            <Route path="/calendar/*" element={<Calendar />} />
-            <Route path="/settings/*" element={<Settings />}>
-              <Route path="Account" element={<AccountSettings />} />
-              <Route path="Notifications" element={<NotificationSettings />} />
-              <Route path="Billing" element={<BillingSettings />} />
-            </Route>
-          </Routes>
-        </div>
-      </animated.div>
+      {userIsSignedIn || isDemo ? (
+        <>
+          {isDemo && !isLoaded ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100vh",
+              }}
+            >
+              <div
+                style={{
+                  width: "6rem",
+                  height: "6rem",
+                  border: "5px solid #ff7043",
+                  borderTopColor: "transparent",
+                  borderRadius: "50%",
+                  animation: "spin 1s ease-in-out infinite",
+                }}
+              ></div>
+            </div>
+          ) : (
+            <animated.div style={props}>
+              <NavBar />
+              <div className="main-container">
+                <MainSectionsNavbar />
+                <Routes>
+                  <Route path="/dashboard/*" element={<Dashboard />}></Route>
+                  <Route path="/contacts/*" element={<Contacts />}>
+                    <Route path="leads" element={<Leads />}>
+                      <Route
+                        path=":id"
+                        element={<div>Full Lead Details</div>}
+                      />
+                    </Route>
+                    <Route path="contacts" element={<div>Contacts</div>} />
+                    <Route path="company" element={<div>Companies</div>}>
+                      <Route path="employees" element={<div>Employees</div>}>
+                        <Route path=":id" element={<div>Employee</div>} />
+                      </Route>
+                    </Route>
+                  </Route>
+                  <Route path="/calendar/*" element={<Calendar />} />
+                  <Route path="/settings/*" element={<Settings />}>
+                    <Route path="Account" element={<AccountSettings />} />
+                    <Route
+                      path="Notifications"
+                      element={<NotificationSettings />}
+                    />
+                    <Route path="Billing" element={<BillingSettings />} />
+                  </Route>
+                </Routes>
+              </div>
+            </animated.div>
+          )}
+        </>
+      ) : (
+        <AuthContainer />
+      )}
     </>
   );
 };

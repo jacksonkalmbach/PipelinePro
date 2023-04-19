@@ -18,8 +18,17 @@ interface LeadRowItemProps {
   email: string;
   phone: string;
   photoURL?: string;
-  owner?: string;
+  leadOwner?: number | undefined;
   status: string;
+}
+
+interface Employee {
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  profile_pic: string;
+  title: string;
 }
 
 const LeadRowItem = ({
@@ -29,22 +38,17 @@ const LeadRowItem = ({
   email,
   phone,
   photoURL,
-  owner,
+  leadOwner,
   status,
 }: LeadRowItemProps) => {
   const dispatch = useDispatch();
-
   const [isSelected, setisSelected] = useState(false);
+  const [ownerData, setOwnerData] = useState<Employee | null>(null);
+  const [ownerFirstName, setOwnerFirstName] = useState("");
+  const [ownerLastName, setOwnerLastName] = useState("");
+  const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
   const leadPreviewId = useSelector((state: any) => state.showLead);
-
-  let ownerFirstName = "";
-  let ownerLastName = "";
-
-  if (owner !== undefined) {
-    ownerFirstName = owner.split(" ")[0];
-    ownerLastName = owner.split(" ")[1];
-  }
 
   useEffect(() => {
     setisSelected(checkAll);
@@ -59,6 +63,19 @@ const LeadRowItem = ({
     dispatch(setShowLeadPreview(true));
     dispatch(setPreviewId(id));
   };
+
+  useEffect(() => {
+    if (leadOwner) {
+      fetch(`http://localhost:5001/employees/${leadOwner}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setOwnerData(data);
+          setOwnerFirstName(data.first_name);
+          setOwnerLastName(data.last_name);
+          setOwnerPhotoURL(data.profile_pic);
+        });
+    }
+  }, [leadOwner]);
 
   return (
     <div
@@ -99,12 +116,14 @@ const LeadRowItem = ({
         <LeadRowStatus status={status} />
       </div>
       <div className="lead-row-item__owner">
-        <AccoutManagerSelect
-          id={1}
-          firstName={ownerFirstName}
-          lastName={ownerLastName}
-          profilePic={photoURL}
-        />
+        {ownerData && (
+          <AccoutManagerSelect
+            id={leadOwner}
+            firstName={ownerFirstName}
+            lastName={ownerLastName}
+            profilePic={ownerPhotoURL}
+          />
+        )}
       </div>
     </div>
   );

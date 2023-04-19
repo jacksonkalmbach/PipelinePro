@@ -6,7 +6,7 @@ import { setSectionNavigation } from "../../../store/reducers/navigation/section
 import "./EmployeeSelect.styles.scss";
 
 interface AccoutManagerSelectProps {
-  id: number;
+  id: number | undefined;
   firstName: string;
   lastName: string;
   profilePic?: string;

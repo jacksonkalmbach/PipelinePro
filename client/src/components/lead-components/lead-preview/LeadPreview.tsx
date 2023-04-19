@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowLeadPreview } from "../../../store/reducers/leads/showLeadSlice";
 
@@ -29,6 +28,7 @@ const LeadPreview = () => {
   const [jobTitle, setJobTitle] = useState("");
   const [status, setStatus] = useState("");
 
+  const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
 
   const previewLead = useSelector((state: any) => state.showLead.previewLead);
@@ -39,7 +39,6 @@ const LeadPreview = () => {
       fetch(`http://localhost:5001/leads/${leadId}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           setCurrentLead(data);
         });
     } catch (error) {
@@ -59,7 +58,20 @@ const LeadPreview = () => {
     }
   }, [currentLead]);
 
-  console.log(firstName);
+  useEffect(() => {
+    if (currentLead) {
+      try {
+        console.log("HIT FETCH LEAD NOTES");
+        fetch(`http://localhost:5001/notes/${leadId}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setNotes(data);
+          });
+      } catch (error) {
+        console.log("error fetching lead notes", error);
+      }
+    }
+  }, [currentLead, addNote]);
 
   const handleCloseLeadPreview = () => {
     dispatch(setShowLeadPreview(false));
@@ -178,13 +190,26 @@ const LeadPreview = () => {
                   )}
                 </div>
               </div>
-              {addNote && <NewNote />}
-              <LeadNote
-                noteTitle="Test"
-                noteAuthor="Mike Smith"
-                noteBody="body text"
-                noteCreatedAt="3/13/23"
-              />
+              {addNote && <NewNote leadId={leadId} />}
+              {notes.length > 0 &&
+                notes.map((note: any) => {
+                  const {
+                    note_id,
+                    note_title,
+                    note_body,
+                    created_at,
+                    created_by,
+                  } = note;
+                  return (
+                    <LeadNote
+                      key={note_id}
+                      noteTitle={note_title}
+                      noteBody={note_body}
+                      noteCreatedAt={created_at}
+                      noteAuthor={created_by}
+                    />
+                  );
+                })}
             </div>
           </div>
         </div>

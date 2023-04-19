@@ -1,13 +1,22 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "./NewNote.styles.scss";
 
+interface NewNoteProps {
+  leadId: number;
+}
+
 const defaultNewNote = {
+  leadId: 0,
   noteTitle: "",
   noteBody: "",
+  noteAuthor: "",
+  createdAt: new Date(),
 };
 
-const NewNote = () => {
+const NewNote = ({ leadId }: NewNoteProps) => {
+  const noteAuthor = useSelector((state: any) => state.userAuth.uid);
   const [newNote, setNewNote] = useState(defaultNewNote);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");
@@ -26,10 +35,24 @@ const NewNote = () => {
     setNoteBody("");
   };
 
-  const handleAddNote = () => {
+  const handleAddNote = async () => {
+    newNote["noteAuthor"] = noteAuthor;
+    newNote["leadId"] = leadId;
     newNote["noteTitle"] = noteTitle;
     newNote["noteBody"] = noteBody;
-    console.log(newNote);
+    newNote["createdAt"] = new Date();
+
+    try {
+      const response = await fetch("http://localhost:5001/notes", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newNote),
+      });
+      console.log("New note res", response);
+    } catch (error) {
+      console.error(error);
+    }
+
     resetNote();
   };
 

@@ -15,6 +15,9 @@ const LeadNote = ({
   noteAuthor,
   noteCreatedAt,
 }: LeadNoteProps) => {
+  const isoDate = new Date(noteCreatedAt);
+  const date = isoDate.toLocaleDateString();
+
   return (
     <div className="lead-note-container">
       <div className="lead-note-header">
@@ -24,7 +27,7 @@ const LeadNote = ({
         </div>
         <div className="note-create">
           <span className="material-symbols-outlined">calendar_today</span>
-          Created {noteCreatedAt}
+          Created {date}
         </div>
       </div>
       <div className="note">
