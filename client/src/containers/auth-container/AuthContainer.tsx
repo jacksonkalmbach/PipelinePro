@@ -24,7 +24,9 @@ const AuthContainer = () => {
   return (
     <div className="auth-container">
       <div className="auth-options">
-        <h1 style={{ fontSize: "50px", marginBottom: "0" }}>PipelinePro</h1>
+        <div className="logo-container">
+          <img className="logo" src="../pp-logo-black.png" alt="logo" />
+        </div>
         <div>
           {authChoice === "signin" ? (
             <h1 className="auth-subtitle">Welcome Back</h1>

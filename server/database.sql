@@ -51,4 +51,9 @@ INSERT INTO employees(
   profile_pic
 )
 VALUES
- ('Sarah', 'Williams', 'sarah.williams@example.com', '3315551234', 'Account Executive', 'Sales', 'https://www.lensmen.ie/wp-content/uploads/2015/02/Profile-Portrait-Photographer-in-Dublin-Ireland..jpg')
+ ('Mike', 'Thomas', 'mike.thomas@example.com', '6378778900', 'Account Executive', 'Sales', 'https://www.neilsonreeves.co.uk/wp-content/uploads/corporate-headshot-neutral-grey-bg.jpg');
+
+
+INSERT INTO leads (first_name, last_name, email, phone, company, job_title, lead_status, lead_owner)
+VALUES 
+('Erin', 'Schumaker', 'eschumaker@example.com', '6768893456', 'XYZ Enterprise', 'Project Lead', 2);

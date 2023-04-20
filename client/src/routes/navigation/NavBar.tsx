@@ -13,14 +13,15 @@ const NavBar = () => {
   const lastName = displayName.split(" ")[1];
   const photoURL = useSelector((state: any) => state.userAuth.photoURL);
   const uid = useSelector((state: any) => state.userAuth.uid);
-  // const photoURL = null;
 
   console.log(uid);
   console.log(firstName);
 
   return (
     <nav className="navbar-container">
-      <div className="navbar-logo">LOGO</div>
+      <div className="navbar-logo">
+        <img className="logo" src="../../pp-logo-white.png" alt="logo" />
+      </div>
       <div className="vertical-line"></div>
       <ul className="navbar-links">
         <li className="navbar-link">{currentSection}</li>
