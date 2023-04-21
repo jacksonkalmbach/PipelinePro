@@ -1,41 +1,17 @@
 import React, { useState, useEffect } from "react";
-// import io from "socket.io-client";
 import { useDispatch } from "react-redux";
-import {
-  setSelectAllLeads,
-  setLeadCount,
-} from "../../../../store/reducers/leads/selectAllLeadsSlice";
+import { setSelectAllLeads } from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
-import Dropdown from "../../../dropdown/Dropdown";
+import SearchBox from "../../../search-box-component/SearchBox";
 import LeadRowItem from "../lead-row-item/LeadRowItem";
 import LeadRowItemPlaceholder from "../lead-row-item/LeadRowItemPlaceholder";
 
-import EMPLOYEE_DATA from "../../../../EMPLOYEE_DATA.json";
 import "./LeadList.styles.scss";
 
-interface Employee {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  img: string;
-  title: string;
+interface LeadListProps {
+  leads: LeadData[];
+  leadCount?: number | null;
 }
-
-interface EmployeeHash {
-  [id: number]: { fullName: string; photoURL: string };
-}
-
-const employeeHash: EmployeeHash = {};
-
-const createEmployeeHash = (array: Employee[]) => {
-  array.forEach((employee) => {
-    employeeHash[employee.id] = {
-      fullName: employee.firstName + " " + employee.lastName,
-      photoURL: employee.img,
-    };
-  });
-};
 
 interface LeadData {
   lead_id: number;
@@ -47,30 +23,37 @@ interface LeadData {
   lead_status: string;
 }
 
-const LeadList = () => {
-  const [leads, setLeads] = useState<LeadData[]>([]);
+const LeadList = ({ leads, leadCount }: LeadListProps) => {
+  const dispatch = useDispatch();
+
+  const [searchField, setSearchField] = useState("");
+  const [filteredLeads, setFilteredLeads] = useState<LeadData[]>(leads);
 
   useEffect(() => {
-    fetch("http://localhost:5001/leads")
-      .then((res) => res.json())
-      .then((data) => {
-        setLeads(data);
-        dispatch(setLeadCount(data.length));
-      });
-  }, []);
+    const newFilteredLeads = leads.filter((lead) => {
+      return (
+        lead.first_name.toLocaleLowerCase().includes(searchField) ||
+        lead.last_name.toLocaleLowerCase().includes(searchField)
+      );
+    });
+
+    setFilteredLeads(newFilteredLeads);
+  }, [searchField, leads]);
+
+  const onSearchChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const searchFieldString = event.target.value.toLowerCase();
+    setSearchField(searchFieldString);
+  };
 
   const placeholders = [];
-  const leadCount = leads ? leads.length : 0;
 
   for (let i = 0; i < 10; i++) {
     placeholders.push(<LeadRowItemPlaceholder key={i} />);
   }
 
-  createEmployeeHash(EMPLOYEE_DATA.employees);
-  const dispatch = useDispatch();
   const [checkAll, setCheckAll] = useState(false);
-
-  const leadsPerPage = [10, 20, 50];
 
   const toggleCheckAll = () => {
     setCheckAll(!checkAll);
@@ -80,13 +63,11 @@ const LeadList = () => {
   return (
     <div className="leads-list-container">
       <div className="leads-list-search">
-        <input className="searchbar-leads" placeholder="Search leads"></input>
-        <div className="leads-per-page">
-          Showing&nbsp;
-          <Dropdown title={10} options={leadsPerPage} />
-          &nbsp;of&nbsp;
-          <div style={{ fontWeight: "bold" }}>{leadCount}</div> &nbsp;results
-        </div>
+        <SearchBox
+          className={"all-leads"}
+          placeholder={"Search all leads"}
+          onChangeHandler={onSearchChange}
+        />
       </div>
       <div className="leads-list-filters">
         <div
@@ -122,8 +103,8 @@ const LeadList = () => {
         </div>
       </div>
       <div className="leads-list">
-        {leads
-          ? leads.map((lead: any) => {
+        {filteredLeads
+          ? filteredLeads.map((lead: any) => {
               const {
                 lead_id,
                 first_name: firstName,

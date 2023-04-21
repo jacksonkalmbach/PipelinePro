@@ -1,12 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SubsectionNavbar from "../../components/navigation-components/subsection-navbar/SubsectionNavbar";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import "./Dashboard.styles.scss";
+import LeadList from "../../components/lead-components/lead-list-components/lead-list/LeadList";
 
 const Dashboard = () => {
+  const dispatch = useDispatch();
+  const [leads, setLeads] = useState([]);
+
   const currentUser = useSelector((state: any) => state.userAuth.displayName);
+  const currentUserId = useSelector((state: any) => state.userAuth.uid);
+  console.log("CUI", currentUserId);
   const currentUserFirstName = currentUser.split(" ")[0];
+
+  useEffect(() => {
+    fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLeads(data);
+      });
+  }, [currentUserId]);
 
   return (
     <div className="dashboard-container">
@@ -21,6 +35,7 @@ const Dashboard = () => {
           </div>
           <div className="my-leads">
             <h2>My leads</h2>
+            <LeadList leads={leads} />
           </div>
         </div>
         <div className="my-calendar">

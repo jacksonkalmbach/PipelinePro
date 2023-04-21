@@ -30,55 +30,9 @@
 
     .leads-list-search {
       display: flex;
-      justify-content: space-between;
       height: 4rem;
+      width: 30%;
       align-items: center;
-      border-bottom: 1px solid $theme-lightgrey;
-
-      .searchbar-leads {
-        width: 30%;
-        margin-left: 20px;
-
-        border: 1px solid $theme-lightgrey;
-        outline: none;
-        font-size: 1rem;
-        font-family: inherit;
-        padding: 0.5rem;
-        border-radius: 0.25rem;
-
-        &:focus {
-          border: 2px solid $secondary-color;
-        }
-
-        &:hover {
-          background-color: #f5f5f5;
-        }
-      }
-
-      .leads-per-page {
-        display: flex;
-        margin-right: 20px;
-        align-items: center;
-
-        .choose-num-leads {
-          display: flex;
-          align-items: center;
-          font-weight: bold;
-          border: 1px solid $theme-grey;
-          background-color: #f6f6f6;
-          color: $theme-black;
-          border-radius: 5px;
-          padding: 2px 3px;
-
-          .material-symbols-outlined {
-            color: $theme-grey;
-          }
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
-      }
     }
 
     .leads-list-filters {

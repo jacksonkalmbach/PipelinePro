@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isDemo: false,
   isSignedIn: false,
-  uid: "123",
+  uid: "3",
   photoURL:
     "https://media.licdn.com/dms/image/D4E03AQFseatAMo8cnA/profile-displayphoto-shrink_800_800/0/1679333449150?e=1686182400&v=beta&t=KnDPBL4QdnoIym6nqOiOXUjI4LjgKVmimwwNEzod2cM",
   displayName: "Jackson Kalmbach",

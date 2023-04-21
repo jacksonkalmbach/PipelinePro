@@ -32,11 +32,12 @@
       }
 
       .my-leads {
-        height: 50%;
+        max-height: 50%;
         width: calc(100% - 40px);
         border: 1px solid $theme-lightgrey;
         border-radius: 15px;
         padding: 20px;
+        overflow: scroll;
       }
     }
 
