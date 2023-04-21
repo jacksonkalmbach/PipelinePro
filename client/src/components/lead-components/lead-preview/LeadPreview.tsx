@@ -3,8 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { setShowLeadPreview } from "../../../store/reducers/leads/showLeadSlice";
 
 import "./LeadPreview.styles.scss";
-import LeadNote from "../lead-note/LeadNote";
-import NewNote from "../new-note/NewNote";
+import LeadNote from "../lead-notes-components/lead-note/LeadNote";
+import NewNote from "../lead-notes-components/new-note/NewNote";
+import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 
 interface Lead {
   id: number;
@@ -15,6 +16,7 @@ interface Lead {
   company: string;
   job_title: string;
   lead_status: string;
+  lead_owner: number;
 }
 
 const LeadPreview = () => {
@@ -27,6 +29,14 @@ const LeadPreview = () => {
   const [company, setCompany] = useState("");
   const [jobTitle, setJobTitle] = useState("");
   const [status, setStatus] = useState("");
+
+  const [optionsOpen, setOptionsOpen] = useState(false);
+  const [verifyDelete, setVerifyDelete] = useState(false);
+
+  const [ownerId, setOwnerId] = useState(0);
+  const [ownerFirstName, setOwnerFirstName] = useState("");
+  const [ownerLastName, setOwnerLastName] = useState("");
+  const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
 
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
@@ -61,7 +71,6 @@ const LeadPreview = () => {
   useEffect(() => {
     if (currentLead) {
       try {
-        console.log("HIT FETCH LEAD NOTES");
         fetch(`http://localhost:5001/notes/${leadId}`)
           .then((res) => res.json())
           .then((data) => {
@@ -73,6 +82,23 @@ const LeadPreview = () => {
     }
   }, [currentLead, addNote]);
 
+  useEffect(() => {
+    if (currentLead) {
+      try {
+        fetch(`http://localhost:5001/employees/${currentLead.lead_owner}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setOwnerId(data.id);
+            setOwnerFirstName(data.first_name);
+            setOwnerLastName(data.last_name);
+            setOwnerPhotoURL(data.profile_pic);
+          });
+      } catch (error) {
+        console.log("error fetching lead owner", error);
+      }
+    }
+  }, [currentLead]);
+
   const handleCloseLeadPreview = () => {
     dispatch(setShowLeadPreview(false));
   };
@@ -81,12 +107,48 @@ const LeadPreview = () => {
     setAddNote(!addNote);
   };
 
+  const handleOpenOptions = () => {
+    setOptionsOpen(!optionsOpen);
+  };
+
+  const handleDeleteLead = () => {
+    setVerifyDelete(!verifyDelete);
+  };
+
+  const confirmDeleteLead = () => {
+    try {
+      fetch(`http://localhost:5001/leads/${leadId}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (error) {
+      console.log("error deleting lead", error);
+    }
+
+    handleCloseLeadPreview();
+  };
+
+  const handleConfirmDelete = () => {
+    confirmDeleteLead();
+  };
+
   return (
     previewLead && (
       <>
+        {verifyDelete && (
+          <div className="confirm-delete-lead">
+            Are you sure you want to delete this lead?
+            <button onClick={handleConfirmDelete}>Delete</button>
+            <button>Cancel</button>
+          </div>
+        )}
         <div className={previewLead ? "overlay" : ""}></div>
         <div className="lead-preview-container">
           <div className="lead-preview-buttons-container">
+            <h1>Lead Preview</h1>
             <div
               className="close-lead-details-button"
               onClick={handleCloseLeadPreview}
@@ -102,9 +164,24 @@ const LeadPreview = () => {
                   {firstName !== "" ? firstName : <div>Loading...</div>}{" "}
                   {lastName !== "" ? lastName : <div>Loading...</div>}
                 </div>
-                <div className="lead-edit">
+                <div className="lead-edit" onClick={handleOpenOptions}>
                   <span className="material-symbols-outlined">more_horiz</span>
                 </div>
+                {optionsOpen && (
+                  <div className="lead-options">
+                    <div className="lead-option">
+                      <span className="material-symbols-outlined">edit</span>
+                      Edit Lead
+                    </div>
+                    <div
+                      className="lead-option delete"
+                      onClick={handleDeleteLead}
+                    >
+                      <span className="material-symbols-outlined">delete</span>
+                      Delete Lead
+                    </div>
+                  </div>
+                )}
               </div>
               <div className="lead-preview-contact-info">
                 <div className="lead-preview-email">
@@ -128,7 +205,21 @@ const LeadPreview = () => {
               </div>
             </div>
             <div className="additional-lead-details">
-              <div className="lead-owner-container">Lead Owner</div>
+              <div className="lead-owner-container">
+                Lead Owner
+                <div className="detail">
+                  {ownerId !== 0 ? (
+                    <EmployeeSelect
+                      id={ownerId}
+                      firstName={ownerFirstName}
+                      lastName={ownerLastName}
+                      profilePic={ownerPhotoURL}
+                    />
+                  ) : (
+                    "Loading..."
+                  )}
+                </div>
+              </div>
               <div className="lead-company-container">
                 Company
                 <div className="detail">

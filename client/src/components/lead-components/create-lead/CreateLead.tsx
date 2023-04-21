@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
-import LeadRowStatus from "../lead-row-status/LeadRowStatus";
+import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
 
 const defaultCreateLeadState = {
   firstName: "",
@@ -77,6 +77,7 @@ const CreateLead = () => {
             className="close-create-lead-button"
             onClick={handleCloseCreateLead}
           >
+            Close
             <span className="material-symbols-outlined">close</span>
           </div>
         </div>
@@ -160,16 +161,22 @@ const CreateLead = () => {
                 selected={leadStatus === "Open" ? true : false}
               />
               <LeadRowStatus
-                status="Closed"
-                clickable={true}
-                onClick={() => handleLeadStatusChange("Closed")}
-                selected={leadStatus === "Closed" ? true : false}
-              />
-              <LeadRowStatus
                 status="Warm"
                 clickable={true}
                 onClick={() => handleLeadStatusChange("Warm")}
                 selected={leadStatus === "Warm" ? true : false}
+              />
+              <LeadRowStatus
+                status="In Progress"
+                clickable={true}
+                onClick={() => handleLeadStatusChange("In Progress")}
+                selected={leadStatus === "In Progress" ? true : false}
+              />
+              <LeadRowStatus
+                status="Closed"
+                clickable={true}
+                onClick={() => handleLeadStatusChange("Closed")}
+                selected={leadStatus === "Closed" ? true : false}
               />
             </div>
           </div>

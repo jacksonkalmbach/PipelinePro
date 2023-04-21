@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useSpring, animated } from "react-spring";
 
 import "./App.css";
 import MainSectionsNavbar from "./components/navigation-components/main-section-navbar/MainSectionsNavbar";
@@ -19,18 +18,10 @@ import NotificationSettings from "./containers/settings-container/notifications/
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
 
 const App: React.FC = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const userIsSignedIn = useSelector((state: any) => state.userAuth.isSignedIn);
   const [isLoaded, setIsLoaded] = useState(false);
   const isDemo = useSelector((state: any) => state.userAuth.isDemo);
-
-  const [hasMounted, sethasMounted] = useState(false);
-
-  const props = useSpring({
-    opacity: 1,
-    from: { opacity: 0 },
-    config: { duration: 1200 },
-  });
 
   useEffect(() => {
     if (isDemo) {
@@ -39,13 +30,6 @@ const App: React.FC = () => {
       }, 1100);
     }
   }, [isDemo]);
-
-  // useEffect(() => {
-  //   if (!hasMounted) {
-  //     navigate("/login");
-  //     sethasMounted(true);
-  //   }
-  // }, [hasMounted, navigate]);
 
   return (
     <>
@@ -72,7 +56,7 @@ const App: React.FC = () => {
               ></div>
             </div>
           ) : (
-            <animated.div style={props}>
+            <>
               <NavBar />
               <div className="main-container">
                 <MainSectionsNavbar />
@@ -103,7 +87,7 @@ const App: React.FC = () => {
                   </Route>
                 </Routes>
               </div>
-            </animated.div>
+            </>
           )}
         </>
       ) : (

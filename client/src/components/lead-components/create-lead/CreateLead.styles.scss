@@ -50,7 +50,15 @@
     }
 
     .close-create-lead-button {
-      padding-right: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $theme-lightgrey;
+      border-radius: 3px;
+      padding: 3px 6px;
+      margin-right: 40px;
+      color: $theme-black;
+
       &:hover {
         cursor: pointer;
       }

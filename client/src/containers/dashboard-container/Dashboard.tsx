@@ -14,9 +14,18 @@ const Dashboard = () => {
         title="dahsboard"
         options={[`${currentUserFirstName} home`, "Sales"]}
       />
-      <div className="my-leads">
-        <h1>My Leads</h1>
-        <div className="my-leads-list"></div>
+      <div className="dashboard-content">
+        <div className="activity-leads-container">
+          <div className="my-activity">
+            <h2>My activity</h2>
+          </div>
+          <div className="my-leads">
+            <h2>My leads</h2>
+          </div>
+        </div>
+        <div className="my-calendar">
+          <h2>My calendar</h2>
+        </div>
       </div>
     </div>
   );

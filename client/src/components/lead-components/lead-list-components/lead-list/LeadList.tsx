@@ -4,13 +4,13 @@ import { useDispatch } from "react-redux";
 import {
   setSelectAllLeads,
   setLeadCount,
-} from "../../../store/reducers/leads/selectAllLeadsSlice";
+} from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
-import Dropdown from "../../dropdown/Dropdown";
+import Dropdown from "../../../dropdown/Dropdown";
 import LeadRowItem from "../lead-row-item/LeadRowItem";
 import LeadRowItemPlaceholder from "../lead-row-item/LeadRowItemPlaceholder";
 
-import EMPLOYEE_DATA from "../../../EMPLOYEE_DATA.json";
+import EMPLOYEE_DATA from "../../../../EMPLOYEE_DATA.json";
 import "./LeadList.styles.scss";
 
 interface Employee {

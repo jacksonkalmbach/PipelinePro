@@ -3,11 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setShowLeadPreview,
   setPreviewId,
-  setShowCreateLead,
-} from "../../../store/reducers/leads/showLeadSlice";
+} from "../../../../store/reducers/leads/showLeadSlice";
 
 import LeadRowStatus from "../lead-row-status/LeadRowStatus";
-import AccoutManagerSelect from "../../employee-components/employee-select/EmployeeSelect";
+import AccoutManagerSelect from "../../../employee-components/employee-select/EmployeeSelect";
 
 import "./LeadRowItem.styles.scss";
 
@@ -48,7 +47,6 @@ const LeadRowItem = ({
   const [ownerLastName, setOwnerLastName] = useState("");
   const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
   const checkAll = useSelector((state: any) => state.selectAllLeads.value);
-  const leadPreviewId = useSelector((state: any) => state.showLead);
 
   useEffect(() => {
     setisSelected(checkAll);

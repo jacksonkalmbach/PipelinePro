@@ -4,16 +4,19 @@
   display: flex;
   margin-top: 0;
   flex-direction: column;
-  justify-content: flex-start;
-  gap: 30px;
-  height: calc(100vh - 11rem);
-
+  justify-content: center;
+  height: 100%;
+  width: calc(100vw - 4rem - 10px);
   .leads-count {
     font-family: $font-family;
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 600;
     color: #000;
+    margin-left: 30px;
+    width: fit-content;
+    padding: 0;
   }
+
   .leads-filter-container {
     border: 1px solid black;
     height: 5rem;
