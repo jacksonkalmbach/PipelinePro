@@ -21,19 +21,8 @@
   height: 93vh;
   background-color: white;
   z-index: 9999;
-  right: -50vw;
+  right: 0vw;
   bottom: 0;
-  animation-name: slideInFromRight;
-  animation-duration: 0.5s;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-
-  &.slide-out {
-    animation-name: slideOutToRight;
-    animation-duration: 0.5s;
-    animation-timing-function: ease-out;
-    animation-fill-mode: forwards;
-  }
 
   .create-lead-header {
     padding: 1rem 0;
@@ -66,24 +55,6 @@
   }
 }
 
-@keyframes slideInFromRight {
-  from {
-    right: -50vw;
-  }
-  to {
-    right: 0;
-  }
-}
-
-@keyframes slideOutToRight {
-  from {
-    right: 0;
-  }
-  to {
-    right: -50vw;
-  }
-}
-
 .create-lead-form {
   padding: 1rem;
   display: flex;
@@ -95,8 +66,11 @@
 
   .lead-name {
     display: flex;
-    width: 100%;
-    gap: 40px;
+    justify-content: space-between;
+
+    .form-group {
+      width: 47%
+    }
   }
 
   input {

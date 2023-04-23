@@ -37,7 +37,11 @@
         border: 1px solid $theme-lightgrey;
         border-radius: 15px;
         padding: 20px;
-        overflow: scroll;
+
+        .my-leads-list {
+          height: 85%;
+          overflow: hidden;
+        }
       }
     }
 

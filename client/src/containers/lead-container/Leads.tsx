@@ -34,7 +34,13 @@ const Leads = () => {
       <CreateLead />
       <LeadPreview />
       <FilterAddLead />
-      <LeadList leads={leads} leadCount={leadCount} />
+      <div className="all-leads-list">
+        <LeadList
+          leads={leads}
+          leadCount={leadCount}
+          searchPlaceholder="Search all leads"
+        />
+      </div>
     </div>
   );
 };

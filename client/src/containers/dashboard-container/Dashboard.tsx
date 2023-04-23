@@ -35,7 +35,9 @@ const Dashboard = () => {
           </div>
           <div className="my-leads">
             <h2>My leads</h2>
-            <LeadList leads={leads} />
+            <div className="my-leads-list">
+              <LeadList leads={leads} searchPlaceholder="Search my leads" />
+            </div>
           </div>
         </div>
         <div className="my-calendar">

@@ -11,6 +11,7 @@ import "./LeadList.styles.scss";
 interface LeadListProps {
   leads: LeadData[];
   leadCount?: number | null;
+  searchPlaceholder: string;
 }
 
 interface LeadData {
@@ -23,7 +24,7 @@ interface LeadData {
   lead_status: string;
 }
 
-const LeadList = ({ leads, leadCount }: LeadListProps) => {
+const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
   const dispatch = useDispatch();
 
   const [searchField, setSearchField] = useState("");
@@ -65,7 +66,7 @@ const LeadList = ({ leads, leadCount }: LeadListProps) => {
       <div className="leads-list-search">
         <SearchBox
           className={"all-leads"}
-          placeholder={"Search all leads"}
+          placeholder={searchPlaceholder}
           onChangeHandler={onSearchChange}
         />
       </div>
