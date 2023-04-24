@@ -115,6 +115,10 @@ const LeadPreview = () => {
     setVerifyDelete(!verifyDelete);
   };
 
+  const handleCancelDelete = () => {
+    setVerifyDelete(false);
+  };
+
   const confirmDeleteLead = () => {
     try {
       fetch(`http://localhost:5001/leads/${leadId}`, {
@@ -140,9 +144,21 @@ const LeadPreview = () => {
       <>
         {verifyDelete && (
           <div className="confirm-delete-lead">
-            Are you sure you want to delete this lead?
-            <button onClick={handleConfirmDelete}>Delete</button>
-            <button>Cancel</button>
+            <div className="are-you-sure">
+              <h3>Are you sure you want to delete this lead?</h3>
+              <p>You will not be able to undo this action.</p>
+            </div>
+            <div className="confirm-delete-lead-buttons">
+              <button className="delete-lead-btn" onClick={handleConfirmDelete}>
+                Delete
+              </button>
+              <button
+                className="cancel-delete-btn"
+                onClick={handleCancelDelete}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         )}
         <div className={previewLead ? "overlay" : ""}></div>
@@ -164,24 +180,30 @@ const LeadPreview = () => {
                   {firstName !== "" ? firstName : <div>Loading...</div>}{" "}
                   {lastName !== "" ? lastName : <div>Loading...</div>}
                 </div>
-                <div className="lead-edit" onClick={handleOpenOptions}>
-                  <span className="material-symbols-outlined">more_horiz</span>
-                </div>
-                {optionsOpen && (
-                  <div className="lead-options">
-                    <div className="lead-option">
-                      <span className="material-symbols-outlined">edit</span>
-                      Edit Lead
-                    </div>
-                    <div
-                      className="lead-option delete"
-                      onClick={handleDeleteLead}
-                    >
-                      <span className="material-symbols-outlined">delete</span>
-                      Delete Lead
-                    </div>
+                <div className="edit-options">
+                  <div className="lead-edit" onClick={handleOpenOptions}>
+                    <span className="material-symbols-outlined">
+                      more_horiz
+                    </span>
                   </div>
-                )}
+                  {optionsOpen && (
+                    <div className="lead-options">
+                      <div className="lead-option">
+                        <span className="material-symbols-outlined">edit</span>
+                        Edit Lead
+                      </div>
+                      <div
+                        className="lead-option delete"
+                        onClick={handleDeleteLead}
+                      >
+                        <span className="material-symbols-outlined">
+                          delete
+                        </span>
+                        Delete Lead
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
               <div className="lead-preview-contact-info">
                 <div className="lead-preview-email">

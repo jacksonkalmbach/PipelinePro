@@ -2,11 +2,67 @@
 
 .confirm-delete-lead {
   background-color: white;
+  border: 1px solid $theme-lightgrey;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 15px;
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
   width: 30vw;
   height: 30vh;
+  z-index: 9999;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  .are-you-sure {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin-bottom: 20px;
+
+    h3 {
+      padding: 0;
+      margin: 0;
+    }
+  }
+
+  .confirm-delete-lead-buttons {
+    display: flex;
+    gap: 20px;
+
+    .delete-lead-btn {
+      background-color: red;
+      border: 1px solid red;
+      color: white;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .cancel-delete-btn {
+      background-color: transparent;
+      border: 1px solid $theme-grey;
+      color: $theme-grey;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
 }
 
 .lead-preview-container {
@@ -19,7 +75,7 @@
   width: 50vw;
   height: 100%;
   background-color: white;
-  z-index: 9999;
+  z-index: 9998;
   bottom: 0;
   right: 0;
 
@@ -29,55 +85,64 @@
     justify-content: space-between;
     padding-right: 40px;
 
-    .lead-edit {
-      border: 1px solid $theme-lightgrey;
-      border-radius: 50%;
-      padding: 5px;
+    .edit-options {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      color: $theme-grey;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-    }
-
-    .lead-options {
-      display: flex;
-      flex-direction: column;
       gap: 10px;
-      align-items: flex-start;
-      justify-content: center;
-      width: 150px;
-      flex-direction: column;
-      border: 1px solid $theme-lightgrey;
-      border-radius: 5px;
-      position: relative;
-      top: 0;
-      right: 0;
-      height: fit-content;
-      z-index: 9999;
 
-      .lead-option {
+      .lead-edit {
+        border: 1px solid $theme-lightgrey;
+        border-radius: 50%;
+        padding: 5px;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 5px 10px;
-        width: calc(100% - 20px);
-        gap: 5px;
+        color: $theme-grey;
 
         &:hover {
           cursor: pointer;
-          background-color: $theme-lightgrey;
         }
 
-        &.delete {
-          color: red;
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+
+      .lead-options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        background-color: white;
+        align-items: flex-start;
+        justify-content: center;
+        width: 150px;
+        flex-direction: column;
+        border: 1px solid $theme-lightgrey;
+        border-radius: 5px;
+        position: absolute;
+        top: 22%;
+        right: 7%;
+        height: fit-content;
+        z-index: 9998;
+
+        .lead-option {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 5px 10px;
+          width: calc(100% - 20px);
+          gap: 5px;
+
+          &:hover {
+            cursor: pointer;
+            background-color: $theme-lightgrey;
+          }
+
+          &.delete {
+            color: red;
+          }
         }
       }
     }
