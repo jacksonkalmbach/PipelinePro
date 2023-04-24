@@ -42,6 +42,20 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get all leads for employee id
+router.get("/employee/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const leads = await pool.query(
+      "SELECT * FROM leads WHERE lead_owner = $1",
+      [id]
+    );
+    res.json(leads.rows);
+  } catch (error) {
+    console.log(`Error fetching leads for employee, ${error}`);
+  }
+});
+
 // Update a lead
 router.put("/:id", async (req, res) => {
   try {
