@@ -11,15 +11,17 @@ const defaultNewNote = {
   leadId: 0,
   noteTitle: "",
   noteBody: "",
-  noteAuthor: "",
+  createdBy: 0,
   createdAt: new Date(),
 };
 
 const NewNote = ({ leadId }: NewNoteProps) => {
-  const noteAuthor = useSelector((state: any) => state.userAuth.uid);
+  const noteAuthor = Number(useSelector((state: any) => state.userAuth.uid));
   const [newNote, setNewNote] = useState(defaultNewNote);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");
+
+  console.log("note author", typeof noteAuthor);
 
   const handleNoteTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNoteTitle(e.target.value);
@@ -36,7 +38,7 @@ const NewNote = ({ leadId }: NewNoteProps) => {
   };
 
   const handleAddNote = async () => {
-    newNote["noteAuthor"] = noteAuthor;
+    newNote["createdBy"] = noteAuthor;
     newNote["leadId"] = leadId;
     newNote["noteTitle"] = noteTitle;
     newNote["noteBody"] = noteBody;

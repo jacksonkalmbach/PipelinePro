@@ -5,7 +5,7 @@ const pool = require("../db");
 // Create a note
 router.post("/", async (req, res) => {
   try {
-    const { noteAuthor, leadId, noteTitle, noteBody, createdAt } = req.body;
+    const { leadId, noteTitle, noteBody, createdAt, createdBy } = req.body;
     const newNote = await pool.query(
       "INSERT INTO notes (note_title, note_body, lead_id, created_at, created_by) VALUES($1, $2, $3, $4, $5) RETURNING *",
       [noteTitle, noteBody, leadId, createdAt, createdBy]
