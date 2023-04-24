@@ -1,4 +1,4 @@
-# Welcome to our PipelinePro!
+# Welcome to PipelinePro!
 
 PipelinePro is a Customer Relationship Manager built using the latest web technologies to provide a fast and reliable experience. PipelinePro uses React with TypeScript on the frontend, along with Redux Toolkit for state management, which enables it to efficiently manage data and keep the user interface responsive.
 
