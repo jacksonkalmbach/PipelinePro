@@ -27,4 +27,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get employees by department
+router.get("/department/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const employees = await pool.query(
+      "SELECT * FROM employees WHERE department = $1",
+      [id]
+    );
+
+    res.json(employees.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
 module.exports = router;

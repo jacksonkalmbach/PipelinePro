@@ -1,3 +1,4 @@
+import socket from "../../utils/socket";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -8,10 +9,20 @@ import LeadList from "../../components/lead-components/lead-list-components/lead
 import "./Leads.styles.scss";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
 
+interface LeadData {
+  lead_id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  leadOwner: number;
+  lead_status: string;
+}
+
 const Leads = () => {
   const dispatch = useDispatch();
 
-  const [leads, setLeads] = useState([]);
+  const [leads, setLeads] = useState<LeadData[]>([]);
   const [leadCount, setLeadCount] = useState<number | null>(0);
 
   useEffect(() => {
@@ -28,12 +39,20 @@ const Leads = () => {
     }
   }, [leads]);
 
+  useEffect(() => {
+    socket.on("new-lead", (lead) => {
+      setLeads((leads) => [...leads, lead]);
+    });
+  }, [leads]);
+
   return (
     <div className="leads-container">
       <div className="leads-count">{leadCount} Leads</div>
       <CreateLead />
       <LeadPreview />
-      <FilterAddLead />
+      <div className="filters-and-add-lead">
+        <FilterAddLead />
+      </div>
       <div className="all-leads-list">
         <LeadList
           leads={leads}

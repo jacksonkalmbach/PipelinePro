@@ -5,11 +5,28 @@ const pool = require("../db");
 // Create a lead
 router.post("/", async (req, res) => {
   try {
-    const { firstName, lastName, email, phone, company, jobTitle, leadStatus } =
-      req.body;
+    const {
+      firstName,
+      lastName,
+      email,
+      phone,
+      company,
+      jobTitle,
+      leadStatus,
+      leadOwner,
+    } = req.body;
     const newLead = await pool.query(
-      "INSERT INTO leads (first_name, last_name, email, phone, company, job_title, lead_status) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [firstName, lastName, email, phone, company, jobTitle, leadStatus]
+      "INSERT INTO leads (first_name, last_name, email, phone, company, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      [
+        firstName,
+        lastName,
+        email,
+        phone,
+        company,
+        jobTitle,
+        leadStatus,
+        leadOwner,
+      ]
     );
 
     res.json(newLead.rows[0]);

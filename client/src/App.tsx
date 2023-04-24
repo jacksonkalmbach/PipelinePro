@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { userSignIn } from "./store/reducers/user/userAuthSlice";
+import socket from "./utils/socket";
 
 import "./App.css";
 import MainSectionsNavbar from "./components/navigation-components/main-section-navbar/MainSectionsNavbar";
@@ -18,18 +20,27 @@ import NotificationSettings from "./containers/settings-container/notifications/
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
 
 const App: React.FC = () => {
-  // const navigate = useNavigate();
+  const dispatch = useDispatch();
   const userIsSignedIn = useSelector((state: any) => state.userAuth.isSignedIn);
   const [isLoaded, setIsLoaded] = useState(false);
   const isDemo = useSelector((state: any) => state.userAuth.isDemo);
 
   useEffect(() => {
     if (isDemo) {
+      dispatch(userSignIn());
       setTimeout(() => {
         setIsLoaded(true);
       }, 1100);
     }
   }, [isDemo]);
+
+  useEffect(() => {
+    if (userIsSignedIn) {
+      socket.on("connect", () => {
+        console.log("connected");
+      });
+    }
+  }, [userIsSignedIn]);
 
   return (
     <>
@@ -63,12 +74,7 @@ const App: React.FC = () => {
                 <Routes>
                   <Route path="/dashboard/*" element={<Dashboard />}></Route>
                   <Route path="/contacts/*" element={<Contacts />}>
-                    <Route path="leads" element={<Leads />}>
-                      <Route
-                        path=":id"
-                        element={<div>Full Lead Details</div>}
-                      />
-                    </Route>
+                    <Route path="leads" element={<Leads />} />
                     <Route path="contacts" element={<div>Contacts</div>} />
                     <Route path="company" element={<div>Companies</div>}>
                       <Route path="employees" element={<div>Employees</div>}>

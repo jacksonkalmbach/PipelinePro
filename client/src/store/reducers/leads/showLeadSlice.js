@@ -4,15 +4,14 @@ const initialState = {
   value: false,
   previewLead: false,
   previewId: null,
-
 };
 
 export const showLeadSlice = createSlice({
   name: "showLead",
   initialState,
   reducers: {
-    setShowCreateLead: (state) => {
-      state.value = !state.value;
+    setShowCreateLead: (state, action) => {
+      state.value = action.payload;
     },
     setStartHidden: (state) => {
       state.value = false;

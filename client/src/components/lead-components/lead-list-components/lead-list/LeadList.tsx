@@ -33,8 +33,10 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
   useEffect(() => {
     const newFilteredLeads = leads.filter((lead) => {
       return (
-        lead.first_name.toLocaleLowerCase().includes(searchField) ||
-        lead.last_name.toLocaleLowerCase().includes(searchField)
+        (lead.first_name &&
+          lead.first_name.toLocaleLowerCase().includes(searchField)) ||
+        (lead.last_name &&
+          lead.last_name.toLocaleLowerCase().includes(searchField))
       );
     });
 
@@ -105,7 +107,7 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
       </div>
       <div className="leads-list">
         {filteredLeads
-          ? filteredLeads.map((lead: any) => {
+          ? filteredLeads.reverse().map((lead: any) => {
               const {
                 lead_id,
                 first_name: firstName,

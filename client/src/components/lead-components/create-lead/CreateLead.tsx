@@ -4,6 +4,9 @@ import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
 import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
+import SearchBox from "../../search-box-component/SearchBox";
+
+import socket from "../../../utils/socket";
 
 const defaultCreateLeadState = {
   firstName: "",
@@ -18,6 +21,8 @@ const defaultCreateLeadState = {
 
 const CreateLead = () => {
   const dispatch = useDispatch();
+
+  const [leadOwners, setLeadOwners] = useState([]);
 
   const [formFields, setFormFields] = useState(defaultCreateLeadState);
   const { leadStatus } = formFields;
@@ -38,7 +43,7 @@ const CreateLead = () => {
   const showCreateLead = useSelector((state: any) => state.showLead.value);
 
   const handleCloseCreateLead = () => {
-    dispatch(setShowCreateLead());
+    dispatch(setShowCreateLead(false));
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -53,7 +58,8 @@ const CreateLead = () => {
 
       console.log(response);
       resetFormFields();
-      dispatch(setShowCreateLead());
+      dispatch(setShowCreateLead(false));
+      socket.emit("create-lead", body);
     } catch (err) {
       console.log(err);
     }
@@ -149,7 +155,7 @@ const CreateLead = () => {
                   type="text"
                   id="leadOwner-input"
                   name="leadOwner"
-                  placeholder="Lead Owner"
+                  placeholder="e.g. 1"
                   onChange={handleInputChange}
                 />
               </div>

@@ -14,11 +14,11 @@
 .create-lead-container {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   position: fixed;
   width: 50vw;
-  height: 93vh;
+  height: 100%;
   background-color: white;
   z-index: 9999;
   right: 0vw;
@@ -69,7 +69,7 @@
     justify-content: space-between;
 
     .form-group {
-      width: 47%
+      width: 47%;
     }
   }
 

@@ -30,6 +30,7 @@ const Contacts = () => {
         section={"contacts"}
         sectionTitles={["Leads, Contacts, Company"]}
       />
+      
     </div>
   );
 };

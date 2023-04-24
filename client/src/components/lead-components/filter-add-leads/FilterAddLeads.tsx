@@ -9,7 +9,7 @@ const FilterAddLead = () => {
   const dispatch = useDispatch();
 
   const handleCreateLead = () => {
-    dispatch(setShowCreateLead());
+    dispatch(setShowCreateLead(true));
   };
 
   const dropdownOptionsAllLeads = ["Sort A - Z", "Sort Z - A"];
