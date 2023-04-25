@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { addSelectedLeads } from "../../../store/reducers/leads/selectAllLeadsSlice";
+import {
+  addSelectedLeads,
+  removeSelectedLeads,
+} from "../../../store/reducers/leads/selectAllLeadsSlice";
 import {
   setShowLeadPreview,
   showConfirmDelete,
@@ -15,15 +18,18 @@ interface ConfirmDeleteProps {
 const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (selectedId) {
-      dispatch(addSelectedLeads(selectedId));
-    }
-  }, [selectedId, dispatch]);
+  const itemsToDelete = useSelector(
+    (state: any) => state.selectAllLeads.selectedLeads
+  );
+  console.log("itemsToDelete", itemsToDelete);
 
   const selectedLeads = useSelector(
     (state: any) => state.selectAllLeads.selectedLeads
   );
+
+  const deleteSelectedLead = () => {
+    confirmDeleteLead(selectedId!);
+  };
 
   const deleteSelectedLeads = () => {
     selectedLeads.forEach((leadId: string) => {
@@ -43,6 +49,7 @@ const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
         });
       dispatch(showConfirmDelete(false));
       dispatch(setShowLeadPreview(false));
+      dispatch(removeSelectedLeads(leadId));
     } catch (error) {
       console.log("error deleting lead", error);
     }
@@ -55,11 +62,14 @@ const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
   return (
     <div className="confirm-delete-lead">
       <div className="are-you-sure">
-        <h3>Are you sure you want to delete this lead?</h3>
+        <h3>Are you sure?</h3>
         <p>You will not be able to undo this action.</p>
       </div>
       <div className="confirm-delete-lead-buttons">
-        <button className="delete-lead-btn" onClick={deleteSelectedLeads}>
+        <button
+          className="delete-lead-btn"
+          onClick={selectedId ? deleteSelectedLead : deleteSelectedLeads}
+        >
           Delete
         </button>
         <button className="cancel-delete-btn" onClick={cancelDelete}>

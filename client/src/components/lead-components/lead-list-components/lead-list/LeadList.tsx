@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectAllLeads } from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
 import SearchBox from "../../../search-box-component/SearchBox";
@@ -56,15 +56,14 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
     placeholders.push(<LeadRowItemPlaceholder key={i} />);
   }
 
-  const [checkAll, setCheckAll] = useState(false);
+  const checkAll = useSelector((state: any) => state.selectAllLeads.selectAll);
 
   const toggleCheckAll = () => {
-    setCheckAll(!checkAll);
     if (checkAll) {
       dispatch(setSelectAllLeads(false));
-      return;
+    } else {
+      dispatch(setSelectAllLeads(true));
     }
-    dispatch(setSelectAllLeads(true));
   };
 
   return (

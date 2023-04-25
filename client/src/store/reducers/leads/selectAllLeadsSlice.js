@@ -11,7 +11,7 @@ export const selectAllLeadsSlice = createSlice({
   initialState,
   reducers: {
     setSelectAllLeads: (state, action) => {
-      state.value = action.payload;
+      state.selectAll = action.payload;
     },
     setLeadCount: (state, action) => {
       state.leadCount = action.payload;
@@ -27,10 +27,6 @@ export const selectAllLeadsSlice = createSlice({
       if (index > -1) {
         state.selectedLeads.splice(index, 1);
       }
-    },
-    unSelectAllLeads: (state) => {
-      state.value = false;
-      state.selectedLeads = [];
     },
   },
 });

@@ -4,17 +4,15 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setShowLeadPreview,
   showConfirmDelete,
+  showEditLead,
 } from "../../../store/reducers/leads/showLeadSlice";
-import {
-  addSelectedLeads,
-  removeSelectedLeads,
-} from "../../../store/reducers/leads/selectAllLeadsSlice";
 
 import "./LeadPreview.styles.scss";
 import LeadNote from "../lead-notes-components/lead-note/LeadNote";
 import NewNote from "../lead-notes-components/new-note/NewNote";
 import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 import ConfirmDelete from "../confirm-delete/ConfirmDelete";
+import EditLead from "../edit-lead/EditLead";
 
 interface Lead {
   id: number;
@@ -28,9 +26,22 @@ interface Lead {
   lead_owner: number;
 }
 
+const currentLeadDetails = {
+  id: 0,
+  first_name: "",
+  last_name: "",
+  email: "",
+  phone: "",
+  company: "",
+  job_title: "",
+  lead_status: "",
+  lead_owner: 0,
+};
+
 const LeadPreview = () => {
   const dispatch = useDispatch();
-  const [currentLead, setCurrentLead] = useState<Lead | null>(null);
+
+  const [currentLead, setCurrentLead] = useState<Lead>(currentLeadDetails);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -40,9 +51,6 @@ const LeadPreview = () => {
   const [status, setStatus] = useState("");
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const confirmDelete = useSelector(
-    (state: any) => state.showLead.confirmDelete
-  );
 
   const [ownerId, setOwnerId] = useState(0);
   const [ownerFirstName, setOwnerFirstName] = useState("");
@@ -52,8 +60,12 @@ const LeadPreview = () => {
   const [notes, setNotes] = useState([]);
   const [addNote, setAddNote] = useState(false);
 
+  const confirmDelete = useSelector(
+    (state: any) => state.showLead.confirmDelete
+  );
   const previewLead = useSelector((state: any) => state.showLead.previewLead);
   const leadId = useSelector((state: any) => state.showLead.previewId);
+  const editLead = useSelector((state: any) => state.showLead.editLead);
 
   useEffect(() => {
     try {
@@ -114,7 +126,6 @@ const LeadPreview = () => {
     dispatch(setShowLeadPreview(false));
     dispatch(showConfirmDelete(false));
     setOptionsOpen(false);
-    removeSelectedLeads(leadId);
   };
 
   const handleAddNote = () => {
@@ -125,6 +136,10 @@ const LeadPreview = () => {
     setOptionsOpen(!optionsOpen);
   };
 
+  const handleEditLead = () => {
+    dispatch(showEditLead(true));
+  };
+
   const handleDeleteLead = () => {
     dispatch(showConfirmDelete(true));
   };
@@ -132,6 +147,19 @@ const LeadPreview = () => {
   return (
     previewLead && (
       <>
+        {editLead && (
+          <EditLead
+            id={leadId}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            phone={phone}
+            company={company}
+            jobTitle={jobTitle}
+            leadOwner={ownerId}
+            leadStatus={status}
+          />
+        )}
         {confirmDelete && <ConfirmDelete selectedId={leadId} />}
         <div className={previewLead ? "overlay" : ""}></div>
         <div className="lead-preview-container">
@@ -160,7 +188,7 @@ const LeadPreview = () => {
                   </div>
                   {optionsOpen && (
                     <div className="lead-options">
-                      <div className="lead-option">
+                      <div className="lead-option" onClick={handleEditLead}>
                         <span className="material-symbols-outlined">edit</span>
                         Edit Lead
                       </div>

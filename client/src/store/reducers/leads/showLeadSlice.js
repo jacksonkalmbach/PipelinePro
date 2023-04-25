@@ -5,6 +5,7 @@ const initialState = {
   previewLead: false,
   previewId: null,
   confirmDelete: false,
+  editLead: false,
 };
 
 export const showLeadSlice = createSlice({
@@ -26,6 +27,9 @@ export const showLeadSlice = createSlice({
     showConfirmDelete: (state, action) => {
       state.confirmDelete = action.payload;
     },
+    showEditLead: (state, action) => {
+      state.editLead = action.payload;
+    },
   },
 });
 
@@ -35,6 +39,7 @@ export const {
   setShowLeadPreview,
   setPreviewId,
   showConfirmDelete,
+  showEditLead,
 } = showLeadSlice.actions;
 
 export default showLeadSlice.reducer;

@@ -1,34 +1,27 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import { showConfirmDelete } from "../../store/reducers/leads/showLeadSlice";
+
 import {
-  unSelectAllLeads,
   setSelectAllLeads,
 } from "../../store/reducers/leads/selectAllLeadsSlice";
 
 import "./ContactConvert.styles.scss";
+import ConfirmDelete from "../lead-components/confirm-delete/ConfirmDelete";
 
 const ContactConvert = () => {
   const dispatch = useDispatch();
-  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
   const selectedLeads = useSelector(
     (state: any) => state.selectAllLeads.selectedLeads
   );
 
+  const displayConfirmDelete = useSelector(
+    (state: any) => state.showLead.confirmDelete
+  );
+
   const handleDeleteLead = () => {
-    setShowConfirmDelete(true);
-    // try {
-    //   fetch(`http://localhost:5001/leads/`, {
-    //     method: "DELETE",
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       console.log(data);
-    //     });
-    //   // socket.emit("delete lead", leadId);
-    // } catch (error) {
-    //   console.log("error deleting lead", error);
-    // }
+    dispatch(showConfirmDelete(true));
   };
 
   const handleConvertToContact = () => {
@@ -36,12 +29,12 @@ const ContactConvert = () => {
   };
 
   const handleUnselectAll = () => {
-    dispatch(unSelectAllLeads(true));
     dispatch(setSelectAllLeads(false));
   };
 
   return (
     <>
+      {displayConfirmDelete && <ConfirmDelete />}
       <div className="contact-convert-container">
         <p>
           {selectedLeads.length}{" "}

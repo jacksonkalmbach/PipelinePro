@@ -12,6 +12,7 @@ import "./LeadRowItem.styles.scss";
 import {
   addSelectedLeads,
   removeSelectedLeads,
+  setSelectAllLeads,
 } from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
 interface LeadRowItemProps {
@@ -52,15 +53,15 @@ const LeadRowItem = ({
   const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
   const checkAll = useSelector((state: any) => state.selectAllLeads.selectAll);
 
-  // console.log("checkall - leadRowItem", checkAll);
-
-  const selectedLeads = useSelector(
-    (state: any) => state.selectAllLeads.selectedLeads
-  );
-
   useEffect(() => {
-    setisSelected(checkAll);
-  }, [checkAll]);
+    if (checkAll) {
+      dispatch(setSelectAllLeads(true));
+      dispatch(addSelectedLeads(id));
+    } else {
+      dispatch(setSelectAllLeads(false));
+      dispatch(removeSelectedLeads(id));
+    }
+  }, [checkAll, dispatch]);
 
   const toggleSelected = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();

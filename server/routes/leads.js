@@ -75,20 +75,15 @@ router.get("/employee/:id", async (req, res) => {
 
 // Update a lead
 router.put("/:id", async (req, res) => {
+  console.log("hit put route");
   try {
+    console.log("req body", req.body);
     const { id } = req.params;
-    const {
-      first_name,
-      last_name,
-      email,
-      phone,
-      company,
-      job_title,
-      lead_status,
-    } = req.body;
+    const { firstName, lastName, email, phone, company, jobTitle, leadStatus } =
+      req.body;
     const updateLead = await pool.query(
       "UPDATE leads SET first_name = $1, last_name = $2, email = $3, phone = $4, company = $5, job_title = $6, lead_status = $7 WHERE lead_id = $8",
-      [first_name, last_name, email, phone, company, job_title, lead_status, id]
+      [firstName, lastName, email, phone, company, jobTitle, leadStatus, id]
     );
 
     res.json("Lead was updated!");

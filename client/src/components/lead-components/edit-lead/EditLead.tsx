@@ -1,29 +1,53 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
-import "./CreateLead.styles.scss";
-import { useDispatch, useSelector } from "react-redux";
-import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
+import { showEditLead } from "../../../store/reducers/leads/showLeadSlice";
+
 import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
-import SearchBox from "../../search-box-component/SearchBox";
 
-import socket from "../../../utils/socket";
+import "./EditLead.styles.scss";
 
-const defaultCreateLeadState = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  phone: "",
-  company: "",
-  jobTitle: "",
-  leadStatus: "",
-  leadOwner: "",
-};
+interface EditLeadProps {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  company: string;
+  jobTitle: string;
+  leadOwner: number;
+  leadStatus: string;
+}
 
-const CreateLead = () => {
+const EditLead = ({
+  id,
+  firstName,
+  lastName,
+  email,
+  phone,
+  company,
+  jobTitle,
+  leadOwner,
+  leadStatus,
+}: EditLeadProps) => {
   const dispatch = useDispatch();
 
-  const [formFields, setFormFields] = useState(defaultCreateLeadState);
-  const { leadStatus } = formFields;
+  const [updateSuccess, setUpdateSuccess] = useState(false);
+
+  const [formFields, setFormFields] = useState({
+    firstName,
+    lastName,
+    email,
+    phone,
+    company,
+    jobTitle,
+    leadOwner,
+    leadStatus,
+  });
+
+  const handleCloseEdit = () => {
+    dispatch(showEditLead(false));
+  };
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -34,52 +58,39 @@ const CreateLead = () => {
     setFormFields({ ...formFields, leadStatus: status });
   };
 
-  const showCreateLead = useSelector((state: any) => state.showLead.value);
-
-  const handleCloseCreateLead = () => {
-    dispatch(setShowCreateLead(false));
-  };
-
-  const resetFormFields = () => {
-    console.log("hit reset form fields");
-    // setFormKey((prevKey) => prevKey + 1);
-    setFormFields(defaultCreateLeadState);
-  };
-
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleUpdateLead = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     try {
-      const body = { ...formFields };
-      const response = fetch("http://localhost:5001/leads", {
-        method: "POST",
+      fetch(`http://localhost:5001/leads/${id}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
+        body: JSON.stringify(formFields),
       });
-      console.log(response);
-      resetFormFields();
-      dispatch(setShowCreateLead(false));
-    } catch (err) {
-      console.log(err);
+      setUpdateSuccess(true);
+    } catch (error) {
+      console.log("error updating lead", error);
     }
   };
 
   return (
-    <>
-      {showCreateLead && (
+    <div className="edit-lead-container">
+      {updateSuccess ? (
         <>
-          <div className={showCreateLead ? "overlay" : ""}></div>
-          <div className={"create-lead-container"}>
-            <div className="create-lead-header">
-              <h1>Create Lead </h1>
-              <div
-                className="close-create-lead-button"
-                onClick={handleCloseCreateLead}
-              >
-                Close
-                <span className="material-symbols-outlined">close</span>
-              </div>
-            </div>
-            <form className="create-lead-form" onSubmit={handleSubmit}>
+          <div className="close-edit-lead" onClick={handleCloseEdit}>
+            <span className="material-symbols-outlined">close</span>
+          </div>
+          <div className="success-icon">
+            <span className="material-symbols-outlined">done</span>Lead Updated!
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="close-edit-lead" onClick={handleCloseEdit}>
+            <span className="material-symbols-outlined">close</span>
+          </div>
+          <div className="edit-lead-content">
+            <h1>Edit Lead</h1>
+            <form className="edit-lead-form" onSubmit={handleUpdateLead}>
               <div className="lead-name">
                 <div className="form-group">
                   First Name
@@ -89,7 +100,8 @@ const CreateLead = () => {
                     type="text"
                     id="firstName-input"
                     name="firstName"
-                    placeholder="e.g. John"
+                    placeholder={firstName}
+                    value={formFields.firstName}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -101,7 +113,8 @@ const CreateLead = () => {
                     type="text"
                     id="lastName-input"
                     name="lastName"
-                    placeholder="e.g. Doe"
+                    placeholder={lastName}
+                    value={formFields.lastName}
                     onChange={handleInputChange}
                   />
                 </div>
@@ -112,7 +125,8 @@ const CreateLead = () => {
                   type="email"
                   id="email-input"
                   name="email"
-                  placeholder="e.g. mail@example.com"
+                  placeholder={email}
+                  value={formFields.email}
                   onChange={handleInputChange}
                 />
               </div>
@@ -123,7 +137,8 @@ const CreateLead = () => {
                   id="phone-input"
                   name="phone"
                   maxLength={10}
-                  placeholder="Enter Number"
+                  placeholder={phone}
+                  value={formFields.phone}
                   onChange={handleInputChange}
                 />
               </div>
@@ -133,7 +148,8 @@ const CreateLead = () => {
                   type="text"
                   id="company-input"
                   name="company"
-                  placeholder="e.g. Google"
+                  placeholder={company}
+                  value={formFields.company}
                   onChange={handleInputChange}
                 />
               </div>
@@ -143,7 +159,8 @@ const CreateLead = () => {
                   type="text"
                   id="jobTitle-input"
                   name="jobTitle"
-                  placeholder="e.g. Project Manager"
+                  placeholder={jobTitle}
+                  value={formFields.jobTitle}
                   onChange={handleInputChange}
                 />
               </div>
@@ -154,7 +171,7 @@ const CreateLead = () => {
                   id="leadOwner-input"
                   name="leadOwner"
                   placeholder="e.g. 1"
-                  onChange={handleInputChange}
+                  // onChange={handleInputChange}
                 />
               </div>
               <div>
@@ -192,30 +209,15 @@ const CreateLead = () => {
                   />
                 </div>
               </div>
-              <div className="create-lead-button-container">
-                <button
-                  className="create-lead-and-another-button"
-                  type="submit"
-                  name="action"
-                  value="create-leads-and-another"
-                >
-                  Create and Add Another
-                </button>
-                <button
-                  className="create-lead-button"
-                  type="submit"
-                  name="action"
-                  value="create-lead"
-                >
-                  Create Lead
-                </button>
-              </div>
+              <button className="update-lead-button" type="submit">
+                Update Lead
+              </button>
             </form>
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 
-export default CreateLead;
+export default EditLead;
