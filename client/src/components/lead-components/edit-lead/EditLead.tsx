@@ -86,7 +86,7 @@ const EditLead = ({
       ) : (
         <>
           <div className="close-edit-lead" onClick={handleCloseEdit}>
-            <span className="material-symbols-outlined">close</span>
+            Close<span className="material-symbols-outlined">close</span>
           </div>
           <div className="edit-lead-content">
             <h1>Edit Lead</h1>

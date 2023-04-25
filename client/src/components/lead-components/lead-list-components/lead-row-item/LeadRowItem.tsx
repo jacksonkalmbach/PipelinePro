@@ -53,16 +53,6 @@ const LeadRowItem = ({
   const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
   const checkAll = useSelector((state: any) => state.selectAllLeads.selectAll);
 
-  useEffect(() => {
-    if (checkAll) {
-      dispatch(setSelectAllLeads(true));
-      dispatch(addSelectedLeads(id));
-    } else {
-      dispatch(setSelectAllLeads(false));
-      dispatch(removeSelectedLeads(id));
-    }
-  }, [checkAll, dispatch]);
-
   const toggleSelected = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     if (isSelected) {
@@ -73,6 +63,14 @@ const LeadRowItem = ({
       dispatch(addSelectedLeads(id));
     }
   };
+
+  // useEffect(() => {
+  //   if (checkAll) {
+  //     setisSelected(true);
+  //   } else {
+  //     setisSelected(false);
+  //   }
+  // }, [checkAll]);
 
   const handleLeadPreviewClick = () => {
     dispatch(setShowLeadPreview(true));

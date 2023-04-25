@@ -169,8 +169,7 @@ const LeadPreview = () => {
               className="close-lead-details-button"
               onClick={handleCloseLeadPreview}
             >
-              <span className="material-symbols-outlined">close</span>
-              Close
+              Close<span className="material-symbols-outlined">close</span>
             </div>
           </div>
           <div className="lead-preview-header">
