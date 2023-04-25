@@ -60,7 +60,11 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
 
   const toggleCheckAll = () => {
     setCheckAll(!checkAll);
-    dispatch(setSelectAllLeads());
+    if (checkAll) {
+      dispatch(setSelectAllLeads(false));
+      return;
+    }
+    dispatch(setSelectAllLeads(true));
   };
 
   return (

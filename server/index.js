@@ -23,9 +23,13 @@ app.use(express.json());
 // SOCKET.IO //
 io.on("connection", (socket) => {
   console.log("socket id", socket.id);
-  socket.on("create-lead", (lead) => {
+  socket.on("new-lead", (lead) => {
+    console.log("new lead - server file", lead);
     io.emit("new-lead", lead);
-    console.log(lead);
+  });
+
+  socket.on("delete-lead", (lead) => {
+    io.emit("delete-lead", lead);
   });
 });
 

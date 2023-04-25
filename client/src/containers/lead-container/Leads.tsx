@@ -1,6 +1,6 @@
 import socket from "../../utils/socket";
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import FilterAddLead from "../../components/lead-components/filter-add-leads/FilterAddLeads";
 import CreateLead from "../../components/lead-components/create-lead/CreateLead";
@@ -8,6 +8,7 @@ import LeadList from "../../components/lead-components/lead-list-components/lead
 
 import "./Leads.styles.scss";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
+import ContactConvert from "../../components/contact-convert/ContactConvert";
 
 interface LeadData {
   lead_id: number;
@@ -20,30 +21,28 @@ interface LeadData {
 }
 
 const Leads = () => {
-  const dispatch = useDispatch();
-
   const [leads, setLeads] = useState<LeadData[]>([]);
   const [leadCount, setLeadCount] = useState<number | null>(0);
+  const leadSelected = useSelector(
+    (state: any) => state.selectAllLeads.selectedLeads
+  );
 
   useEffect(() => {
     fetch("http://localhost:5001/leads")
       .then((res) => res.json())
       .then((data) => {
         setLeads(data);
+        setLeadCount(data.length);
       });
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (leads) {
-      setLeadCount(leads.length);
-    }
-  }, [leads]);
+  }, []);
 
   useEffect(() => {
     socket.on("new-lead", (lead) => {
+      console.log("NEW LEAD - Leads component", lead);
       setLeads((leads) => [...leads, lead]);
+      setLeadCount((leadCount) => (leadCount ? leadCount + 1 : 1));
     });
-  }, [leads]);
+  }, []);
 
   return (
     <div className="leads-container">
@@ -53,6 +52,7 @@ const Leads = () => {
       <div className="filters-and-add-lead">
         <FilterAddLead />
       </div>
+      {leadSelected.length > 0 && <ContactConvert />}
       <div className="all-leads-list">
         <LeadList
           leads={leads}

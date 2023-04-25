@@ -1,11 +1,17 @@
+import socket from "../../../utils/socket";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setShowLeadPreview } from "../../../store/reducers/leads/showLeadSlice";
+import {
+  addSelectedLeads,
+  removeSelectedLeads,
+} from "../../../store/reducers/leads/selectAllLeadsSlice";
 
 import "./LeadPreview.styles.scss";
 import LeadNote from "../lead-notes-components/lead-note/LeadNote";
 import NewNote from "../lead-notes-components/new-note/NewNote";
 import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
+import ConfirmDelete from "../confirm-delete/ConfirmDelete";
 
 interface Lead {
   id: number;
@@ -43,6 +49,13 @@ const LeadPreview = () => {
 
   const previewLead = useSelector((state: any) => state.showLead.previewLead);
   const leadId = useSelector((state: any) => state.showLead.previewId);
+
+  const selectedLeads = useSelector(
+    (state: any) => state.selectAllLeads.selectedLeads
+  );
+
+  console.log("LEAD PREVIEW - selectedLeads", selectedLeads);
+  console.log("LEAD PREVIEW - leadId", leadId);
 
   useEffect(() => {
     try {
@@ -101,6 +114,9 @@ const LeadPreview = () => {
 
   const handleCloseLeadPreview = () => {
     dispatch(setShowLeadPreview(false));
+    setVerifyDelete(false);
+    setOptionsOpen(false);
+    removeSelectedLeads(leadId);
   };
 
   const handleAddNote = () => {
@@ -115,52 +131,10 @@ const LeadPreview = () => {
     setVerifyDelete(!verifyDelete);
   };
 
-  const handleCancelDelete = () => {
-    setVerifyDelete(false);
-  };
-
-  const confirmDeleteLead = () => {
-    try {
-      fetch(`http://localhost:5001/leads/${leadId}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
-    } catch (error) {
-      console.log("error deleting lead", error);
-    }
-
-    handleCloseLeadPreview();
-  };
-
-  const handleConfirmDelete = () => {
-    confirmDeleteLead();
-  };
-
   return (
     previewLead && (
       <>
-        {verifyDelete && (
-          <div className="confirm-delete-lead">
-            <div className="are-you-sure">
-              <h3>Are you sure you want to delete this lead?</h3>
-              <p>You will not be able to undo this action.</p>
-            </div>
-            <div className="confirm-delete-lead-buttons">
-              <button className="delete-lead-btn" onClick={handleConfirmDelete}>
-                Delete
-              </button>
-              <button
-                className="cancel-delete-btn"
-                onClick={handleCancelDelete}
-              >
-                Cancel
-              </button>
-            </div>
-          </div>
-        )}
+        {verifyDelete && <ConfirmDelete />}
         <div className={previewLead ? "overlay" : ""}></div>
         <div className="lead-preview-container">
           <div className="lead-preview-buttons-container">

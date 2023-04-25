@@ -11,7 +11,6 @@ const Dashboard = () => {
 
   const currentUser = useSelector((state: any) => state.userAuth.displayName);
   const currentUserId = useSelector((state: any) => state.userAuth.uid);
-  console.log("CUI", currentUserId);
   const currentUserFirstName = currentUser.split(" ")[0];
 
   useEffect(() => {

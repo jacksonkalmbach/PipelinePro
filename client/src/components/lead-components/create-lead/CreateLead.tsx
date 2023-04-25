@@ -22,8 +22,6 @@ const defaultCreateLeadState = {
 const CreateLead = () => {
   const dispatch = useDispatch();
 
-  const [leadOwners, setLeadOwners] = useState([]);
-
   const [formFields, setFormFields] = useState(defaultCreateLeadState);
   const { leadStatus } = formFields;
 
@@ -55,11 +53,12 @@ const CreateLead = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-
       console.log(response);
-      resetFormFields();
+
+      await resetFormFields();
       dispatch(setShowCreateLead(false));
-      socket.emit("create-lead", body);
+      socket.emit("new-lead", body);
+      console.log("EMITTED NEW LEAD", body);
     } catch (err) {
       console.log(err);
     }

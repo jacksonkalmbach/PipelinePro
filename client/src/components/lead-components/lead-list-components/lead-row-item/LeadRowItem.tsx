@@ -9,6 +9,10 @@ import LeadRowStatus from "../lead-row-status/LeadRowStatus";
 import AccoutManagerSelect from "../../../employee-components/employee-select/EmployeeSelect";
 
 import "./LeadRowItem.styles.scss";
+import {
+  addSelectedLeads,
+  removeSelectedLeads,
+} from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
 interface LeadRowItemProps {
   id: number | null;
@@ -46,15 +50,27 @@ const LeadRowItem = ({
   const [ownerFirstName, setOwnerFirstName] = useState("");
   const [ownerLastName, setOwnerLastName] = useState("");
   const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
-  const checkAll = useSelector((state: any) => state.selectAllLeads.value);
+  const checkAll = useSelector((state: any) => state.selectAllLeads.selectAll);
+
+  // console.log("checkall - leadRowItem", checkAll);
+
+  const selectedLeads = useSelector(
+    (state: any) => state.selectAllLeads.selectedLeads
+  );
 
   useEffect(() => {
     setisSelected(checkAll);
   }, [checkAll]);
 
-  const toggleSelected = (e: React.MouseEvent) => {
+  const toggleSelected = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
-    setisSelected(!isSelected);
+    if (isSelected) {
+      setisSelected(false);
+      dispatch(removeSelectedLeads(id));
+    } else {
+      setisSelected(true);
+      dispatch(addSelectedLeads(id));
+    }
   };
 
   const handleLeadPreviewClick = () => {
