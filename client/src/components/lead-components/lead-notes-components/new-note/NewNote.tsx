@@ -21,8 +21,6 @@ const NewNote = ({ leadId }: NewNoteProps) => {
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");
 
-  console.log("note author", typeof noteAuthor);
-
   const handleNoteTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNoteTitle(e.target.value);
   };

@@ -1,9 +1,26 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { addSelectedLeads } from "../../../store/reducers/leads/selectAllLeadsSlice";
+import {
+  setShowLeadPreview,
+  showConfirmDelete,
+} from "../../../store/reducers/leads/showLeadSlice";
 
 import "./ConfirmDelete.styles.scss";
 
-const ConfirmDelete = () => {
+interface ConfirmDeleteProps {
+  selectedId?: string;
+}
+
+const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (selectedId) {
+      dispatch(addSelectedLeads(selectedId));
+    }
+  }, [selectedId, dispatch]);
+
   const selectedLeads = useSelector(
     (state: any) => state.selectAllLeads.selectedLeads
   );
@@ -24,9 +41,15 @@ const ConfirmDelete = () => {
         .then((data) => {
           console.log(data);
         });
+      dispatch(showConfirmDelete(false));
+      dispatch(setShowLeadPreview(false));
     } catch (error) {
       console.log("error deleting lead", error);
     }
+  };
+
+  const cancelDelete = () => {
+    dispatch(showConfirmDelete(false));
   };
 
   return (
@@ -39,7 +62,7 @@ const ConfirmDelete = () => {
         <button className="delete-lead-btn" onClick={deleteSelectedLeads}>
           Delete
         </button>
-        <button className="cancel-delete-btn" onClick={() => "cancel"}>
+        <button className="cancel-delete-btn" onClick={cancelDelete}>
           Cancel
         </button>
       </div>

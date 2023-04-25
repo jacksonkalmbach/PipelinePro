@@ -1,7 +1,10 @@
 import socket from "../../../utils/socket";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setShowLeadPreview } from "../../../store/reducers/leads/showLeadSlice";
+import {
+  setShowLeadPreview,
+  showConfirmDelete,
+} from "../../../store/reducers/leads/showLeadSlice";
 import {
   addSelectedLeads,
   removeSelectedLeads,
@@ -37,7 +40,9 @@ const LeadPreview = () => {
   const [status, setStatus] = useState("");
 
   const [optionsOpen, setOptionsOpen] = useState(false);
-  const [verifyDelete, setVerifyDelete] = useState(false);
+  const confirmDelete = useSelector(
+    (state: any) => state.showLead.confirmDelete
+  );
 
   const [ownerId, setOwnerId] = useState(0);
   const [ownerFirstName, setOwnerFirstName] = useState("");
@@ -49,13 +54,6 @@ const LeadPreview = () => {
 
   const previewLead = useSelector((state: any) => state.showLead.previewLead);
   const leadId = useSelector((state: any) => state.showLead.previewId);
-
-  const selectedLeads = useSelector(
-    (state: any) => state.selectAllLeads.selectedLeads
-  );
-
-  console.log("LEAD PREVIEW - selectedLeads", selectedLeads);
-  console.log("LEAD PREVIEW - leadId", leadId);
 
   useEffect(() => {
     try {
@@ -114,7 +112,7 @@ const LeadPreview = () => {
 
   const handleCloseLeadPreview = () => {
     dispatch(setShowLeadPreview(false));
-    setVerifyDelete(false);
+    dispatch(showConfirmDelete(false));
     setOptionsOpen(false);
     removeSelectedLeads(leadId);
   };
@@ -128,13 +126,13 @@ const LeadPreview = () => {
   };
 
   const handleDeleteLead = () => {
-    setVerifyDelete(!verifyDelete);
+    dispatch(showConfirmDelete(true));
   };
 
   return (
     previewLead && (
       <>
-        {verifyDelete && <ConfirmDelete />}
+        {confirmDelete && <ConfirmDelete selectedId={leadId} />}
         <div className={previewLead ? "overlay" : ""}></div>
         <div className="lead-preview-container">
           <div className="lead-preview-buttons-container">
