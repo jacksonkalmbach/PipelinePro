@@ -6,6 +6,7 @@ interface SearchBoxProps {
   className: string;
   placeholder: string;
   onChangeHandler: any;
+  name?: string;
 }
 
 const SearchBox = ({

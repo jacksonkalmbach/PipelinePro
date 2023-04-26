@@ -3,7 +3,7 @@ import "./Dropdown.styles.scss";
 
 interface DropdownProps {
   title: string | number;
-  options: (string | number)[];
+  options: (string | number | React.ReactNode)[];
   moreFilters?: boolean;
   numberFilter?: boolean;
   type?: string;
@@ -17,6 +17,8 @@ const Dropdown = ({
 }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | number>("");
+
+  console.log("Dropdown: ", options);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -58,13 +60,7 @@ const Dropdown = ({
       )}
       <ul className={`dropdown-menu ${isOpen ? "show" : ""}`}>
         {options.map((option) => (
-          <li
-            key={option}
-            className="dropdown-menu-item"
-            onClick={() => handleOptionClick(option)}
-          >
-            {option}
-          </li>
+          <li>{option}</li>
         ))}
       </ul>
     </div>

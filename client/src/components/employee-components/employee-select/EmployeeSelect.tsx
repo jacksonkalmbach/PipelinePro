@@ -1,41 +1,43 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setSectionNavigation } from "../../../store/reducers/navigation/sectionNavigationSlice";
 
 import "./EmployeeSelect.styles.scss";
 
-interface AccoutManagerSelectProps {
+interface EmployeeSelectProps {
   id: number | undefined;
   firstName: string;
   lastName: string;
   profilePic?: string;
   title?: string;
   nav?: boolean;
+  onEmployeeSelected?: (
+    ownerId: string,
+    ownerFirstName: string,
+    ownerLastName: string,
+    ownerProfilePic: string
+  ) => void;
 }
 
-const AccoutManagerSelect = ({
+const EmployeeSelect = ({
   id,
   firstName,
   lastName,
   profilePic,
   title,
   nav,
-}: AccoutManagerSelectProps) => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const fullName = firstName + " " + lastName;
-
-  const handleClick = () => {
-    if (nav) {
-      navigate(`contacts/company/employees/${id}`);
-      dispatch(setSectionNavigation(fullName));
-    }
-    console.log("Employee #: " + id + " clicked");
+  onEmployeeSelected,
+}: EmployeeSelectProps) => {
+  const handleSelected = () => {
+    onEmployeeSelected &&
+      onEmployeeSelected(
+        id?.toString() || "",
+        firstName,
+        lastName,
+        profilePic || ""
+      );
   };
 
   return (
-    <div className="employee-select-container" onClick={handleClick}>
+    <div className="employee-select-container" onClick={handleSelected}>
       <div className="profile-pic-container">
         {profilePic ? (
           <img src={profilePic} alt="profile" />
@@ -55,4 +57,4 @@ const AccoutManagerSelect = ({
   );
 };
 
-export default AccoutManagerSelect;
+export default EmployeeSelect;

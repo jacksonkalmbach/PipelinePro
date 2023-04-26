@@ -4,9 +4,11 @@ import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
 import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
+import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 import SearchBox from "../../search-box-component/SearchBox";
 
 import socket from "../../../utils/socket";
+import LeadOwnerSearchList from "../../employee-components/lead-owner-search-list/LeadOwnerSearchList";
 
 const defaultCreateLeadState = {
   firstName: "",
@@ -19,11 +21,95 @@ const defaultCreateLeadState = {
   leadOwner: "",
 };
 
+interface Employee {
+  employee_id: number;
+  first_name: string;
+  last_name: string;
+  profile_pic: string;
+  email: string;
+  phone: string;
+  department: string;
+  job_title: string;
+}
+
+const defaultLeadOwner = {
+  employee_id: 0,
+  first_name: "",
+  last_name: "",
+  profile_pic: "",
+};
+
+interface selectedLeadOwner {
+  employee_id: number;
+  first_name: string;
+  last_name: string;
+  profile_pic: string;
+}
+
 const CreateLead = () => {
   const dispatch = useDispatch();
 
   const [formFields, setFormFields] = useState(defaultCreateLeadState);
   const { leadStatus } = formFields;
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [selectedLeadOwner, setSelectedLeadOwner] =
+    useState<selectedLeadOwner>(defaultLeadOwner);
+
+  useEffect(() => {
+    try {
+      fetch("http://localhost:5001/employees/department/Sales")
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("data", data);
+          setEmployees(data);
+        });
+    } catch (error) {
+      console.log("error fetching owners in create lead", error);
+    }
+  }, []);
+
+  const [searchField, setSearchField] = useState("");
+  const [filteredEmployees, setFilteredEmployees] =
+    useState<Employee[]>(employees);
+
+  useEffect(() => {
+    const newFilteredEmployees = employees.filter((employee) => {
+      return (
+        (employee.first_name &&
+          employee.first_name.toLocaleLowerCase().includes(searchField)) ||
+        (employee.last_name &&
+          employee.last_name.toLocaleLowerCase().includes(searchField))
+      );
+    });
+
+    setFilteredEmployees(newFilteredEmployees);
+  }, [searchField, employees]);
+
+  const onSearchChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const searchFieldString = event.target.value.toLowerCase();
+    setSearchField(searchFieldString);
+  };
+
+  const onEmployeeSelect = (
+    ownerId: string,
+    firstName: string,
+    lastName: string,
+    profilePic: string
+  ) => {
+    setSelectedLeadOwner({
+      employee_id: Number(ownerId),
+      first_name: firstName,
+      last_name: lastName,
+      profile_pic: profilePic,
+    });
+    setFormFields({ ...formFields, leadOwner: ownerId });
+  };
+
+  const handleClearLeadOwner = () => {
+    setFormFields({ ...formFields, leadOwner: "" });
+  };
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
@@ -42,7 +128,6 @@ const CreateLead = () => {
 
   const resetFormFields = () => {
     console.log("hit reset form fields");
-    // setFormKey((prevKey) => prevKey + 1);
     setFormFields(defaultCreateLeadState);
   };
 
@@ -149,13 +234,41 @@ const CreateLead = () => {
               </div>
               <div className="form-group">
                 Lead Owner
-                <input
-                  type="text"
-                  id="leadOwner-input"
-                  name="leadOwner"
-                  placeholder="e.g. 1"
-                  onChange={handleInputChange}
-                />
+                {formFields.leadOwner.length ? (
+                  <>
+                    <div className="selected-lead-owner">
+                      <EmployeeSelect
+                        id={selectedLeadOwner.employee_id}
+                        firstName={selectedLeadOwner.first_name}
+                        lastName={selectedLeadOwner.last_name}
+                        profilePic={selectedLeadOwner.profile_pic}
+                      />
+                      <span
+                        className="material-symbols-outlined"
+                        onClick={handleClearLeadOwner}
+                      >
+                        close
+                      </span>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <SearchBox
+                      className="seach-box"
+                      placeholder="Search Lead Owners"
+                      name="leadOwner"
+                      onChangeHandler={onSearchChange}
+                    />
+                    {searchField.length > 0 &&
+                      employees &&
+                      !formFields.leadOwner.length && (
+                        <LeadOwnerSearchList
+                          employees={filteredEmployees}
+                          onEmployeeSelected={onEmployeeSelect}
+                        />
+                      )}
+                  </>
+                )}
               </div>
               <div>
                 Lead Status

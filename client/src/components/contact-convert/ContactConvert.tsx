@@ -76,8 +76,8 @@ const ContactConvert = () => {
           </>
         )}
         <p className="add-to-contacts" onClick={handleConvertToContact}>
-          <span className="material-symbols-outlined">person_add</span>Convert
-          to Contact
+          <span className="material-symbols-outlined">person_add</span>
+          {selectedLeads.length === 1 ? "Convert to Contact" : "Convert to Contacts"}
         </p>
         <div className="vertical-line"></div>
         <p className="delete-lead" onClick={handleDeleteLead}>

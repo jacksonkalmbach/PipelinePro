@@ -1,0 +1,18 @@
+@import "../../../styles/variables.scss";
+
+.lead-owner-search-list-container {
+  position: relative;
+  z-index: 9999;
+  min-height: fit-content;
+  max-height: 5rem;
+  width: calc(fit-content + 2rem);
+  background-color: white;
+  overflow-y: scroll;
+
+  .employee-option {
+    &:hover {
+      cursor: pointer;
+      background-color: $theme-lightgrey;
+    }
+  }
+}
