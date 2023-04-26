@@ -1,6 +1,6 @@
 import React from "react";
 
-import EmployeeSelect from "../employee-select/EmployeeSelect";
+import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 
 import "./LeadOwnerSearchList.styles.scss";
 

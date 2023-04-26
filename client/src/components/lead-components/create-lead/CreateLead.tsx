@@ -8,7 +8,7 @@ import EmployeeSelect from "../../employee-components/employee-select/EmployeeSe
 import SearchBox from "../../search-box-component/SearchBox";
 
 import socket from "../../../utils/socket";
-import LeadOwnerSearchList from "../../employee-components/lead-owner-search-list/LeadOwnerSearchList";
+import LeadOwnerSearchList from "../lead-owner-search-list/LeadOwnerSearchList";
 
 const defaultCreateLeadState = {
   firstName: "",
@@ -60,7 +60,6 @@ const CreateLead = () => {
       fetch("http://localhost:5001/employees/department/Sales")
         .then((res) => res.json())
         .then((data) => {
-          console.log("data", data);
           setEmployees(data);
         });
     } catch (error) {
@@ -71,6 +70,7 @@ const CreateLead = () => {
   const [searchField, setSearchField] = useState("");
   const [filteredEmployees, setFilteredEmployees] =
     useState<Employee[]>(employees);
+  const [createLeadSuccess, setCreateLeadSuccess] = useState(false);
 
   useEffect(() => {
     const newFilteredEmployees = employees.filter((employee) => {
@@ -142,7 +142,8 @@ const CreateLead = () => {
       });
       console.log(response);
       resetFormFields();
-      dispatch(setShowCreateLead(false));
+      setCreateLeadSuccess(true);
+      // dispatch(setShowCreateLead(false));
     } catch (err) {
       console.log(err);
     }
@@ -164,166 +165,180 @@ const CreateLead = () => {
                 <span className="material-symbols-outlined">close</span>
               </div>
             </div>
-            <form className="create-lead-form" onSubmit={handleSubmit}>
-              <div className="lead-name">
-                <div className="form-group">
-                  First Name
-                  <input
-                    className="first-name-input"
-                    required
-                    type="text"
-                    id="firstName-input"
-                    name="firstName"
-                    placeholder="e.g. John"
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-group">
-                  Last Name
-                  <input
-                    className="last-name-input"
-                    required
-                    type="text"
-                    id="lastName-input"
-                    name="lastName"
-                    placeholder="e.g. Doe"
-                    onChange={handleInputChange}
-                  />
+
+            {createLeadSuccess ? (
+              <div className="create-success">
+                <div className="lead-create-success">
+                  <div className="material-symbols-border animate">
+                    <span className="material-symbols-outlined">
+                      check_circle
+                    </span>
+                  </div>
+                  Lead Created!
+                  <button
+                    className="create-another-lead-button"
+                    onClick={() => setCreateLeadSuccess(false)}
+                  >
+                    Create another lead
+                  </button>
                 </div>
               </div>
-              <div className="form-group">
-                Email
-                <input
-                  type="email"
-                  id="email-input"
-                  name="email"
-                  placeholder="e.g. mail@example.com"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                Phone
-                <input
-                  type="tel"
-                  id="phone-input"
-                  name="phone"
-                  maxLength={10}
-                  placeholder="Enter Number"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                Company
-                <input
-                  type="text"
-                  id="company-input"
-                  name="company"
-                  placeholder="e.g. Google"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                Job Title
-                <input
-                  type="text"
-                  id="jobTitle-input"
-                  name="jobTitle"
-                  placeholder="e.g. Project Manager"
-                  onChange={handleInputChange}
-                />
-              </div>
-              <div className="form-group">
-                Lead Owner
-                {formFields.leadOwner.length ? (
-                  <>
-                    <div className="selected-lead-owner">
-                      <EmployeeSelect
-                        id={selectedLeadOwner.employee_id}
-                        firstName={selectedLeadOwner.first_name}
-                        lastName={selectedLeadOwner.last_name}
-                        profilePic={selectedLeadOwner.profile_pic}
+            ) : (
+              <>
+                <form className="create-lead-form" onSubmit={handleSubmit}>
+                  <div className="lead-name">
+                    <div className="form-group">
+                      First Name
+                      <input
+                        className="first-name-input"
+                        required
+                        type="text"
+                        id="firstName-input"
+                        name="firstName"
+                        placeholder="e.g. John"
+                        onChange={handleInputChange}
                       />
-                      <span
-                        className="material-symbols-outlined"
-                        onClick={handleClearLeadOwner}
-                      >
-                        close
-                      </span>
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <SearchBox
-                      className="seach-box"
-                      placeholder="Search Lead Owners"
-                      name="leadOwner"
-                      onChangeHandler={onSearchChange}
+                    <div className="form-group">
+                      Last Name
+                      <input
+                        className="last-name-input"
+                        required
+                        type="text"
+                        id="lastName-input"
+                        name="lastName"
+                        placeholder="e.g. Doe"
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  </div>
+                  <div className="form-group">
+                    Email
+                    <input
+                      type="email"
+                      id="email-input"
+                      name="email"
+                      placeholder="e.g. mail@example.com"
+                      onChange={handleInputChange}
                     />
-                    {searchField.length > 0 &&
-                      employees &&
-                      !formFields.leadOwner.length && (
-                        <LeadOwnerSearchList
-                          employees={filteredEmployees}
-                          onEmployeeSelected={onEmployeeSelect}
+                  </div>
+                  <div className="form-group">
+                    Phone
+                    <input
+                      type="tel"
+                      id="phone-input"
+                      name="phone"
+                      maxLength={10}
+                      placeholder="Enter Number"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    Company
+                    <input
+                      type="text"
+                      id="company-input"
+                      name="company"
+                      placeholder="e.g. Google"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    Job Title
+                    <input
+                      type="text"
+                      id="jobTitle-input"
+                      name="jobTitle"
+                      placeholder="e.g. Project Manager"
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    Lead Owner
+                    {formFields.leadOwner.length ? (
+                      <>
+                        <div className="selected-lead-owner">
+                          <EmployeeSelect
+                            id={selectedLeadOwner.employee_id}
+                            firstName={selectedLeadOwner.first_name}
+                            lastName={selectedLeadOwner.last_name}
+                            profilePic={selectedLeadOwner.profile_pic}
+                          />
+                          <span
+                            className="material-symbols-outlined"
+                            onClick={handleClearLeadOwner}
+                          >
+                            close
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <SearchBox
+                          className="seach-box"
+                          placeholder="Search Lead Owners"
+                          name="leadOwner"
+                          onChangeHandler={onSearchChange}
                         />
-                      )}
-                  </>
-                )}
-              </div>
-              <div>
-                Lead Status
-                <div className="lead-progress">
-                  <LeadRowStatus
-                    status="New"
-                    clickable={true}
-                    onClick={() => handleLeadStatusChange("New")}
-                    selected={leadStatus === "New" ? true : false}
-                  />
-                  <LeadRowStatus
-                    status="Open"
-                    clickable={true}
-                    onClick={() => handleLeadStatusChange("Open")}
-                    selected={leadStatus === "Open" ? true : false}
-                  />
-                  <LeadRowStatus
-                    status="Warm"
-                    clickable={true}
-                    onClick={() => handleLeadStatusChange("Warm")}
-                    selected={leadStatus === "Warm" ? true : false}
-                  />
-                  <LeadRowStatus
-                    status="In Progress"
-                    clickable={true}
-                    onClick={() => handleLeadStatusChange("In Progress")}
-                    selected={leadStatus === "In Progress" ? true : false}
-                  />
-                  <LeadRowStatus
-                    status="Closed"
-                    clickable={true}
-                    onClick={() => handleLeadStatusChange("Closed")}
-                    selected={leadStatus === "Closed" ? true : false}
-                  />
-                </div>
-              </div>
-              <div className="create-lead-button-container">
-                <button
-                  className="create-lead-and-another-button"
-                  type="submit"
-                  name="action"
-                  value="create-leads-and-another"
-                >
-                  Create and Add Another
-                </button>
-                <button
-                  className="create-lead-button"
-                  type="submit"
-                  name="action"
-                  value="create-lead"
-                >
-                  Create Lead
-                </button>
-              </div>
-            </form>
+                        {searchField.length > 0 &&
+                          employees &&
+                          !formFields.leadOwner.length && (
+                            <LeadOwnerSearchList
+                              employees={filteredEmployees}
+                              onEmployeeSelected={onEmployeeSelect}
+                            />
+                          )}
+                      </>
+                    )}
+                  </div>
+                  <div>
+                    Lead Status
+                    <div className="lead-progress">
+                      <LeadRowStatus
+                        status="New"
+                        clickable={true}
+                        onClick={() => handleLeadStatusChange("New")}
+                        selected={leadStatus === "New" ? true : false}
+                      />
+                      <LeadRowStatus
+                        status="Open"
+                        clickable={true}
+                        onClick={() => handleLeadStatusChange("Open")}
+                        selected={leadStatus === "Open" ? true : false}
+                      />
+                      <LeadRowStatus
+                        status="Warm"
+                        clickable={true}
+                        onClick={() => handleLeadStatusChange("Warm")}
+                        selected={leadStatus === "Warm" ? true : false}
+                      />
+                      <LeadRowStatus
+                        status="In Progress"
+                        clickable={true}
+                        onClick={() => handleLeadStatusChange("In Progress")}
+                        selected={leadStatus === "In Progress" ? true : false}
+                      />
+                      <LeadRowStatus
+                        status="Closed"
+                        clickable={true}
+                        onClick={() => handleLeadStatusChange("Closed")}
+                        selected={leadStatus === "Closed" ? true : false}
+                      />
+                    </div>
+                  </div>
+                  <div className="create-lead-button-container">
+                    <button
+                      className="create-lead-button"
+                      type="submit"
+                      name="action"
+                      value="create-lead"
+                    >
+                      Create Lead
+                    </button>
+                  </div>
+                </form>
+              </>
+            )}
           </div>
         </>
       )}

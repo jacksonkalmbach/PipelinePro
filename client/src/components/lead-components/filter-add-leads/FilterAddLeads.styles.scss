@@ -1,6 +1,7 @@
 @import "../../../styles/variables";
 
 .filter-add-lead-container {
+  z-index: 3;
   padding: 0 20px;
   display: flex;
   justify-content: space-between;
