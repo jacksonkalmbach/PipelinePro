@@ -96,3 +96,32 @@
     width: calc(90% / 4);
   }
 }
+
+@media (max-width: 767px) {
+  .lead-row-item {
+    width: 100%;
+
+    .lead-row-item__checkbox {
+      display: none;
+    }
+
+    .lead-row-item__name {
+      width: 50%;
+    }
+
+    .lead-row-item__contact {
+      display: none;
+    }
+
+    .lead-row-item__status {
+      display: flex;
+      width: 50%;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .lead-row-item__owner {
+      display: none;
+    }
+  }
+}

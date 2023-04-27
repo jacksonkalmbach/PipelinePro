@@ -46,11 +46,13 @@ const Leads = () => {
 
   return (
     <div className="leads-container">
-      <div className="leads-count">{leadCount} Leads</div>
-      <CreateLead />
-      <LeadPreview />
-      <div className="filters-and-add-lead">
-        <FilterAddLead />
+      <div className="count-and-create">
+        <div className="leads-count">{leadCount} Leads</div>
+        <CreateLead />
+        <LeadPreview />
+        <div className="filters-and-add-lead">
+          <FilterAddLead />
+        </div>
       </div>
       {leadSelected.length > 0 && <ContactConvert />}
       <div className="all-leads-list">

@@ -29,11 +29,20 @@
 
 @media (max-width: 767px) {
   .leads-container {
+    height: 86vh;
     width: 90vw;
 
-    .leads-count {
-      font-size: 30px;
-      margin-left: 0;
+    .count-and-create {
+      display: flex;
+      .leads-count {
+        font-size: 30px;
+        margin-left: 0;
+        width: 50%;
+      }
+
+      .filters-and-add-lead {
+        width: 50%;
+      }
     }
   }
 }

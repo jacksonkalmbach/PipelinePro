@@ -131,7 +131,40 @@
 
 @media (max-width: 767px) {
   .leads-list-container {
-    width: fit-content;
-    overflow-x: scroll;
+    width: 100%;
+    overflow-x: hidden;
+
+    .leads-list-search {
+      align-self: center;
+      width: 90%;
+    }
+
+    .leads-list-filters {
+      .leads-list-filters__checkbox {
+        display: none;
+      }
+
+      .leads-list-filters__name {
+        width: 50%;
+        justify-content: center;
+        padding-left: 0;
+        text-align: center;
+      }
+
+      .leads-list-filters__contact {
+        display: none;
+      }
+
+      .leads-list-filters__status {
+        width: 50%;
+        justify-content: center;
+        padding-left: 0;
+        text-align: center;
+      }
+
+      .leads-list-filters__owner {
+        display: none;
+      }
+    }
   }
 }
