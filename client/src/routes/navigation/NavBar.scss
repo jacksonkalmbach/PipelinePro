@@ -18,6 +18,7 @@
     justify-content: center;
     align-items: center;
     margin-left: 10px;
+    cursor: pointer;
 
     .logo {
       height: 80%;
@@ -47,9 +48,34 @@
       font-size: 18px;
       font-family: $font-family;
       font-weight: 600;
+      text-decoration: none;
 
       &:hover {
         cursor: pointer;
+      }
+
+      .demo-account {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+      }
+
+      .get-started-button {
+        background-color: $primary-color;
+
+        &:hover {
+          background-color: #ff3d00;
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+
+        &.login {
+          display: none;
+        }
       }
     }
   }

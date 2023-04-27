@@ -1,24 +1,15 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { setIsDemo } from "../../store/reducers/user/userAuthSlice";
+
 import SignInForm from "../../components/auth-components/sign-in/SignInForm";
 import SignUpForm from "../../components/auth-components/sign-up/SignUpForm";
 
 import "./AuthContainer.styles.scss";
 
 const AuthContainer = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [authChoice, setAuthChoice] = useState("signin");
 
   const toggleAuth = () => {
     setAuthChoice(authChoice === "signin" ? "signup" : "signin");
-  };
-
-  const handleDemoClick = () => {
-    dispatch(setIsDemo(true));
-    navigate("/dashboard");
   };
 
   return (
@@ -56,9 +47,6 @@ const AuthContainer = () => {
           {authChoice === "signin" ? <SignInForm /> : <SignUpForm />}
         </div>
       </div>
-      <p className="try-demo" onClick={handleDemoClick}>
-        Try the demo
-      </p>
     </div>
   );
 };
