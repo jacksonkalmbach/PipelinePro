@@ -49,12 +49,22 @@ const MainSectionNavbar = () => {
             <span className="material-symbols-outlined">calendar_month</span>
           </Link>
         </div>
+        <div
+          className={`section-icon ${
+            selectedSectionIndex === 3 ? "selected" : ""
+          }`}
+          onClick={() => handleSelectedSection(3, "Chat")}
+        >
+          <Link to="/chat" className="link">
+            <span className="material-symbols-outlined">chat</span>
+          </Link>
+        </div>
       </div>
       <div
         className={`section-icon settings ${
-          selectedSectionIndex === 3 ? "selected" : ""
+          selectedSectionIndex === 4 ? "selected" : ""
         }`}
-        onClick={() => handleSelectedSection(3, "Settings")}
+        onClick={() => handleSelectedSection(4, "Settings")}
       >
         <div className="section-icon">
           <Link to="/settings" className="link">
