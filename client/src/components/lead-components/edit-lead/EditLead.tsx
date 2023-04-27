@@ -39,6 +39,7 @@ const EditLead = ({
   const dispatch = useDispatch();
 
   const [updateSuccess, setUpdateSuccess] = useState(false);
+  const [editStatus, setEditStatus] = useState(leadStatus);
 
   const [formFields, setFormFields] = useState({
     firstName,
@@ -61,6 +62,7 @@ const EditLead = ({
   };
 
   const handleLeadStatusChange = (status: string): void => {
+    setEditStatus(status);
     setFormFields({ ...formFields, leadStatus: status });
   };
 
@@ -186,31 +188,31 @@ const EditLead = ({
                     status="New"
                     clickable={true}
                     onClick={() => handleLeadStatusChange("New")}
-                    selected={leadStatus === "New" ? true : false}
+                    selected={editStatus === "New" ? true : false}
                   />
                   <LeadRowStatus
                     status="Open"
                     clickable={true}
                     onClick={() => handleLeadStatusChange("Open")}
-                    selected={leadStatus === "Open" ? true : false}
+                    selected={editStatus === "Open" ? true : false}
                   />
                   <LeadRowStatus
                     status="Warm"
                     clickable={true}
                     onClick={() => handleLeadStatusChange("Warm")}
-                    selected={leadStatus === "Warm" ? true : false}
+                    selected={editStatus === "Warm" ? true : false}
                   />
                   <LeadRowStatus
                     status="In Progress"
                     clickable={true}
                     onClick={() => handleLeadStatusChange("In Progress")}
-                    selected={leadStatus === "In Progress" ? true : false}
+                    selected={editStatus === "In Progress" ? true : false}
                   />
                   <LeadRowStatus
                     status="Closed"
                     clickable={true}
                     onClick={() => handleLeadStatusChange("Closed")}
-                    selected={leadStatus === "Closed" ? true : false}
+                    selected={editStatus === "Closed" ? true : false}
                   />
                 </div>
               </div>

@@ -9,7 +9,7 @@
 
   &.clickable {
     cursor: pointer;
-    opacity: 0.4;
+    opacity: 0.25;
 
     &:active {
       transform: scale(0.95);
@@ -33,7 +33,7 @@
   }
 
   &.warm {
-    background-color: #fad24f;
+    background-color: #ffb700;
   }
 
   &:hover {
