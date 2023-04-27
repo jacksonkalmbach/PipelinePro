@@ -18,6 +18,7 @@ import Calendar from "./containers/calendar-container/Calendar";
 import AccountSettings from "./containers/settings-container/account/AccountSettings";
 import NotificationSettings from "./containers/settings-container/notifications/NotificationSettings";
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
+import LandingPage from "./containers/landing-page/LandingPage";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const App: React.FC = () => {
         setIsLoaded(true);
       }, 1100);
     }
-  }, [isDemo]);
+  }, [isDemo, dispatch]);
 
   useEffect(() => {
     if (userIsSignedIn) {
@@ -44,63 +45,74 @@ const App: React.FC = () => {
 
   return (
     <>
-      {userIsSignedIn || isDemo ? (
+      <NavBar />
+      {!userIsSignedIn ? (
         <>
-          {isDemo && !isLoaded ? (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "100vh",
-              }}
-            >
-              <div
-                style={{
-                  width: "6rem",
-                  height: "6rem",
-                  border: "5px solid #ff7043",
-                  borderTopColor: "transparent",
-                  borderRadius: "50%",
-                  animation: "spin 1s ease-in-out infinite",
-                }}
-              ></div>
-            </div>
-          ) : (
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<AuthContainer />} />
+          </Routes>
+        </>
+      ) : (
+        <>
+          {isLoaded ? (
             <>
-              <NavBar />
-              <div className="main-container">
-                <MainSectionsNavbar />
-                <Routes>
-                  <Route path="/dashboard/*" element={<Dashboard />}></Route>
-                  <Route path="/contacts/*" element={<Contacts />}>
-                    <Route path="leads" element={<Leads />} />
-                    <Route path="contacts" element={<div>Contacts</div>} />
-                    <Route path="company" element={<div>Companies</div>}>
-                      <Route path="employees" element={<div>Employees</div>}>
-                        <Route path=":id" element={<div>Employee</div>} />
+              <>
+                <div className="main-container">
+                  <MainSectionsNavbar />
+                  <Routes>
+                    <Route path="/dashboard/*" element={<Dashboard />}></Route>
+                    <Route path="/contacts/*" element={<Contacts />}>
+                      <Route path="leads" element={<Leads />} />
+                      <Route path="contacts" element={<div>Contacts</div>} />
+                      <Route path="company" element={<div>Companies</div>}>
+                        <Route path="employees" element={<div>Employees</div>}>
+                          <Route path=":id" element={<div>Employee</div>} />
+                        </Route>
                       </Route>
                     </Route>
-                  </Route>
-                  <Route path="/calendar/*" element={<Calendar />} />
-                  <Route path="/settings/*" element={<Settings />}>
-                    <Route path="Account" element={<AccountSettings />} />
-                    <Route
-                      path="Notifications"
-                      element={<NotificationSettings />}
-                    />
-                    <Route path="Billing" element={<BillingSettings />} />
-                  </Route>
-                </Routes>
+                    <Route path="/calendar/*" element={<Calendar />} />
+                    <Route path="/settings/*" element={<Settings />}>
+                      <Route path="Account" element={<AccountSettings />} />
+                      <Route
+                        path="Notifications"
+                        element={<NotificationSettings />}
+                      />
+                      <Route path="Billing" element={<BillingSettings />} />
+                    </Route>
+                  </Routes>
+                </div>
+              </>
+            </>
+          ) : (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  height: "100vh",
+                }}
+              >
+                <div
+                  style={{
+                    width: "6rem",
+                    height: "6rem",
+                    border: "5px solid #ff7043",
+                    borderTopColor: "transparent",
+                    borderRadius: "50%",
+                    animation: "spin 1s ease-in-out infinite",
+                  }}
+                ></div>
               </div>
             </>
           )}
         </>
-      ) : (
-        <AuthContainer />
       )}
     </>
   );
 };
 
 export default App;
+
+//     {isDemo && !isLoaded ? (

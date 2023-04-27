@@ -14,9 +14,6 @@ const NavBar = () => {
   const photoURL = useSelector((state: any) => state.userAuth.photoURL);
   const uid = useSelector((state: any) => state.userAuth.uid);
 
-  console.log(uid);
-  console.log(firstName);
-
   return (
     <nav className="navbar-container">
       <div className="navbar-logo">
