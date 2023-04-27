@@ -342,3 +342,56 @@
     display: none;
   }
 }
+
+@media (max-width: 767px) {
+  .lead-preview-container {
+    width: 100vw;
+    overflow-y: scroll;
+
+    .lead-preview-header {
+      height: fit-content;
+      .lead-preview-contact-info {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        margin: 0;
+        padding-left: 10px;
+        width: fit-content;
+
+        .dot {
+          display: none;
+        }
+      }
+
+      .additional-lead-details {
+        flex-direction: column;
+        width: 90%;
+        margin: 0;
+        border: none;
+
+        .lead-owner-container {
+          min-width: 100%;
+        }
+
+        .lead-company-container {
+          min-width: 100%;
+        }
+
+        .lead-job-title-container {
+          min-width: 100%;
+        }
+      }
+    }
+
+    .lead-status-container {
+      justify-content: center;
+      .lead-status {
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 15px 10px;
+        font-size: 14px;
+      }
+    }
+  }
+}

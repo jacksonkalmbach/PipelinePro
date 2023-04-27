@@ -214,7 +214,7 @@ const LeadPreview = () => {
                   <span className="material-symbols-outlined">mail</span>
                   {email !== "" ? email : <div>Loading...</div>}
                 </div>
-                <div>&#x2022;</div>
+                <div className="dot">&#x2022;</div>
                 <div className="lead-preview-phone">
                   <span className="material-symbols-outlined">call</span>
                   {phone !== "" ? (
