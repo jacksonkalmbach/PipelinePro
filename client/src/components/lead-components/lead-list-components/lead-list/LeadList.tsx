@@ -11,6 +11,7 @@ import "./LeadList.styles.scss";
 interface LeadListProps {
   leads: LeadData[];
   leadCount?: number | null;
+  myLeads?: boolean;
   searchPlaceholder: string;
 }
 
@@ -24,7 +25,12 @@ interface LeadData {
   lead_status: string;
 }
 
-const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
+const LeadList = ({
+  leads,
+  leadCount,
+  searchPlaceholder,
+  myLeads,
+}: LeadListProps) => {
   const dispatch = useDispatch();
 
   const [searchField, setSearchField] = useState("");
@@ -76,22 +82,26 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
         />
       </div>
       <div className="leads-list-filters">
-        <div
-          className={`leads-list-filters__checkbox ${
-            checkAll ? "checkAll" : ""
-          }`}
-          onClick={toggleCheckAll}
-        >
-          {checkAll ? (
-            <span className="material-symbols-outlined">
-              indeterminate_check_box
-            </span>
-          ) : (
-            <span className="material-symbols-outlined">
-              check_box_outline_blank
-            </span>
-          )}
-        </div>
+        {!myLeads && (
+          <>
+            <div
+              className={`leads-list-filters__checkbox ${
+                checkAll ? "checkAll" : ""
+              }`}
+              onClick={toggleCheckAll}
+            >
+              {checkAll ? (
+                <span className="material-symbols-outlined">
+                  indeterminate_check_box
+                </span>
+              ) : (
+                <span className="material-symbols-outlined">
+                  check_box_outline_blank
+                </span>
+              )}
+            </div>
+          </>
+        )}
         <div className="leads-list-filters__name">
           {/* <span className="material-symbols-outlined">unfold_more</span> */}
           NAME
@@ -131,6 +141,7 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
                   phone={phone}
                   leadOwner={leadOwner}
                   status={leadStatus}
+                  myLeads={myLeads}
                 />
               );
             })

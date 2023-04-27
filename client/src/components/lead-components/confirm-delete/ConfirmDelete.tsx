@@ -26,7 +26,6 @@ const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
   );
 
   const deleteId = useSelector((state: any) => state.showLead.deleteId);
-  console.log("deleteId - CONFIRM DELETE", deleteId);
 
   const deleteSelectedLead = () => {
     confirmDeleteLead(selectedId!);

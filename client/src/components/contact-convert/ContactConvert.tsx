@@ -56,11 +56,6 @@ const ContactConvert = () => {
 
   const displayEditLead = useSelector((state: any) => state.showLead.editLead);
 
-  //
-  const deleteType = useSelector((state: any) => state.showLead.deleteType);
-  console.log("deleteType - Contact Convert", deleteType);
-  //
-
   const handleDeleteLead = () => {
     dispatch(showConfirmDelete(true));
     dispatch(setDeleteType("lead"));

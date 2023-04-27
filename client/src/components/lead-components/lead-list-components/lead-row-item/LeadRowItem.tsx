@@ -24,6 +24,7 @@ interface LeadRowItemProps {
   photoURL?: string;
   leadOwner?: number | undefined;
   status: string;
+  myLeads?: boolean;
 }
 
 interface Employee {
@@ -44,6 +45,7 @@ const LeadRowItem = ({
   photoURL,
   leadOwner,
   status,
+  myLeads,
 }: LeadRowItemProps) => {
   const dispatch = useDispatch();
   const [isSelected, setisSelected] = useState(false);
@@ -108,22 +110,32 @@ const LeadRowItem = ({
       className={`lead-row-item ${isSelected ? "selected" : ""}`}
       onClick={handleLeadPreviewClick}
     >
-      <div
-        className={`lead-row-item__checkbox ${
-          checkAll || isSelected ? "selected" : ""
-        } ${isSelected ? "selected" : ""}}`}
-        onClick={toggleSelected}
-      >
-        {checkAll || isSelected ? (
-          <span className="material-symbols-outlined" onClick={toggleSelected}>
-            check_box
-          </span>
-        ) : (
-          <span className="material-symbols-outlined" onClick={toggleSelected}>
-            check_box_outline_blank
-          </span>
-        )}
-      </div>
+      {!myLeads && (
+        <>
+          <div
+            className={`lead-row-item__checkbox ${
+              checkAll || isSelected ? "selected" : ""
+            } ${isSelected ? "selected" : ""}}`}
+            onClick={toggleSelected}
+          >
+            {checkAll || isSelected ? (
+              <span
+                className="material-symbols-outlined"
+                onClick={toggleSelected}
+              >
+                check_box
+              </span>
+            ) : (
+              <span
+                className="material-symbols-outlined"
+                onClick={toggleSelected}
+              >
+                check_box_outline_blank
+              </span>
+            )}
+          </div>
+        </>
+      )}
       <div className="lead-row-item__name">{firstName + " " + lastName}</div>
       <div className="lead-row-item__contact">
         <div className="lead-row-item__contact_email">
