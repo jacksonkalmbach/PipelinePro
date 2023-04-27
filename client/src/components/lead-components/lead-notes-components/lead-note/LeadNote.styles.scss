@@ -27,6 +27,27 @@
       align-items: center;
       gap: 10px;
       font-size: 1rem;
+
+      .material-symbols-outlined {
+        &.edit-delete {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border: 1px solid $theme-lightgrey;
+          height: 2rem;
+          width: 2rem;
+          border-radius: 50%;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $theme-lightgrey;
+          }
+
+          &:active {
+            background-color: $theme-grey;
+          }
+        }
+      }
     }
   }
 

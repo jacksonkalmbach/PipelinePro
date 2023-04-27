@@ -93,18 +93,19 @@ const LeadList = ({ leads, leadCount, searchPlaceholder }: LeadListProps) => {
           )}
         </div>
         <div className="leads-list-filters__name">
-          <span className="material-symbols-outlined">unfold_more</span>NAME
+          {/* <span className="material-symbols-outlined">unfold_more</span> */}
+          NAME
         </div>
         <div className="leads-list-filters__contact">
-          <span className="material-symbols-outlined">unfold_more</span>
+          {/* <span className="material-symbols-outlined">unfold_more</span> */}
           CONTACT
         </div>
         <div className="leads-list-filters__status">
-          <span className="material-symbols-outlined">unfold_more</span>
+          {/* <span className="material-symbols-outlined">unfold_more</span> */}
           STATUS
         </div>
         <div className="leads-list-filters__owner">
-          <span className="material-symbols-outlined">unfold_more</span>
+          {/* <span className="material-symbols-outlined">unfold_more</span> */}
           LEAD OWNER
         </div>
       </div>

@@ -2,6 +2,7 @@ import socket from "../../../utils/socket";
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
+  setDeleteType,
   setShowLeadPreview,
   showConfirmDelete,
   showEditLead,
@@ -141,6 +142,7 @@ const LeadPreview = () => {
   };
 
   const handleDeleteLead = () => {
+    dispatch(setDeleteType("lead"));
     dispatch(showConfirmDelete(true));
   };
 
@@ -318,6 +320,7 @@ const LeadPreview = () => {
                   return (
                     <LeadNote
                       key={note_id}
+                      noteId={note_id}
                       noteTitle={note_title}
                       noteBody={note_body}
                       noteCreatedAt={created_at}

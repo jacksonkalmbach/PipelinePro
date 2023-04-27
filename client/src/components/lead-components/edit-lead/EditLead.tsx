@@ -56,8 +56,6 @@ const EditLead = ({
     dispatch(showEditLead(false));
   };
 
-  console.log(typeof id, id);
-
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -70,7 +68,6 @@ const EditLead = ({
       leadStatus: status,
     }));
   };
-  console.log("formFields", formFields);
 
   const handleUpdateLead = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -80,7 +77,6 @@ const EditLead = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formFields),
       });
-      console.log("formFields - PUT", formFields);
       setUpdateSuccess(true);
     } catch (error) {
       console.log("error updating lead", error);

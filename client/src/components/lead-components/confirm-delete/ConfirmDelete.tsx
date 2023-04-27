@@ -17,15 +17,16 @@ interface ConfirmDeleteProps {
 
 const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
   const dispatch = useDispatch();
+  const deleteType = useSelector((state: any) => state.showLead.deleteType);
 
-  const itemsToDelete = useSelector(
-    (state: any) => state.selectAllLeads.selectedLeads
-  );
-  console.log("itemsToDelete", itemsToDelete);
+  console.log("deleteType - CONFIRM DELETE", deleteType);
 
   const selectedLeads = useSelector(
     (state: any) => state.selectAllLeads.selectedLeads
   );
+
+  const deleteId = useSelector((state: any) => state.showLead.deleteId);
+  console.log("deleteId - CONFIRM DELETE", deleteId);
 
   const deleteSelectedLead = () => {
     confirmDeleteLead(selectedId!);
@@ -33,23 +34,34 @@ const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
 
   const deleteSelectedLeads = () => {
     selectedLeads.forEach((leadId: string) => {
-      console.log("leadID type", typeof leadId);
       confirmDeleteLead(leadId);
     });
   };
 
-  const confirmDeleteLead = (leadId: string) => {
+  const confirmDeleteLead = (id: string) => {
     try {
-      fetch(`http://localhost:5001/leads/${leadId}`, {
-        method: "DELETE",
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          console.log(data);
-        });
+      if (deleteType === "lead") {
+        fetch(`http://localhost:5001/leads/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+        dispatch(setShowLeadPreview(false));
+        dispatch(removeSelectedLeads(id));
+      } else if (deleteType === "note") {
+        fetch(`http://localhost:5001/notes/${deleteId}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+          });
+      } else {
+        console.log("delete");
+      }
       dispatch(showConfirmDelete(false));
-      dispatch(setShowLeadPreview(false));
-      dispatch(removeSelectedLeads(leadId));
     } catch (error) {
       console.log("error deleting lead", error);
     }

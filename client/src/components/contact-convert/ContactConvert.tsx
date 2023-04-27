@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import {
+  setDeleteType,
   showConfirmDelete,
   showEditLead,
 } from "../../store/reducers/leads/showLeadSlice";
@@ -47,9 +48,7 @@ const ContactConvert = () => {
   const selectedLeads = useSelector(
     (state: any) => state.selectAllLeads.selectedLeads
   );
-  const leadId = useSelector((state: any) => state.showLead.previewId);
   const [leadData, setLeadData] = useState<Lead>(defaultLeadData);
-  console.log("leadId - Contact Convert", leadId);
 
   const displayConfirmDelete = useSelector(
     (state: any) => state.showLead.confirmDelete
@@ -57,8 +56,14 @@ const ContactConvert = () => {
 
   const displayEditLead = useSelector((state: any) => state.showLead.editLead);
 
+  //
+  const deleteType = useSelector((state: any) => state.showLead.deleteType);
+  console.log("deleteType - Contact Convert", deleteType);
+  //
+
   const handleDeleteLead = () => {
     dispatch(showConfirmDelete(true));
+    dispatch(setDeleteType("lead"));
   };
 
   const handleConvertToContact = () => {
@@ -79,7 +84,6 @@ const ContactConvert = () => {
         fetch(`http://localhost:5001/leads/${selectedLeads[0].toString()}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log("data", data);
             setLeadData(data);
           });
         fetch(`http://localhost:5001/employees/${leadData.lead_owner}`)

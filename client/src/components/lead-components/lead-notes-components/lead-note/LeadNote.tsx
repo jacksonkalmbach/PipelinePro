@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import {
+  setDeleteType,
+  showConfirmDelete,
+  setDeleteId,
+} from "../../../../store/reducers/leads/showLeadSlice";
 import EmployeeSelect from "../../../employee-components/employee-select/EmployeeSelect";
 
 import "./LeadNote.styles.scss";
 
 interface LeadNoteProps {
+  key: string;
+  noteId: string;
   noteTitle: string;
   noteBody: string;
   noteAuthor: string;
@@ -25,11 +33,15 @@ const defaultAuthorDetails = {
 };
 
 const LeadNote = ({
+  key,
+  noteId,
   noteTitle,
   noteBody,
   noteAuthor,
   noteCreatedAt,
 }: LeadNoteProps) => {
+  const dispatch = useDispatch();
+
   const isoDate = new Date(noteCreatedAt);
   const date = isoDate.toLocaleDateString();
 
@@ -52,6 +64,12 @@ const LeadNote = ({
     getAuthorDetails();
   }, [noteAuthor]);
 
+  const handleDelete = () => {
+    dispatch(showConfirmDelete(true));
+    dispatch(setDeleteType("note"));
+    dispatch(setDeleteId(noteId));
+  };
+
   return (
     <div className="lead-note-container">
       <div className="lead-note-header">
@@ -69,6 +87,13 @@ const LeadNote = ({
         <div className="note-create">
           <span className="material-symbols-outlined">calendar_today</span>
           Created {date}
+          <span className="material-symbols-outlined edit-delete">edit</span>
+          <span
+            className="material-symbols-outlined edit-delete"
+            onClick={handleDelete}
+          >
+            delete
+          </span>
         </div>
       </div>
       <div className="note">

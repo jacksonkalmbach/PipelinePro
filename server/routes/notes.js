@@ -60,7 +60,9 @@ router.put("/:id", async (req, res) => {
 // Delete a note
 router.delete("/:id", async (req, res) => {
   try {
+    console.log("Hite delete note route");
     const { id } = req.params;
+    console.log(id, "note id");
     const deleteNote = await pool.query(
       "DELETE FROM notes WHERE note_id = $1",
       [id]
