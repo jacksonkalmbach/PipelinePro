@@ -1,1 +1,9 @@
 @import "../../styles/variables.scss";
+
+.landing-page-container {
+  height: 93vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

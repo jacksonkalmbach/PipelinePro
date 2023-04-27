@@ -16,7 +16,7 @@ const LandingPage = () => {
   };
 
   return (
-    <div>
+    <div className="landing-page-container">
       <button onClick={handleDemoClick}>Try Demo</button>
     </div>
   );

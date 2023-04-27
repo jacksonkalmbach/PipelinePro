@@ -31,7 +31,7 @@ const App: React.FC = () => {
       dispatch(userSignIn());
       setTimeout(() => {
         setIsLoaded(true);
-      }, 1100);
+      }, 1000);
     }
   }, [isDemo, dispatch]);
 
@@ -91,7 +91,8 @@ const App: React.FC = () => {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  height: "100vh",
+                  height: "93vh",
+                  width: "100vw",
                 }}
               >
                 <div
