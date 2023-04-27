@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { userSignOut } from "../../store/reducers/user/userAuthSlice";
@@ -10,6 +10,16 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const pathname = location.pathname;
+
+  const [sideNavVisible, setSideNavVisible] = useState(false);
+
+  const toggleSideNav = () => {
+    setSideNavVisible(!sideNavVisible);
+  };
+
+  const closeSideNav = () => {
+    setSideNavVisible(false);
+  };
 
   const currentSection = useSelector(
     (state: any) => state.sectionNavigation.value
@@ -35,6 +45,9 @@ const NavBar = () => {
     <nav className="navbar-container">
       <div className="navbar-logo" onClick={handleLogoClick}>
         <img className="logo" src="../../assets/pp-logo-white.png" alt="logo" />
+      </div>
+      <div className="hamburger-container" onClick={toggleSideNav}>
+        <span className="material-symbols-outlined">menu</span>
       </div>
       {isSignedIn ? (
         <>

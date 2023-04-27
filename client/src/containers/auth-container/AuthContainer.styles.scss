@@ -94,7 +94,7 @@
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media (max-width: 767px) {
   .auth-container {
     flex-direction: column;
     height: fit-content;

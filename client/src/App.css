@@ -8,3 +8,9 @@
     transform: rotate(360deg);
   }
 }
+
+@media (max-width: 767px) {
+  .main-container {
+    flex-direction: column-reverse;
+  }
+}

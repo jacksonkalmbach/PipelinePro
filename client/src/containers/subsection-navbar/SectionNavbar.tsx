@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 
 interface SectionNavbarProps {
   section: string;
@@ -8,7 +7,6 @@ interface SectionNavbarProps {
 }
 
 const SectionNavbar = ({ section, sectionTitles }: SectionNavbarProps) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [selectedSection, setSelectedSection] = useState(0);
   const [hasMounted, sethasMounted] = useState(false);
@@ -18,11 +16,10 @@ const SectionNavbar = ({ section, sectionTitles }: SectionNavbarProps) => {
       navigate(`${section}`);
       sethasMounted(true);
     }
-  }, [hasMounted, navigate]);
+  }, [hasMounted, navigate, section]);
 
   const handleSelected = (index: number, value: string) => {
     setSelectedSection(index);
-    // dispatch(setContactsNavigation(value));
   };
 
   return (

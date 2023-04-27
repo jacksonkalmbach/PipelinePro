@@ -26,3 +26,12 @@
     height: 540px;
   }
 }
+
+@media (max-width: 767px) {
+  .leads-container {
+    .leads-count {
+      font-size: 30px;
+      margin-left: 0;
+    }
+  }
+}

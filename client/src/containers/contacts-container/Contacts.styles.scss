@@ -38,3 +38,13 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .contacts-container {
+    .contacts-sections {
+      width: 100vw;
+      justify-content: center;
+      padding-left: 0;
+    }
+  }
+}

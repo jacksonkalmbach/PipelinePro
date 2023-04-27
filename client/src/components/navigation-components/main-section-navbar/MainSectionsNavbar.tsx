@@ -51,7 +51,7 @@ const MainSectionNavbar = () => {
         </div>
       </div>
       <div
-        className={`section-icon ${
+        className={`section-icon settings ${
           selectedSectionIndex === 3 ? "selected" : ""
         }`}
         onClick={() => handleSelectedSection(3, "Settings")}

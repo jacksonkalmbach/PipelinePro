@@ -213,3 +213,39 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .overlay {
+    display: none;
+  }
+
+  .create-lead-container {
+    width: 100vw;
+    padding: 0;
+    height: 100vh;
+    overflow-y: scroll;
+
+    .create-lead-form {
+      gap: 15px;
+
+      .lead-name {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .form-group {
+          width: 100%;
+        }
+      }
+    }
+
+    .lead-progress {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+  }
+}

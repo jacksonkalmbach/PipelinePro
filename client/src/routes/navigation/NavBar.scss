@@ -26,6 +26,10 @@
     }
   }
 
+  .hamburger-container {
+    display: none;
+  }
+
   .vertical-line {
     width: 2px;
     height: 50%;
@@ -77,6 +81,38 @@
           display: none;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .navbar-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    .navbar-logo {
+      width: 20%;
+    }
+
+    .hamburger-container {
+      display: flex;
+      color: white;
+      justify-content: center;
+      align-items: center;
+
+      .material-symbols-outlined {
+        font-size: 2rem;
+      }
+    }
+
+    .vertical-line {
+      display: none;
+    }
+
+    .navbar-links {
+      display: none;
     }
   }
 }

@@ -56,3 +56,55 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .dashboard-container {
+    width: 100vw;
+    max-height: calc(86vh);
+    overflow-y: scroll;
+
+    .dashboard-content {
+      flex-direction: column;
+      width: 100vw;
+
+      .activity-leads-container {
+        // display: flex;
+        // flex-direction: column;
+        // width: 100%;
+        // height: 100%;
+        // gap: 20px;
+        display: none;
+
+        .my-activity {
+          height: 300px;
+          width: 100%;
+          border: 1px solid $theme-lightgrey;
+          border-radius: 15px;
+          padding: 20px;
+        }
+
+        .my-leads {
+          height: 100%;
+          width: 100%;
+          border: 1px solid $theme-lightgrey;
+          border-radius: 15px;
+          padding: 20px;
+
+          .my-leads-list {
+            height: 85%;
+            width: 90%;
+            overflow: hidden;
+          }
+        }
+      }
+
+      .my-calendar {
+        width: 90vw;
+        height: fit-content;
+        border: 1px solid $theme-lightgrey;
+        border-radius: 15px;
+        padding: 20px;
+      }
+    }
+  }
+}
