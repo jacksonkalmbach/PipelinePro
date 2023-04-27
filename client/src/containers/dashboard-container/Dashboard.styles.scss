@@ -6,6 +6,7 @@
   justify-content: flex-start;
   align-items: flex-start;
   width: calc(100vw - 4rem);
+  height: calc(100vh - 4rem);
 
   .dashboard-content {
     display: flex;
@@ -15,7 +16,7 @@
     justify-content: center;
     gap: 20px;
     padding: 20px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 
     .activity-leads-container {
       display: flex;
@@ -33,7 +34,7 @@
       }
 
       .my-leads {
-        max-height: 400px;
+        height: 100%;
         width: calc(100% - 40px);
         border: 1px solid $theme-lightgrey;
         border-radius: 15px;
