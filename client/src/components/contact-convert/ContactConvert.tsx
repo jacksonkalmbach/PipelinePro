@@ -13,7 +13,7 @@ import ConfirmDelete from "../lead-components/confirm-delete/ConfirmDelete";
 import EditLead from "../lead-components/edit-lead/EditLead";
 
 const defaultLeadData = {
-  id: 0,
+  lead_id: 0,
   first_name: "",
   last_name: "",
   email: "",
@@ -28,7 +28,7 @@ const defaultLeadData = {
 };
 
 interface Lead {
-  id: number;
+  lead_id: number;
   first_name: string;
   last_name: string;
   email: string;
@@ -79,6 +79,7 @@ const ContactConvert = () => {
         fetch(`http://localhost:5001/leads/${selectedLeads[0].toString()}`)
           .then((res) => res.json())
           .then((data) => {
+            console.log("data", data);
             setLeadData(data);
           });
         fetch(`http://localhost:5001/employees/${leadData.lead_owner}`)
@@ -102,7 +103,7 @@ const ContactConvert = () => {
       {displayConfirmDelete && <ConfirmDelete />}
       {displayEditLead && (
         <EditLead
-          id={leadData.id}
+          id={leadData.lead_id}
           firstName={leadData.first_name}
           lastName={leadData.last_name}
           email={leadData.email}

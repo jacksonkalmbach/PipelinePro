@@ -305,16 +305,16 @@ const CreateLead = () => {
                         selected={leadStatus === "Open" ? true : false}
                       />
                       <LeadRowStatus
-                        status="Warm"
-                        clickable={true}
-                        onClick={() => handleLeadStatusChange("Warm")}
-                        selected={leadStatus === "Warm" ? true : false}
-                      />
-                      <LeadRowStatus
                         status="In Progress"
                         clickable={true}
                         onClick={() => handleLeadStatusChange("In Progress")}
                         selected={leadStatus === "In Progress" ? true : false}
+                      />
+                      <LeadRowStatus
+                        status="Warm"
+                        clickable={true}
+                        onClick={() => handleLeadStatusChange("Warm")}
+                        selected={leadStatus === "Warm" ? true : false}
                       />
                       <LeadRowStatus
                         status="Closed"

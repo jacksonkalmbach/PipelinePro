@@ -56,6 +56,8 @@ const EditLead = ({
     dispatch(showEditLead(false));
   };
 
+  console.log(typeof id, id);
+
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
@@ -63,8 +65,12 @@ const EditLead = ({
 
   const handleLeadStatusChange = (status: string): void => {
     setEditStatus(status);
-    setFormFields({ ...formFields, leadStatus: status });
+    setFormFields((prevFormFields) => ({
+      ...prevFormFields,
+      leadStatus: status,
+    }));
   };
+  console.log("formFields", formFields);
 
   const handleUpdateLead = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,6 +80,7 @@ const EditLead = ({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formFields),
       });
+      console.log("formFields - PUT", formFields);
       setUpdateSuccess(true);
     } catch (error) {
       console.log("error updating lead", error);
@@ -197,16 +204,16 @@ const EditLead = ({
                     selected={editStatus === "Open" ? true : false}
                   />
                   <LeadRowStatus
-                    status="Warm"
-                    clickable={true}
-                    onClick={() => handleLeadStatusChange("Warm")}
-                    selected={editStatus === "Warm" ? true : false}
-                  />
-                  <LeadRowStatus
                     status="In Progress"
                     clickable={true}
                     onClick={() => handleLeadStatusChange("In Progress")}
                     selected={editStatus === "In Progress" ? true : false}
+                  />
+                  <LeadRowStatus
+                    status="Warm"
+                    clickable={true}
+                    onClick={() => handleLeadStatusChange("Warm")}
+                    selected={editStatus === "Warm" ? true : false}
                   />
                   <LeadRowStatus
                     status="Closed"
