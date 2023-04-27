@@ -34,7 +34,7 @@ const NavBar = () => {
   return (
     <nav className="navbar-container">
       <div className="navbar-logo" onClick={handleLogoClick}>
-        <img className="logo" src="../../pp-logo-white.png" alt="logo" />
+        <img className="logo" src="../../assets/pp-logo-white.png" alt="logo" />
       </div>
       {isSignedIn ? (
         <>
