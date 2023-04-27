@@ -20,14 +20,14 @@ const FilterAddLead = () => {
   return (
     <div className="filter-add-lead-container">
       <div className="filter-leads-container">
-        <Dropdown title="All leads" options={dropdownOptionsAllLeads} />
+        {/* <Dropdown title="All leads" options={dropdownOptionsAllLeads} />
         <Dropdown title="Create Date" options={dropdownOptionsCreateDate} />
         <Dropdown title="Contact Owner" options={dropdownOptionsContactOwner} />
         <Dropdown
           title="More filters"
           options={dropdownOptionsMoreFilters}
           moreFilters={true}
-        />
+        /> */}
       </div>
       <button className="create-lead-button" onClick={handleCreateLead}>
         Create Lead

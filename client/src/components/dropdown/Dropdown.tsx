@@ -18,8 +18,6 @@ const Dropdown = ({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<string | number>("");
 
-  console.log("Dropdown: ", options);
-
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };

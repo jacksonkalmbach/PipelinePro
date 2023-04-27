@@ -52,8 +52,13 @@ const LeadRowItem = ({
   const [ownerLastName, setOwnerLastName] = useState("");
   const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
   const checkAll = useSelector((state: any) => state.selectAllLeads.selectAll);
+  const selectedLeads = useSelector(
+    (state: any) => state.selectAllLeads.selectedLeads
+  );
 
-  const toggleSelected = (e: React.MouseEvent<HTMLDivElement>) => {
+  const toggleSelected = (
+    e: React.MouseEvent<HTMLDivElement> | React.MouseEvent<HTMLSpanElement>
+  ) => {
     e.stopPropagation();
     if (isSelected) {
       setisSelected(false);
@@ -64,13 +69,21 @@ const LeadRowItem = ({
     }
   };
 
-  // useEffect(() => {
-  //   if (checkAll) {
-  //     setisSelected(true);
-  //   } else {
-  //     setisSelected(false);
-  //   }
-  // }, [checkAll]);
+  useEffect(() => {
+    if (selectedLeads.length === 1) {
+      dispatch(setPreviewId(selectedLeads[0]));
+    }
+  }, [selectedLeads, dispatch]);
+
+  useEffect(() => {
+    if (checkAll) {
+      setisSelected(true);
+      dispatch(addSelectedLeads(id));
+    } else {
+      setisSelected(false);
+      dispatch(removeSelectedLeads(id));
+    }
+  }, [checkAll, id, dispatch]);
 
   const handleLeadPreviewClick = () => {
     dispatch(setShowLeadPreview(true));
@@ -102,9 +115,11 @@ const LeadRowItem = ({
         onClick={toggleSelected}
       >
         {checkAll || isSelected ? (
-          <span className="material-symbols-outlined">check_box</span>
+          <span className="material-symbols-outlined" onClick={toggleSelected}>
+            check_box
+          </span>
         ) : (
-          <span className="material-symbols-outlined">
+          <span className="material-symbols-outlined" onClick={toggleSelected}>
             check_box_outline_blank
           </span>
         )}

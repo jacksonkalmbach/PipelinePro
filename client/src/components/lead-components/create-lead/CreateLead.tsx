@@ -127,7 +127,6 @@ const CreateLead = () => {
   };
 
   const resetFormFields = () => {
-    console.log("hit reset form fields");
     setFormFields(defaultCreateLeadState);
   };
 
@@ -143,7 +142,6 @@ const CreateLead = () => {
       console.log(response);
       resetFormFields();
       setCreateLeadSuccess(true);
-      // dispatch(setShowCreateLead(false));
     } catch (err) {
       console.log(err);
     }

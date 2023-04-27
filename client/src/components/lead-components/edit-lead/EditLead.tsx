@@ -16,6 +16,9 @@ interface EditLeadProps {
   company: string;
   jobTitle: string;
   leadOwner: number;
+  leadOwnerFirstName: string;
+  leadOwnerLastName: string;
+  leadOwnerPhotoURL: string;
   leadStatus: string;
 }
 
@@ -28,6 +31,9 @@ const EditLead = ({
   company,
   jobTitle,
   leadOwner,
+  leadOwnerFirstName,
+  leadOwnerLastName,
+  leadOwnerPhotoURL,
   leadStatus,
 }: EditLeadProps) => {
   const dispatch = useDispatch();
@@ -170,8 +176,7 @@ const EditLead = ({
                   type="text"
                   id="leadOwner-input"
                   name="leadOwner"
-                  placeholder="e.g. 1"
-                  // onChange={handleInputChange}
+                  placeholder={`${leadOwnerFirstName} ${leadOwnerLastName}`}
                 />
               </div>
               <div>

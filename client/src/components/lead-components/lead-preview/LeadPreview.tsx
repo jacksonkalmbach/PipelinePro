@@ -103,7 +103,7 @@ const LeadPreview = () => {
         console.log("error fetching lead notes", error);
       }
     }
-  }, [currentLead, addNote]);
+  }, [currentLead, addNote, leadId]);
 
   useEffect(() => {
     if (currentLead) {
@@ -111,7 +111,7 @@ const LeadPreview = () => {
         fetch(`http://localhost:5001/employees/${currentLead.lead_owner}`)
           .then((res) => res.json())
           .then((data) => {
-            setOwnerId(data.id);
+            setOwnerId(data.employee_id);
             setOwnerFirstName(data.first_name);
             setOwnerLastName(data.last_name);
             setOwnerPhotoURL(data.profile_pic);
@@ -157,6 +157,9 @@ const LeadPreview = () => {
             company={company}
             jobTitle={jobTitle}
             leadOwner={ownerId}
+            leadOwnerFirstName={ownerFirstName}
+            leadOwnerLastName={ownerLastName}
+            leadOwnerPhotoURL={ownerPhotoURL}
             leadStatus={status}
           />
         )}
