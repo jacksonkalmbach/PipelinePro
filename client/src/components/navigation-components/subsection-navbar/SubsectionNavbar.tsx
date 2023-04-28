@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import "./SubsectionNavbar.styles.scss";
 
@@ -8,11 +8,24 @@ interface SubsectionNavbarProps {
 }
 
 const SubsectionNavbar = ({ title, options }: SubsectionNavbarProps) => {
+  const [selectedSectionIndex, setSelectedSectionIndex] = useState(0);
+
+  const handleSelectedSection = (index: number) => {
+    setSelectedSectionIndex(index);
+  };
+
   const subSections = [];
 
   for (let i = 0; i < options.length; i++) {
     subSections.push(
-      <Link key={i} to={options[i]} className="subsection-link">
+      <Link
+        key={i}
+        to={options[i]}
+        className={`subsection-link ${
+          selectedSectionIndex === i ? "selected" : ""
+        }`}
+        onClick={() => handleSelectedSection(i)}
+      >
         {options[i]}
       </Link>
     );

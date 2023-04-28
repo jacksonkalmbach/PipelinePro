@@ -67,7 +67,7 @@ const MainSectionNavbar = () => {
         onClick={() => handleSelectedSection(4, "Settings")}
       >
         <div className="section-icon">
-          <Link to="/settings" className="link">
+          <Link to="/settings/Account" className="link">
             <span className="material-symbols-outlined">settings</span>
           </Link>
         </div>

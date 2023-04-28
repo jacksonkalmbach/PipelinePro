@@ -2,16 +2,215 @@
 
 .account-settings-container {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
-  border: 1px solid red;
+
+  .title {
+    align-self: center;
+    font-size: 2rem;
+  }
 
   .account-settings-content {
     display: flex;
-    flex-direction: column;
-    width: 50%;
+    // flex-direction: column;
+    width: 80%;
     height: 100%;
     padding: 2rem;
-    border: 1px solid blue;
+    justify-content: center;
+    align-items: center;
+
+    .edit-photo {
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding-top: 50px;
+      align-items: center;
+      gap: 30px;
+
+      .profile-pic-container {
+        height: 300px;
+        width: 300px;
+        border: 3px solid $theme-lightgrey;
+        border-radius: 50%;
+        overflow: hidden;
+
+        .photo {
+          height: 100%;
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .change-photo-button {
+        background-color: $theme-grey;
+
+        &:hover {
+          background-color: $theme-lightgrey;
+        }
+
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+
+      .contact-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+
+        .material-symbols-outlined {
+          border: 1px solid $theme-grey;
+          border-radius: 50%;
+          padding: 0.5rem;
+          cursor: pointer;
+          color: $theme-grey;
+
+          &:hover {
+            color: $primary-color;
+            border: 1px solid $primary-color;
+            content: attr(title);
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+    }
+
+    .edit-personal-information {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 50%;
+      height: 100%;
+      gap: 20px;
+
+      .personal-info-title-container {
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .material-symbols-outlined {
+          border: 1px solid $theme-lightgrey;
+          border-radius: 50%;
+          padding: 0.5rem;
+          cursor: pointer;
+          color: $theme-lightgrey;
+
+          &:hover {
+            color: $primary-color;
+            border: 1px solid $primary-color;
+            content: attr(title);
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+
+      .form-group {
+        width: 70%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 10px;
+
+        label {
+          width: 100%;
+          color: $theme-grey;
+        }
+
+        .info {
+          font-size: 1.2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+
+          .material-symbols-outlined {
+            cursor: pointer;
+            color: $theme-lightgrey;
+
+            &:hover {
+              color: $primary-color;
+            }
+
+            &:active {
+              transform: scale(0.95);
+            }
+          }
+        }
+
+        label {
+          border-bottom: 1px solid $theme-lightgrey;
+        }
+
+        input {
+          border: 1px solid $theme-lightgrey;
+          outline: none;
+          font-size: 1rem;
+          font-family: inherit;
+          padding: 0.5rem;
+          border-radius: 0.25rem;
+          width: 100%;
+          color: $theme-black;
+
+          &:focus {
+            border: 2px solid $secondary-color;
+          }
+
+          &:hover {
+            background-color: #f5f5f5;
+          }
+        }
+      }
+      .buttons-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+
+        .save-updates-button {
+          display: none;
+
+          &.update {
+            display: flex;
+            background-color: $secondary-color;
+
+            &:hover {
+              background-color: darkblue;
+            }
+
+            &:active {
+              transform: scale(0.95);
+            }
+          }
+        }
+
+        .cancel-button {
+          background-color: $theme-lightgrey;
+
+          &:hover {
+            background-color: $theme-grey;
+          }
+
+          &:active {
+            transform: scale(0.95);
+          }
+        }
+      }
+    }
   }
 }
