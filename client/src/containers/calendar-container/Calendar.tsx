@@ -13,11 +13,27 @@ const Calendar = () => {
     { month: "long" }
   );
   const daysInMonth = new Date(yearState, monthState, 0).getDate();
+  const firstDayOfMonth = new Date(yearState, monthState - 1, 1).getDay();
   const days = [];
 
   useEffect(() => {
     setMonthState(month);
   }, [month]);
+
+  for (let i = firstDayOfMonth; i > 0; i--) {
+    const day = new Date(yearState, monthState - 1, -i + 1);
+    days.push(
+      <div
+        className={`day ${
+          day <= date && day.toDateString() !== date.toDateString()
+            ? "past"
+            : ""
+        }`}
+      >
+        <div className="date other-month">{day.getDate()}</div>
+      </div>
+    );
+  }
 
   for (let i = 1; i <= daysInMonth; i++) {
     const day = new Date(yearState, monthState - 1, i);
@@ -40,19 +56,12 @@ const Calendar = () => {
     );
   }
 
-  const remainingDays = 35 - daysInMonth;
-
+  const remainingDays = days.length <= 35 ? 35 - days.length : 42 - days.length;
   for (let i = 1; i <= remainingDays; i++) {
     const day = new Date(yearState, monthState, i);
     days.push(
-      <div
-        className={`day ${
-          day <= date && day.toDateString() !== date.toDateString()
-            ? "past"
-            : ""
-        }`}
-      >
-        <div className="date">{i}</div>
+      <div className={`day ${day <= date ? "past" : ""}`}>
+        <div className="date other-month">{i}</div>
       </div>
     );
   }
@@ -84,7 +93,7 @@ const Calendar = () => {
               className="material-symbols-outlined"
               onClick={handlePreviousMonth}
             >
-              arrow_back_ios
+              arrow_back_ios_new
             </span>
             <div className="month-year">
               <span style={{ fontWeight: "bold", margin: "0", padding: "0" }}>

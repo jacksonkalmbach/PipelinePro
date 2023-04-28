@@ -30,6 +30,9 @@
       }
 
       .material-symbols-outlined {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 1rem;
         cursor: pointer;
         border: 1px solid $theme-lightgrey;
@@ -75,7 +78,7 @@
           border: 1px solid $theme-lightgrey;
 
           &.past {
-            background-color: rgb(237, 237, 237);
+            background-color: rgb(245, 245, 245);
           }
 
           .date {
@@ -95,6 +98,10 @@
             &.today {
               background-color: $primary-color;
               color: white;
+            }
+
+            &.other-month {
+              color: rgb(196, 196, 196);
             }
           }
         }
