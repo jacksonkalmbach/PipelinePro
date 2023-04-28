@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   showDayPreview: false,
+  datePreview: null,
 };
 
 export const calendarSlice = createSlice({
@@ -11,9 +12,12 @@ export const calendarSlice = createSlice({
     setShowDayPreview: (state, action) => {
       state.showDayPreview = action.payload;
     },
+    setDatePreview: (state, action) => {
+      state.datePreview = action.payload;
+    },
   },
 });
 
-export const { setShowDayPreview } = calendarSlice.actions;
+export const { setShowDayPreview, setDatePreview } = calendarSlice.actions;
 
 export default calendarSlice.reducer;

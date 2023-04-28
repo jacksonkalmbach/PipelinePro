@@ -1,0 +1,24 @@
+@import "../../../styles/variables.scss";
+
+.event-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+
+  cursor: pointer;
+
+  .event-title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+    margin: 0 10px;
+
+    .bullet-point {
+      color: $primary-color;
+    }
+  }
+}

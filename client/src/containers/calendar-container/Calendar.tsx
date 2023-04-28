@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setShowDayPreview } from "../../store/reducers/calendar/calendarSlice";
+import { useSelector } from "react-redux";
 
 import DayPreview from "../../components/calendar-components/day-preview/DayPreview";
-
-import "./Calendar.styles.scss";
 import Day from "../../components/calendar-components/day/Day";
 
+import "./Calendar.styles.scss";
+
 const Calendar = () => {
-  const dispatch = useDispatch();
   const showDayPreview = useSelector(
     (state: any) => state.calendar.showDayPreview
   );
 
-  const handleShowDayPreview = () => {
-    dispatch(setShowDayPreview(true));
-  };
+  console.log("showDayPreview", showDayPreview);
 
   const date = new Date();
   const year = date.getFullYear();
@@ -95,6 +91,15 @@ const Calendar = () => {
             </span>
           </div>
           <div className="days-container">
+            <div className="day-name">
+              <div>Sun</div>
+              <div>Mon</div>
+              <div>Tue</div>
+              <div>Wed</div>
+              <div>Thu</div>
+              <div>Fri</div>
+              <div>Sat</div>
+            </div>
             <div className="days">{days}</div>
           </div>
         </div>

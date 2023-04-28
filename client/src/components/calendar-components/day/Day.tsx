@@ -1,6 +1,12 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 
-import { setShowDayPreview } from "../../../store/reducers/calendar/calendarSlice";
+import Event from "../event/Event";
+
+import {
+  setShowDayPreview,
+  setDatePreview,
+} from "../../../store/reducers/calendar/calendarSlice";
 
 import "./Day.styles.scss";
 
@@ -12,8 +18,11 @@ interface DayProps {
 }
 
 const Day = ({ day, date, past, otherMonth }: DayProps) => {
+  const dispatch = useDispatch();
+
   const handleShowDayPreview = () => {
-    setShowDayPreview(true);
+    dispatch(setShowDayPreview(true));
+    dispatch(setDatePreview(day));
   };
 
   return (
@@ -30,6 +39,8 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
       >
         {day.getDate()}
       </div>
+      <Event eventName="Event 1" />
+      <Event eventName="Event 2" />
     </div>
   );
 };

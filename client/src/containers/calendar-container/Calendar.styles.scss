@@ -61,6 +61,17 @@
       margin: 0;
       padding: 0;
 
+      .day-name {
+        width: 90%;
+        max-height: calc(100% / 5);
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: $theme-black;
+      }
+
       .days {
         width: 90%;
         height: 100%;
@@ -72,44 +83,7 @@
         margin: 0;
         padding: 0;
 
-        .day {
-          min-width: calc(100% / 8);
-          max-height: calc(100% / 5);
-          border: 1px solid $theme-lightgrey;
-          cursor: pointer;
-
-          &:hover {
-            transform: scale(1.05);
-          }
-
-          &.past {
-            background-color: rgb(245, 245, 245);
-          }
-
-          .date {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            top: 0;
-            left: 0;
-            padding: 10px;
-            margin-top: 5px;
-            margin-left: 5px;
-            height: 1rem;
-            width: 1rem;
-            border-radius: 50%;
-
-            &.today {
-              background-color: $primary-color;
-              color: white;
-            }
-
-            &.other-month {
-              color: rgb(196, 196, 196);
-            }
-          }
-        }
+        
       }
     }
   }

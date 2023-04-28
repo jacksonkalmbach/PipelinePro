@@ -14,7 +14,7 @@
 .day-preview-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   position: fixed;
   width: 50vw;
@@ -23,4 +23,63 @@
   z-index: 991;
   right: 0vw;
   bottom: 0;
+
+  .day-preview-lead-header {
+    padding: 1rem 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid $theme-lightgrey;
+
+    h1 {
+      font-size: 24px;
+      font-weight: bold;
+      padding-left: 3rem;
+    }
+
+    .close-preview-day-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid $theme-lightgrey;
+      border-radius: 3px;
+      padding: 3px 6px;
+      margin-right: 40px;
+      color: $theme-black;
+      cursor: pointer;
+    }
+  }
+
+  .day-preview-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    padding: 1rem 0;
+
+    .day-preview-content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 1rem 0;
+
+      .add-event-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3px;
+        padding: 3px 6px;
+        margin-right: 40px;
+        color: $primary-color;
+        cursor: pointer;
+
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
 }
