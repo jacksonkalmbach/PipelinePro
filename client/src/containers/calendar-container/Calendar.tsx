@@ -1,8 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setShowDayPreview } from "../../store/reducers/calendar/calendarSlice";
+
+import DayPreview from "../../components/calendar-components/day-preview/DayPreview";
 
 import "./Calendar.styles.scss";
+import Day from "../../components/calendar-components/day/Day";
 
 const Calendar = () => {
+  const dispatch = useDispatch();
+  const showDayPreview = useSelector(
+    (state: any) => state.calendar.showDayPreview
+  );
+
+  const handleShowDayPreview = () => {
+    dispatch(setShowDayPreview(true));
+  };
+
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -22,48 +36,18 @@ const Calendar = () => {
 
   for (let i = firstDayOfMonth; i > 0; i--) {
     const day = new Date(yearState, monthState - 1, -i + 1);
-    days.push(
-      <div
-        className={`day ${
-          day <= date && day.toDateString() !== date.toDateString()
-            ? "past"
-            : ""
-        }`}
-      >
-        <div className="date other-month">{day.getDate()}</div>
-      </div>
-    );
+    days.push(<Day key={i * Math.random()} day={day} date={date} otherMonth />);
   }
 
   for (let i = 1; i <= daysInMonth; i++) {
     const day = new Date(yearState, monthState - 1, i);
-    days.push(
-      <div
-        className={`day ${
-          day <= date && day.toDateString() !== date.toDateString()
-            ? "past"
-            : ""
-        }`}
-      >
-        <div
-          className={`date ${
-            day.toDateString() === date.toDateString() ? "today" : ""
-          } `}
-        >
-          {i}
-        </div>
-      </div>
-    );
+    days.push(<Day key={i * Math.random()} day={day} date={date} />);
   }
 
   const remainingDays = days.length <= 35 ? 35 - days.length : 42 - days.length;
   for (let i = 1; i <= remainingDays; i++) {
     const day = new Date(yearState, monthState, i);
-    days.push(
-      <div className={`day ${day <= date ? "past" : ""}`}>
-        <div className="date other-month">{i}</div>
-      </div>
-    );
+    days.push(<Day key={i * Math.random()} day={day} date={date} otherMonth />);
   }
 
   const handlePreviousMonth = () => {
@@ -86,6 +70,7 @@ const Calendar = () => {
 
   return (
     <>
+      {showDayPreview && <DayPreview />}
       <div className="calendar-container">
         <div className="calendar">
           <div className="month">

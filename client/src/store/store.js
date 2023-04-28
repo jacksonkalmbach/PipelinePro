@@ -6,6 +6,7 @@ import showCreateLeadSlice from "./reducers/leads/showLeadSlice";
 import sortLeadsSlice from "./reducers/leads/sortLeadsSlice";
 import userAuthSlice from "./reducers/user/userAuthSlice";
 import chatSlice from "./reducers/chat/chatSlice";
+import calendarSlice from "./reducers/calendar/calendarSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     sortLeads: sortLeadsSlice,
     userAuth: userAuthSlice,
     chat: chatSlice,
+    calendar: calendarSlice,
   },
 });
 

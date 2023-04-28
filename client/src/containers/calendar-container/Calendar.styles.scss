@@ -76,6 +76,11 @@
           min-width: calc(100% / 8);
           max-height: calc(100% / 5);
           border: 1px solid $theme-lightgrey;
+          cursor: pointer;
+
+          &:hover {
+            transform: scale(1.05);
+          }
 
           &.past {
             background-color: rgb(245, 245, 245);
