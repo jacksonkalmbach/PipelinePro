@@ -1,0 +1,84 @@
+@import "../../styles/variables.scss";
+
+.chat-container {
+  height: 93vh;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .chats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 90%;
+    width: 90%;
+    border: 1px solid $theme-lightgrey;
+    border-radius: 25px;
+
+    .chat-title {
+      align-self: flex-start;
+      width: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-left: 20px;
+      padding-right: 10px;
+
+      .create-chat {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 3rem;
+        width: 3rem;
+        border-radius: 50%;
+        background-color: white;
+        border: 1px solid $theme-lightgrey;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $theme-lightgrey;
+        }
+
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+
+    .conversations {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+
+      height: 100%;
+      width: 30%;
+      border-right: 1px solid $theme-lightgrey;
+
+      .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        height: 5%;
+        width: 90%;
+      }
+    }
+
+    .messages-container {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      height: 100%;
+      width: 70%;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+}

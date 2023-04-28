@@ -5,6 +5,7 @@ import selectAllLeadsSlice from "./reducers/leads/selectAllLeadsSlice";
 import showCreateLeadSlice from "./reducers/leads/showLeadSlice";
 import sortLeadsSlice from "./reducers/leads/sortLeadsSlice";
 import userAuthSlice from "./reducers/user/userAuthSlice";
+import chatSlice from "./reducers/chat/chatSlice";
 
 const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ const store = configureStore({
     showLead: showCreateLeadSlice,
     sortLeads: sortLeadsSlice,
     userAuth: userAuthSlice,
+    chat: chatSlice,
   },
 });
 

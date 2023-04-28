@@ -19,6 +19,7 @@ import AccountSettings from "./containers/settings-container/account/AccountSett
 import NotificationSettings from "./containers/settings-container/notifications/NotificationSettings";
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
 import LandingPage from "./containers/landing-page/LandingPage";
+import Chat from "./containers/chat-container/Chat";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ const App: React.FC = () => {
                       </Route>
                     </Route>
                     <Route path="/calendar/*" element={<Calendar />} />
-                    <Route path="/chat/*" element={<div>Chat</div>} />
+                    <Route path="/chat/*" element={<Chat />} />
                     <Route path="/settings/*" element={<Settings />}>
                       <Route path="Account" element={<AccountSettings />} />
                       <Route

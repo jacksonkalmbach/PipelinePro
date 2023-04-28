@@ -1,0 +1,14 @@
+.message-container {
+  width: fit-content;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 5px 0;
+
+  &.received {
+    background-color: lightblue;
+  }
+
+  &.sent {
+    background-color: lightgreen;
+  }
+}
