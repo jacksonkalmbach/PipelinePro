@@ -18,46 +18,46 @@
     border: 1px solid $theme-lightgrey;
     border-radius: 25px;
 
-    .chat-title {
-      align-self: flex-start;
-      width: 90%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-left: 20px;
-      padding-right: 10px;
-
-      .create-chat {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        height: 3rem;
-        width: 3rem;
-        border-radius: 50%;
-        background-color: white;
-        border: 1px solid $theme-lightgrey;
-        cursor: pointer;
-
-        &:hover {
-          background-color: $theme-lightgrey;
-        }
-
-        &:active {
-          transform: scale(0.9);
-        }
-      }
-    }
-
     .conversations {
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
 
       height: 100%;
-      width: 30%;
+      width: 22%;
       border-right: 1px solid $theme-lightgrey;
+
+      .chat-title {
+        align-self: flex-start;
+        width: 90%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 20px;
+        padding-right: 10px;
+
+        .create-chat {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          height: 3rem;
+          width: 3rem;
+          border-radius: 50%;
+          background-color: white;
+          border: 1px solid $theme-lightgrey;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $theme-lightgrey;
+          }
+
+          &:active {
+            transform: scale(0.9);
+          }
+        }
+      }
 
       .search-container {
         display: flex;
@@ -67,6 +67,15 @@
         height: 5%;
         width: 90%;
       }
+
+      .all-chats {
+        width: 100%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+      }
     }
 
     .messages-container {
@@ -75,7 +84,7 @@
       align-items: center;
 
       height: 100%;
-      width: 70%;
+      width: 78%;
     }
   }
 }

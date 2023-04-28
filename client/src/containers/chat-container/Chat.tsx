@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import ChatPreview from "../../components/chat-components/chat-preview/ChatPreview";
 import Conversation from "../../components/chat-components/conversation/Conversation";
 import SearchBox from "../../components/search-box-component/SearchBox";
 import { setNewChat } from "../../store/reducers/chat/chatSlice";
@@ -28,6 +29,10 @@ const Chat = () => {
               placeholder="Search Chats"
               onChangeHandler={() => {}}
             />
+          </div>
+          <div className="all-chats">
+            <ChatPreview senderId={1} />
+            <ChatPreview senderId={2} />
           </div>
         </div>
         <div className="messages-container">
