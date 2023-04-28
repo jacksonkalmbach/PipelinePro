@@ -7,7 +7,11 @@ import Message from "../message-component/Message";
 
 import "./Conversation.styles.scss";
 
-const Conversation = () => {
+interface ConversationProps {
+  id?: number;
+}
+
+const Conversation = ({ id }: ConversationProps) => {
   const newChat = useSelector((state: any) => state.chat.newChat);
 
   return (

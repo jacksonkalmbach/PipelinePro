@@ -5,6 +5,7 @@ import "./ChatPreview.styles.scss";
 
 interface ChatPreviewProps {
   senderId: number;
+  onClick?: () => void;
 }
 
 const defaultSender = {
@@ -21,7 +22,7 @@ interface Sender {
   profile_pic: string;
 }
 
-const ChatPreview = ({ senderId }: ChatPreviewProps) => {
+const ChatPreview = ({ senderId, onClick }: ChatPreviewProps) => {
   const [sender, setSender] = useState<Sender>(defaultSender);
   const [isLoaded, setIsLoaded] = useState(false);
 

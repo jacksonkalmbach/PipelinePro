@@ -13,6 +13,11 @@ const Chat = () => {
     dispatch(setNewChat(true));
   };
 
+  const handleClickChat = () => {
+    console.log("clicked");
+    dispatch(setNewChat(false));
+  };
+
   return (
     <div className="chat-container">
       <div className="chats">
@@ -31,12 +36,12 @@ const Chat = () => {
             />
           </div>
           <div className="all-chats">
-            <ChatPreview senderId={1} />
+            <ChatPreview senderId={1} onClick={handleClickChat} />
             <ChatPreview senderId={2} />
           </div>
         </div>
         <div className="messages-container">
-          <Conversation />
+          <Conversation id={0} />
         </div>
       </div>
     </div>
