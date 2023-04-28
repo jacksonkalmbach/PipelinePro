@@ -2,5 +2,103 @@
 
 .calendar-container {
   width: 100%;
-  border: 1px solid orange;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .calendar {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 85%;
+    gap: 20px;
+
+    .month {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2rem;
+      gap: 30px;
+
+      .month-year {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        width: 20%;
+      }
+
+      .material-symbols-outlined {
+        font-size: 1rem;
+        cursor: pointer;
+        border: 1px solid $theme-lightgrey;
+        color: $theme-grey;
+        padding: 10px;
+        border-radius: 50%;
+
+        &:hover {
+          background-color: $theme-lightgrey;
+        }
+
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+
+    .days-container {
+      width: 100%;
+      height: calc(100% - 2rem);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin: 0;
+      padding: 0;
+
+      .days {
+        width: 90%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+
+        .day {
+          min-width: calc(100% / 8);
+          max-height: calc(100% / 5);
+          border: 1px solid $theme-lightgrey;
+
+          &.past {
+            background-color: rgb(237, 237, 237);
+          }
+
+          .date {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            top: 0;
+            left: 0;
+            padding: 10px;
+            margin-top: 5px;
+            margin-left: 5px;
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+
+            &.today {
+              background-color: $primary-color;
+              color: white;
+            }
+          }
+        }
+      }
+    }
+  }
 }

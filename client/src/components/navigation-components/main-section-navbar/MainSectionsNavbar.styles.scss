@@ -31,6 +31,9 @@
     padding: 5px;
     &:hover {
       cursor: pointer;
+      background-color: $theme-lightgrey;
+      border: transparent;
+      border-radius: 25%;
     }
 
     &.selected {
