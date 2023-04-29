@@ -9,6 +9,15 @@ CREATE DATABASE crm;
   user_type VARCHAR(50) NOT NULL
 );
 
+CREATE TABLE events(
+  event_id SERIAL PRIMARY KEY,
+  event_name VARCHAR(50) NOT NULL,
+  event_date DATE NOT NULL,
+  event_time TIME NOT NULL,
+  event_description VARCHAR(255) NOT NULL,
+  event_owner INT NOT NULL
+);
+
 CREATE TABLE leads(
   lead_id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,

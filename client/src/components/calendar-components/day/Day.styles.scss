@@ -1,8 +1,8 @@
 @import "../../../styles/variables.scss";
 
 .day {
-  min-width: calc(100% / 8);
-  max-height: calc(100% / 5);
+  width: calc(100% / 8);
+  height: calc(100% / 5);
   border: 1px solid $theme-lightgrey;
   cursor: pointer;
 

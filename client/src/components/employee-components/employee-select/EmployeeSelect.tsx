@@ -3,12 +3,13 @@ import React from "react";
 import "./EmployeeSelect.styles.scss";
 
 interface EmployeeSelectProps {
-  id: number | undefined;
+  id?: number | undefined;
   firstName: string;
   lastName: string;
   profilePic?: string;
   title?: string;
   nav?: boolean;
+  ai?: boolean;
   onEmployeeSelected?: (
     ownerId: string,
     ownerFirstName: string,
@@ -24,6 +25,7 @@ const EmployeeSelect = ({
   profilePic,
   title,
   nav,
+  ai,
   onEmployeeSelected,
 }: EmployeeSelectProps) => {
   const handleSelected = () => {
@@ -48,9 +50,11 @@ const EmployeeSelect = ({
         )}
       </div>
       <div className="employee-details">
-        <div className={`fullname ${nav ? "nav" : ""}`}>
-          {firstName} {lastName}
-        </div>
+        <>
+          <div className={`fullname ${nav ? "nav" : ""}`}>
+            {firstName} {lastName}
+          </div>
+        </>
         {nav ? <div className="employee-title">{title}</div> : <></>}
       </div>
     </div>

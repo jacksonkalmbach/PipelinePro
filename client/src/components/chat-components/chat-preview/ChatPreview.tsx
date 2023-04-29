@@ -4,8 +4,9 @@ import EmployeeSelect from "../../employee-components/employee-select/EmployeeSe
 import "./ChatPreview.styles.scss";
 
 interface ChatPreviewProps {
-  senderId: number;
+  senderId?: number;
   onClick?: () => void;
+  ai?: boolean;
 }
 
 const defaultSender = {
@@ -22,20 +23,24 @@ interface Sender {
   profile_pic: string;
 }
 
-const ChatPreview = ({ senderId, onClick }: ChatPreviewProps) => {
+const ChatPreview = ({ senderId, onClick, ai }: ChatPreviewProps) => {
   const [sender, setSender] = useState<Sender>(defaultSender);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    try {
-      fetch(`http://localhost:5001/employees/${senderId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setSender(data);
-          setIsLoaded(true);
-        });
-    } catch (error) {}
-  }, [senderId]);
+    if (!ai) {
+      try {
+        fetch(`http://localhost:5001/employees/${senderId}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setSender(data);
+            setIsLoaded(true);
+          });
+      } catch (error) {
+        console.log("error fetching chat preview", error);
+      }
+    }
+  }, [senderId, ai]);
 
   return (
     <div className="chat-preview-container">

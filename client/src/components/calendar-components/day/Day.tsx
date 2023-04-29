@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Event from "../event/Event";
@@ -17,13 +17,54 @@ interface DayProps {
   otherMonth?: boolean;
 }
 
+interface EventData {
+  event_id: number;
+  event_name: string | undefined;
+  event_date: string;
+  event_time: string;
+  event_description: string;
+  event_owner: number;
+}
+
+const defaultEventData = {
+  event_id: 0,
+  event_name: "",
+  event_date: "",
+  event_time: "",
+  event_description: "",
+  event_owner: 0,
+};
+
 const Day = ({ day, date, past, otherMonth }: DayProps) => {
   const dispatch = useDispatch();
+
+  const [eventData, setEventData] = useState<EventData[]>([]);
+
+  const [eventName, setEventName] = useState<string>("");
+
+  const isoDate = day.toISOString();
+  const yearMonthDay = isoDate.slice(0, 10);
 
   const handleShowDayPreview = () => {
     dispatch(setShowDayPreview(true));
     dispatch(setDatePreview(day));
   };
+
+  useEffect(() => {
+    try {
+      fetch(`http://localhost:5001/events/${yearMonthDay}/3`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log("fetched data", data);
+          console.log("eventData_name", data[0].event_name);
+          if (data[0].event_name !== undefined)
+            setEventName(data[0].event_name);
+          setEventData(data);
+        });
+    } catch (error) {
+      console.log("error fetching events in Day Component", error);
+    }
+  }, [yearMonthDay]);
 
   return (
     <div
@@ -39,8 +80,9 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
       >
         {day.getDate()}
       </div>
-      <Event eventName="Event 1" />
-      <Event eventName="Event 2" />
+      {eventData && eventData[0] && eventData[0].event_name && (
+        <Event eventName={eventName} />
+      )}
     </div>
   );
 };

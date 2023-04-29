@@ -1,0 +1,47 @@
+@import "../../../styles/variables.scss";
+
+.dashboard-event-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  min-height: 80px;
+  height: 100%;
+
+  cursor: pointer;
+
+  .time-container {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .time {
+      font-size: 16px;
+      font-weight: 600;
+      color: $theme-black;
+    }
+
+    .am-pm {
+      font-size: 14px;
+      font-weight: 600;
+      color: $theme-grey;
+    }
+  }
+
+  .body-container {
+    width: 80%;
+    border: 1px solid $theme-lightgrey;
+    border-radius: 5px;
+    padding: 0 20px;
+    min-height: 80px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    font-size: 18px;
+    font-weight: 600;
+  }
+}

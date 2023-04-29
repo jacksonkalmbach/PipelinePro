@@ -4,9 +4,11 @@ import { useSelector, useDispatch } from "react-redux";
 import "./Dashboard.styles.scss";
 import LeadList from "../../components/lead-components/lead-list-components/lead-list/LeadList";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
+import DashboardEvent from "../../components/calendar-components/dashboard-event/DashboardEvent";
 
 const Dashboard = () => {
   const [leads, setLeads] = useState([]);
+  const [todaysEvents, setTodaysEvents] = useState([{}]);
 
   const currentUserId = useSelector((state: any) => state.userAuth.uid);
 
@@ -15,6 +17,15 @@ const Dashboard = () => {
       .then((res) => res.json())
       .then((data) => {
         setLeads(data);
+      });
+  }, [currentUserId]);
+
+  useEffect(() => {
+    fetch("http://localhost:5001/events/")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTodaysEvents(data);
       });
   }, [currentUserId]);
 
@@ -38,7 +49,19 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="my-calendar">
-          <h2>My calendar</h2>
+          <h2>Today's Calendar</h2>
+          <div className="today-events-container">
+            {todaysEvents.length > 0 &&
+              todaysEvents.map((event: any) => {
+                const { event_name, event_time } = event;
+                return (
+                  <DashboardEvent
+                    eventTitle={event_name}
+                    eventTime={event_time}
+                  />
+                );
+              })}
+          </div>
         </div>
       </div>
     </div>

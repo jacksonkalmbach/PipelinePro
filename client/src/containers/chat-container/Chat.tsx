@@ -36,6 +36,7 @@ const Chat = () => {
             />
           </div>
           <div className="all-chats">
+            {/* <ChatPreview senderId={} /> */}
             <ChatPreview senderId={1} onClick={handleClickChat} />
             <ChatPreview senderId={2} />
           </div>
