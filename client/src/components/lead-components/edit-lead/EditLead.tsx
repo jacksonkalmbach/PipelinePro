@@ -104,7 +104,7 @@ const EditLead = ({
             <form className="edit-lead-form" onSubmit={handleUpdateLead}>
               <div className="lead-name">
                 <div className="form-group">
-                  First Name
+                  <label>First Name</label>
                   <input
                     className="first-name-input"
                     required
@@ -117,7 +117,7 @@ const EditLead = ({
                   />
                 </div>
                 <div className="form-group">
-                  Last Name
+                  <label>Last Name</label>
                   <input
                     className="last-name-input"
                     required
@@ -131,7 +131,7 @@ const EditLead = ({
                 </div>
               </div>
               <div className="form-group">
-                Email
+                <label>Email Address</label>
                 <input
                   type="email"
                   id="email-input"
@@ -142,7 +142,7 @@ const EditLead = ({
                 />
               </div>
               <div className="form-group">
-                Phone
+                <label>Phone</label>
                 <input
                   type="tel"
                   id="phone-input"
@@ -154,7 +154,7 @@ const EditLead = ({
                 />
               </div>
               <div className="form-group">
-                Company
+                <label>Company</label>
                 <input
                   type="text"
                   id="company-input"
@@ -165,7 +165,7 @@ const EditLead = ({
                 />
               </div>
               <div className="form-group">
-                Job Title
+                <label>Job Title</label>
                 <input
                   type="text"
                   id="jobTitle-input"
@@ -176,7 +176,7 @@ const EditLead = ({
                 />
               </div>
               <div className="form-group">
-                Lead Owner
+                <label>Lead Owner</label>
                 <input
                   type="text"
                   id="leadOwner-input"

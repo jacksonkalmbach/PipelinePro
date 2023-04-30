@@ -41,6 +41,15 @@ const Conversation = ({ id }: ConversationProps) => {
     dispatch(setShowAllChats(true));
   };
 
+  const messagesArray = [
+    {
+      id: 1,
+      message: "Hello",
+      sender: "me",
+      type: "received",
+    },
+  ];
+
   useEffect(() => {
     try {
       fetch(`http://localhost:5001/employees/${senderId}`)
@@ -100,8 +109,14 @@ const Conversation = ({ id }: ConversationProps) => {
               )}
             </div>
             <div className="messages-container">
-              <Message message="Hello" sender="me" type="received" />
-              <Message message="Howdy" sender="me" type="sent" />
+              {messagesArray.map((message) => (
+                <Message
+                  key={message.id}
+                  message={message.message}
+                  sender={message.sender}
+                  type={message.type}
+                />
+              ))}
             </div>
             <div className="new-message">
               <input className="write-message" placeholder="Aa" />
