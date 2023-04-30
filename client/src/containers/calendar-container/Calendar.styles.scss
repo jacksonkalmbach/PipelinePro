@@ -71,6 +71,10 @@
         font-size: 1.1rem;
         font-weight: 600;
         color: $theme-black;
+
+        .letter {
+          display: none;
+        }
       }
 
       .days {
@@ -83,6 +87,56 @@
         gap: 4px;
         margin: 0;
         padding: 0;
+      }
+
+      .this-week {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .calendar-container {
+    margin: 20px 0 40px 0;
+
+    .calendar {
+      .month {
+        font-size: 1.5rem;
+        gap: 20px;
+
+        .month-year {
+          gap: 5px;
+          width: 30%;
+        }
+
+        .material-symbols-outlined {
+          font-size: 0.8rem;
+          padding: 5px;
+        }
+      }
+
+      .days-container {
+        .day-name {
+          justify-content: space-between;
+          .name {
+            display: none;
+          }
+
+          .letter {
+            display: flex;
+          }
+        }
+
+        .days {
+          display: none;
+        }
+
+        .this-week {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
   }

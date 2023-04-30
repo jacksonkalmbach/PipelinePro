@@ -11,8 +11,6 @@ const Calendar = () => {
     (state: any) => state.calendar.showDayPreview
   );
 
-  console.log("showDayPreview", showDayPreview);
-
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -25,6 +23,7 @@ const Calendar = () => {
   const daysInMonth = new Date(yearState, monthState, 0).getDate();
   const firstDayOfMonth = new Date(yearState, monthState - 1, 1).getDay();
   const days = [];
+  const thisWeek = [];
 
   useEffect(() => {
     setMonthState(month);
@@ -44,6 +43,23 @@ const Calendar = () => {
   for (let i = 1; i <= remainingDays; i++) {
     const day = new Date(yearState, monthState, i);
     days.push(<Day key={i * Math.random()} day={day} date={date} otherMonth />);
+  }
+
+  const today = new Date();
+  const startOfWeek = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() - today.getDay()
+  ); // Sunday of this week
+  const endOfWeek = new Date(
+    today.getFullYear(),
+    today.getMonth(),
+    today.getDate() + (6 - today.getDay())
+  ); // Saturday of this week
+
+  for (let i = startOfWeek.getDate(); i <= endOfWeek.getDate(); i++) {
+    const day = new Date(yearState, monthState - 1, i);
+    thisWeek.push(<Day key={i * Math.random()} day={day} date={date} />);
   }
 
   const handlePreviousMonth = () => {
@@ -92,15 +108,23 @@ const Calendar = () => {
           </div>
           <div className="days-container">
             <div className="day-name">
-              <div>Sun</div>
-              <div>Mon</div>
-              <div>Tue</div>
-              <div>Wed</div>
-              <div>Thu</div>
-              <div>Fri</div>
-              <div>Sat</div>
+              <div className="name">Sun</div>
+              <div className="letter">S</div>
+              <div className="name">Mon</div>
+              <div className="letter">M</div>
+              <div className="name">Tue</div>
+              <div className="letter">T</div>
+              <div className="name">Wed</div>
+              <div className="letter">W</div>
+              <div className="name">Thu</div>
+              <div className="letter">T</div>
+              <div className="name">Fri</div>
+              <div className="letter">F</div>
+              <div className="name">Sat</div>
+              <div className="letter">S</div>
             </div>
             <div className="days">{days}</div>
+            <div className="this-week">{thisWeek}</div>
           </div>
         </div>
       </div>
