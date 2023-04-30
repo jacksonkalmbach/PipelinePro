@@ -56,7 +56,7 @@ const MainSectionNavbar = () => {
           onClick={() => handleSelectedSection(3, "Chat")}
         >
           <Link to="/chat" className="link">
-            <span className="material-symbols-outlined">chat</span>
+            <span className="material-symbols-outlined">chat_bubble</span>
           </Link>
         </div>
       </div>

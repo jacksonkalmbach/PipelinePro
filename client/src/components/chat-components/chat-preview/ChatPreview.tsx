@@ -1,4 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setConversationId,
+  setNewChat,
+  setShowAllChats,
+} from "../../../store/reducers/chat/chatSlice";
 import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 
 import "./ChatPreview.styles.scss";
@@ -24,8 +30,15 @@ interface Sender {
 }
 
 const ChatPreview = ({ senderId, onClick, ai }: ChatPreviewProps) => {
+  const dispatch = useDispatch();
   const [sender, setSender] = useState<Sender>(defaultSender);
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleChatPreviewClick = () => {
+    dispatch(setShowAllChats(false));
+    dispatch(setConversationId(senderId));
+    dispatch(setNewChat(false));
+  };
 
   useEffect(() => {
     if (!ai) {
@@ -43,7 +56,7 @@ const ChatPreview = ({ senderId, onClick, ai }: ChatPreviewProps) => {
   }, [senderId, ai]);
 
   return (
-    <div className="chat-preview-container">
+    <div className="chat-preview-container" onClick={handleChatPreviewClick}>
       {isLoaded && (
         <EmployeeSelect
           id={senderId}

@@ -239,3 +239,52 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .account-settings-container {
+    width: 100%;
+    height: 76vh;
+    overflow: scroll;
+    justify-content: flex-start;
+    gap: 20px;
+
+    .title {
+      align-self: center;
+      font-size: 1.7rem;
+    }
+
+    .account-settings-content {
+      flex-direction: column-reverse;
+      gap: 20px;
+
+      .edit-photo {
+        width: 100%;
+        height: 100%;
+        padding-top: 0;
+
+        .profile-pic-container {
+          height: 200px;
+          width: 200px;
+        }
+      }
+
+      .edit-personal-information {
+        width: 100%;
+        height: 100%;
+        gap: 10px;
+
+        .personal-info-title-container {
+          width: 100%;
+        }
+
+        .form-group {
+          width: 100%;
+        }
+
+        .buttons-container {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

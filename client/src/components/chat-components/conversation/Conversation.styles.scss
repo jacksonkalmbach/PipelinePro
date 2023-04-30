@@ -81,10 +81,17 @@
     width: 100%;
     .send-to {
       width: 95%;
+      display: flex;
+      justify-content: flex-start;
+
+      .employee-name {
+        padding-right: 10px;
+      }
 
       .material-symbols-outlined {
         display: flex;
         color: $theme-grey;
+        justify-self: flex-start;
       }
     }
 
