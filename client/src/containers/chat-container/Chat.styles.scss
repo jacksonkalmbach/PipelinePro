@@ -116,6 +116,10 @@
         justify-content: center;
         align-items: center;
 
+        &.hide {
+          display: none;
+        }
+
         .chat-title {
           width: 100%;
           display: flex;

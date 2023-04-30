@@ -3,16 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import ChatPreview from "../../components/chat-components/chat-preview/ChatPreview";
 import Conversation from "../../components/chat-components/conversation/Conversation";
 import SearchBox from "../../components/search-box-component/SearchBox";
-import { setNewChat } from "../../store/reducers/chat/chatSlice";
+import {
+  setNewChat,
+  setShowAllChats,
+} from "../../store/reducers/chat/chatSlice";
 
 import "./Chat.styles.scss";
 
 const Chat = () => {
   const dispatch = useDispatch();
   const newChat = useSelector((state: any) => state.chat.newChat);
+  const showAllChats = useSelector((state: any) => state.chat.showAllChats);
 
   const handleNewConversation = () => {
     dispatch(setNewChat(true));
+    dispatch(setShowAllChats(false));
   };
 
   const handleClickChat = () => {
@@ -26,7 +31,7 @@ const Chat = () => {
   return (
     <div className="chat-container">
       <div className="chats">
-        <div className="conversations">
+        <div className={`conversations ${!showAllChats && "hide"}`}>
           <h1 className="chat-title">
             Chats
             <div className="create-chat" onClick={handleNewConversation}>
