@@ -6,10 +6,7 @@ import "./Settings.styles.scss";
 const Settings = () => {
   return (
     <div className="settings-container">
-      <SubSectionNavbar
-        title={"Settings"}
-        options={["Account", "Notifications", "Billing"]}
-      />
+      <SubSectionNavbar title={"Settings"} options={["Account"]} />
     </div>
   );
 };

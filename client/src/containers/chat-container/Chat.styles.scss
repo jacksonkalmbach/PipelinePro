@@ -12,7 +12,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
     height: 90%;
     width: 90%;
     border: 1px solid $theme-lightgrey;
@@ -91,4 +90,55 @@
 }
 
 @media (max-width: 767px) {
+  .chat-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 83vh;
+
+    .chats {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      border: none;
+
+      .conversations {
+        width: 90vw;
+        border-right: none;
+        border-bottom: 1px solid $theme-lightgrey;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .chat-title {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          width: 100%;
+          padding: 0;
+        }
+
+        .search-container {
+          width: 100%;
+        }
+
+        .all-chats {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .messages-container {
+        width: 95%;
+        height: 100%;
+      }
+    }
+  }
 }

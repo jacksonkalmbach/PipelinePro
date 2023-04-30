@@ -41,9 +41,13 @@
       background-color: red;
       border: 1px solid red;
       color: white;
+      padding: 10px 15px;
+      border-radius: 5px;
 
       &:hover {
         cursor: pointer;
+        background-color: rgb(215, 0, 0);
+        border: 1px solid rgb(196, 0, 0);
       }
 
       &:active {
@@ -55,9 +59,14 @@
       background-color: transparent;
       border: 1px solid $theme-grey;
       color: $theme-grey;
+      padding: 10px 15px;
+      border-radius: 5px;
 
       &:hover {
         cursor: pointer;
+        background: $theme-lightgrey;
+        border: 1px solid $theme-lightgrey;
+        color: $theme-black;
       }
 
       &:active {

@@ -48,6 +48,10 @@
     }
 
     .my-calendar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
       width: 35%;
       height: calc(100% - 40px);
       border: 1px solid $theme-lightgrey;
@@ -80,46 +84,68 @@
 
 @media (max-width: 767px) {
   .dashboard-container {
-    width: 100vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     max-height: calc(86vh);
-    overflow-y: scroll;
+    overflow: scroll;
+    border: 1px solid orange;
 
     .dashboard-content {
       flex-direction: column;
-      width: 100vw;
+      align-items: center;
+      gap: 20px;
+      justify-content: flex-start;
+      width: 90vw;
 
       .activity-leads-container {
-        display: none;
+        display: flex;
+        width: 100%;
 
         .my-activity {
-          height: 300px;
           width: 100%;
           border: 1px solid $theme-lightgrey;
           border-radius: 15px;
-          padding: 20px;
+          padding: 0;
+          display: flex;
+          justify-content: center;
         }
 
         .my-leads {
-          height: 100%;
+          height: fit-content;
           width: 100%;
           border: 1px solid $theme-lightgrey;
           border-radius: 15px;
-          padding: 20px;
+          padding: 20px 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
 
           .my-leads-list {
             height: 85%;
             width: 90%;
             overflow: hidden;
+            padding: 0;
           }
         }
       }
 
       .my-calendar {
         width: 90vw;
-        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        min-height: fit-content;
+        max-height: 40%;
+        width: 100%;
         border: 1px solid $theme-lightgrey;
         border-radius: 15px;
-        padding: 20px;
+        padding: 20px 0;
+
+        // .calendar {
+        //   padding: 0;
+        // }
       }
     }
   }

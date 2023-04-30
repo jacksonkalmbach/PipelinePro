@@ -56,6 +56,11 @@
         background-color: $primary-color;
         color: white;
         font-size: 1.4rem;
+        padding: 10px 20px;
+        border: transparent;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
 
         &:hover {
           background-color: #ff3d00;
@@ -73,8 +78,12 @@
       .try-demo-button {
         background-color: white;
         color: $theme-black;
-        // border: 1px solid $theme-black;
+        border: transparent;
         font-size: 1.4rem;
+        padding: 10px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
 
         &:hover {
           background-color: rgb(203, 203, 203);

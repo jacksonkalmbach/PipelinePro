@@ -1,9 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  addSelectedLeads,
-  removeSelectedLeads,
-} from "../../../store/reducers/leads/selectAllLeadsSlice";
+import { removeSelectedLeads } from "../../../store/reducers/leads/selectAllLeadsSlice";
 import {
   setShowLeadPreview,
   showConfirmDelete,

@@ -14,13 +14,6 @@ const AuthContainer = () => {
 
   return (
     <div className="auth-container">
-      <div className="image-container">
-        <img
-          className="image"
-          src="https://img.freepik.com/free-photo/portrait-woman-customer-service-worker_144627-37943.jpg?w=2000&t=st=1682628038~exp=1682628638~hmac=5c1a12da8852cbb0d273627a11135ed75e839ba3702b33a7980863d7bb356b8a"
-          alt="happy-service"
-        />
-      </div>
       <div className="auth-options">
         <div className="logo-container">
           <img className="logo" src="../assets/pp-logo-black.png" alt="logo" />

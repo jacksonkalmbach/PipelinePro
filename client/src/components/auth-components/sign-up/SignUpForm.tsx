@@ -10,7 +10,7 @@ const SignUpForm = () => {
           required
           className="form-input"
           type="text"
-          placeholder="Display Name"
+          placeholder="Display Name (ex. John Doe)"
         />
         <input
           required

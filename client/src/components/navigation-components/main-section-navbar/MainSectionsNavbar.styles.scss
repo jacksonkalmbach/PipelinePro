@@ -43,6 +43,10 @@
       border-radius: 25%;
       color: white;
 
+      &:hover {
+        background-color: $primary-color;
+      }
+
       .link {
         color: white;
       }

@@ -105,6 +105,13 @@
 
       .get-started-button {
         background-color: $primary-color;
+        color: white;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border: transparent;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
 
         &:hover {
           background-color: #ff3d00;

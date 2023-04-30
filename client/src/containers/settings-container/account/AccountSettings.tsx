@@ -159,9 +159,16 @@ const AccountSettings = () => {
           <div className="profile-pic-container">
             <img className="photo" src={userData.profile_pic} alt="profile" />
           </div>
-          <button className="change-photo-button" onClick={handleEditPhoto}>
+          <div className="change-photo">
             Change Photo
-          </button>
+            <span
+              className="material-symbols-outlined"
+              onClick={handleEditPhoto}
+            >
+              upload
+            </span>
+          </div>
+
           {isDemo && (
             <div className="contact-buttons">
               <Link to="https://docs.google.com/document/d/1gmhHDax9uPWlIcE3hUXCTqwETpdOIjiL6Zk98VdyFTI/edit?usp=sharing">

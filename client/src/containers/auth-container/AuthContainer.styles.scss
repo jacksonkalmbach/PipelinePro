@@ -7,26 +7,19 @@
   margin-bottom: 0;
   gap: 30px;
 
-  .image-container {
-    height: 80%;
-    width: 35%;
-
-    .image {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
   .auth-options {
     display: flex;
     flex-direction: column;
     margin-top: 70px;
     align-items: center;
+    justify-content: center;
     height: 80%;
     margin-bottom: 0;
 
     .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 100px;
       width: auto;
 

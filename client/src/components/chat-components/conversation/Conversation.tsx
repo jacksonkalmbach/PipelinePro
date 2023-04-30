@@ -1,6 +1,6 @@
-import React from "react";
-
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setNewChat } from "../../../store/reducers/chat/chatSlice";
 
 import SearchBox from "../../search-box-component/SearchBox";
 import Message from "../message-component/Message";
@@ -12,13 +12,24 @@ interface ConversationProps {
 }
 
 const Conversation = ({ id }: ConversationProps) => {
+  const dispatch = useDispatch();
   const newChat = useSelector((state: any) => state.chat.newChat);
+
+  const backtoAllChats = () => {
+    dispatch(setNewChat(false));
+  };
 
   return (
     <div className="conversation-container">
       {newChat ? (
         <>
           <div className="send-to">
+            <span
+              className="material-symbols-outlined"
+              onClick={backtoAllChats}
+            >
+              arrow_back_ios
+            </span>
             To:
             <div className="search-container">
               <SearchBox
@@ -34,7 +45,8 @@ const Conversation = ({ id }: ConversationProps) => {
           </div>
           <div className="new-message">
             <input className="write-message" placeholder="Aa" />
-            <button>Send</button>
+            <button className="send-button">Send</button>
+            <span className="material-symbols-outlined">arrow_upward</span>
           </div>
         </>
       ) : (

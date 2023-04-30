@@ -126,7 +126,12 @@ const NavBar = () => {
                 </div>
                 {isDemo && (
                   <Link className="navbar-link" to="/">
-                    <button onClick={handleExitDemo}>Exit Demo</button>
+                    <button
+                      className="get-started-button"
+                      onClick={handleExitDemo}
+                    >
+                      Exit Demo
+                    </button>
                   </Link>
                 )}
               </div>

@@ -68,14 +68,16 @@ const LeadPreview = () => {
   const editLead = useSelector((state: any) => state.showLead.editLead);
 
   useEffect(() => {
-    try {
-      fetch(`http://localhost:5001/leads/${leadId}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setCurrentLead(data);
-        });
-    } catch (error) {
-      console.log(error);
+    if (leadId) {
+      try {
+        fetch(`http://localhost:5001/leads/${leadId}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setCurrentLead(data);
+          });
+      } catch (error) {
+        console.log(error);
+      }
     }
   }, [leadId]);
 
@@ -92,7 +94,7 @@ const LeadPreview = () => {
   }, [currentLead]);
 
   useEffect(() => {
-    if (currentLead) {
+    if (leadId) {
       try {
         fetch(`http://localhost:5001/notes/${leadId}`)
           .then((res) => res.json())
@@ -103,7 +105,7 @@ const LeadPreview = () => {
         console.log("error fetching lead notes", error);
       }
     }
-  }, [currentLead, addNote, leadId]);
+  }, [addNote, leadId]);
 
   useEffect(() => {
     if (currentLead) {

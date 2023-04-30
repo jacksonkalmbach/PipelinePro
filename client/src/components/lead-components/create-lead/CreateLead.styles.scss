@@ -70,6 +70,28 @@
     color: #24a16e;
     font-size: 2rem;
 
+    .create-another-lead-button {
+      background-color: white;
+      border: transparent;
+      color: $theme-grey;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: $theme-grey;
+      // border: 2px solid $theme-grey;
+
+      &:hover {
+        background-color: $theme-lightgrey;
+        color: $theme-black;
+        cursor: pointer;
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
     .material-symbols-border {
       display: flex;
       justify-content: center;
@@ -92,12 +114,6 @@
         animation-duration: 1s;
         animation-fill-mode: both;
       }
-    }
-
-    .create-another-lead-button {
-      border: 1px solid $theme-grey;
-      color: $theme-grey;
-      background-color: white;
     }
   }
 }
@@ -175,25 +191,6 @@
     justify-self: flex-end;
     justify-content: flex-end;
     gap: 1rem;
-
-    .create-lead-and-another-button {
-      background-color: white;
-      border: transparent;
-      color: $theme-grey;
-      font-weight: bold;
-      padding: 10px 15px;
-      border-radius: 5px;
-      border: 2px solid $theme-grey;
-
-      &:hover {
-        background-color: $theme-lightgrey;
-        cursor: pointer;
-      }
-
-      &:active {
-        transform: scale(0.95);
-      }
-    }
 
     .create-lead-button {
       background-color: $primary-color;

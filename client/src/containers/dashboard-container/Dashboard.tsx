@@ -26,7 +26,7 @@ const Dashboard = () => {
   }, [currentUserId]);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}}`)
+    fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

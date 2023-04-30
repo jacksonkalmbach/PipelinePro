@@ -41,3 +41,19 @@
     }
   }
 }
+
+@media (max-width: 767px) {
+  .filter-add-lead-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0;
+
+    .filter-leads-container {
+      display: none;
+    }
+
+    .create-lead-button {
+      justify-self: flex-end;
+    }
+  }
+}

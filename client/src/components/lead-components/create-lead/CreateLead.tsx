@@ -177,7 +177,7 @@ const CreateLead = () => {
                     className="create-another-lead-button"
                     onClick={() => setCreateLeadSuccess(false)}
                   >
-                    Create another lead
+                    Create Another Lead
                   </button>
                 </div>
               </div>
