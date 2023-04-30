@@ -18,6 +18,13 @@ CREATE TABLE events(
   event_owner INT NOT NULL
 );
 
+CREATE TABLE messages(
+  message_id SERIAL PRIMARY KEY,
+  message_body VARCHAR(255) NOT NULL,
+  message_sender INT NOT NULL,
+  message_recipient INT NOT NULL
+);
+
 CREATE TABLE leads(
   lead_id SERIAL PRIMARY KEY,
   first_name VARCHAR(50) NOT NULL,
@@ -66,3 +73,7 @@ VALUES
 INSERT INTO leads (first_name, last_name, email, phone, company, job_title, lead_status, lead_owner)
 VALUES 
 ('Erin', 'Schumaker', 'eschumaker@example.com', '6768893456', 'XYZ Enterprise', 'Project Lead', 2);
+
+INSERT INTO messages (message_body, message_sender, message_recipient)
+VALUES 
+("Good Morning, How was your weekend?", 1, 2);
