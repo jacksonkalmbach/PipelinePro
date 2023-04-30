@@ -33,6 +33,7 @@ const ChatPreview = ({ senderId, onClick, ai }: ChatPreviewProps) => {
   const dispatch = useDispatch();
   const [sender, setSender] = useState<Sender>(defaultSender);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [lastMessage, setLastMessage] = useState("");
 
   const handleChatPreviewClick = () => {
     dispatch(setShowAllChats(false));
@@ -41,19 +42,16 @@ const ChatPreview = ({ senderId, onClick, ai }: ChatPreviewProps) => {
   };
 
   useEffect(() => {
-    if (!ai) {
-      try {
-        fetch(`http://localhost:5001/employees/${senderId}`)
-          .then((res) => res.json())
-          .then((data) => {
-            setSender(data);
-            setIsLoaded(true);
-          });
-      } catch (error) {
-        console.log("error fetching chat preview", error);
-      }
+    try {
+      fetch(`http://localhost:5001/messages/conversation/1`)
+        .then((res) => res.json())
+        .then((data) => {
+          setLastMessage(data[data.length - 1].message_body);
+        });
+    } catch (error) {
+      console.log("error fetching sender", error);
     }
-  }, [senderId, ai]);
+  }, [senderId]);
 
   return (
     <div className="chat-preview-container" onClick={handleChatPreviewClick}>
@@ -65,7 +63,7 @@ const ChatPreview = ({ senderId, onClick, ai }: ChatPreviewProps) => {
           profilePic={sender.profile_pic}
         />
       )}
-      <div className="last-message">Last message</div>
+      <div className="last-message">{lastMessage}</div>
     </div>
   );
 };

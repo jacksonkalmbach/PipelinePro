@@ -1,14 +1,23 @@
+@import "../../../styles/variables.scss";
+
 .message-container {
-  width: fit-content;
+  display: flex;
+  flex-wrap: wrap;
   padding: 5px 10px;
   border-radius: 20px;
-  margin: 5px 0;
+  max-width: 70%;
+  display: flex;
 
   &.received {
-    background-color: lightblue;
+    background-color: $theme-lightgrey;
+    border: 1px solid $theme-lightgrey;
+    align-self: flex-start;
   }
 
   &.sent {
-    background-color: lightgreen;
+    background-color: $secondary-color;
+    border: 1px solid $secondary-color;
+    color: white;
+    align-self: flex-end;
   }
 }

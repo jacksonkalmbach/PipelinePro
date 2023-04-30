@@ -28,13 +28,13 @@ const App: React.FC = () => {
   const isDemo = useSelector((state: any) => state.userAuth.isDemo);
 
   useEffect(() => {
-    if (isDemo) {
+    if (isDemo || userIsSignedIn) {
       dispatch(userSignIn());
       setTimeout(() => {
         setIsLoaded(true);
       }, 1000);
     }
-  }, [isDemo, dispatch]);
+  }, [isDemo, userIsSignedIn, dispatch]);
 
   useEffect(() => {
     if (userIsSignedIn) {

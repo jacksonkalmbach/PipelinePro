@@ -41,7 +41,7 @@ const EmployeeSelect = ({
   return (
     <div className="employee-select-container" onClick={handleSelected}>
       <div className="profile-pic-container">
-        {profilePic ? (
+        {profilePic !== "" ? (
           <img src={profilePic} alt="profile" />
         ) : (
           <div className="profile-pic-initials">

@@ -22,17 +22,18 @@ interface SenderData {
   profile_pic: string;
 }
 
-const defaultSenderData = {
-  id: 0,
-  first_name: "",
-  last_name: "",
-  profile_pic: "",
+const defaultMessageData = {
+  message_id: 0,
+  message_body: "",
+  message_recipient: 0,
+  message_sender: 0,
+  conversation_id: 0,
 };
 
 const Conversation = ({ id }: ConversationProps) => {
   const dispatch = useDispatch();
   const senderId = useSelector((state: any) => state.chat.conversationId);
-  const [senderData, setSenderData] = useState<SenderData>(defaultSenderData);
+  const [allMessages, setAllMessages] = useState([defaultMessageData]);
   const newChat = useSelector((state: any) => state.chat.newChat);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
 
@@ -41,21 +42,12 @@ const Conversation = ({ id }: ConversationProps) => {
     dispatch(setShowAllChats(true));
   };
 
-  const messagesArray = [
-    {
-      id: 1,
-      message: "Hello",
-      sender: "me",
-      type: "received",
-    },
-  ];
-
   useEffect(() => {
     try {
-      fetch(`http://localhost:5001/employees/${senderId}`)
+      fetch(`http://localhost:5001/messages/conversation/1`)
         .then((res) => res.json())
         .then((data) => {
-          setSenderData(data);
+          setAllMessages(data);
         });
     } catch (error) {
       console.log("error fetching conversation", error);
@@ -87,7 +79,7 @@ const Conversation = ({ id }: ConversationProps) => {
                 </>
               ) : (
                 <div className="employee-name">
-                  <EmployeeSelect
+                  {/* <EmployeeSelect
                     id={1}
                     firstName={
                       senderData.first_name.length > 1
@@ -104,17 +96,18 @@ const Conversation = ({ id }: ConversationProps) => {
                         ? senderData.profile_pic
                         : ""
                     }
-                  />
+                  /> */}
                 </div>
               )}
             </div>
             <div className="messages-container">
-              {messagesArray.map((message) => (
+              {allMessages.map((message) => (
                 <Message
-                  key={message.id}
-                  message={message.message}
-                  sender={message.sender}
-                  type={message.type}
+                  key={message.message_id}
+                  message={message.message_body}
+                  recipient={message.message_recipient}
+                  sender={message.message_sender}
+                  conversationId={message.conversation_id}
                 />
               ))}
             </div>

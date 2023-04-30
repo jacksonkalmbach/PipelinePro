@@ -12,7 +12,7 @@ interface UserData {
   phone: string;
   company_name: string;
   job_title: string;
-  profile_pic: string;
+  photo_url: string;
 }
 
 const defaultUserData = {
@@ -22,7 +22,7 @@ const defaultUserData = {
   phone: "",
   company_name: "",
   job_title: "",
-  profile_pic: "",
+  photo_url: "",
 };
 
 const NavBar = () => {
@@ -40,9 +40,11 @@ const NavBar = () => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5001/employees/${uid}`)
+      fetch(`http://localhost:5001/users/${uid}`)
         .then((res) => res.json())
-        .then((data) => setUserData(data));
+        .then((data) => {
+          setUserData(data);
+        });
     } catch (error) {
       console.log("error fetching account info - navbar", error);
     }
@@ -52,9 +54,9 @@ const NavBar = () => {
     setSideNavVisible(!sideNavVisible);
   };
 
-  const closeSideNav = () => {
-    setSideNavVisible(false);
-  };
+  // const closeSideNav = () => {
+  //   setSideNavVisible(false);
+  // };
 
   const currentSection = useSelector(
     (state: any) => state.sectionNavigation.value
@@ -66,6 +68,10 @@ const NavBar = () => {
 
   const handleLogoClick = () => {
     navigate("/");
+    dispatch(userSignOut());
+  };
+
+  const handleLogout = () => {
     dispatch(userSignOut());
   };
 
@@ -94,8 +100,8 @@ const NavBar = () => {
                     firstName={userData.first_name}
                     lastName={userData.last_name}
                     profilePic={
-                      userData.profile_pic
-                        ? userData.profile_pic
+                      userData.photo_url
+                        ? userData.photo_url
                         : userData.first_name[0] + userData.last_name[0]
                     }
                     nav={true}
@@ -107,7 +113,6 @@ const NavBar = () => {
                         <Link
                           className="nav-dropdown-link"
                           to="/settings/Account"
-                          onClick={showDropdownOptions}
                         >
                           Account
                         </Link>
@@ -116,7 +121,7 @@ const NavBar = () => {
                         <Link
                           className="nav-dropdown-link"
                           to="/login"
-                          onClick={showDropdownOptions}
+                          onClick={handleLogout}
                         >
                           Logout
                         </Link>

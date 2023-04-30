@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import { signInWithGooglePopup } from "../../../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -27,6 +28,10 @@ const SignInForm = () => {
     dispatch(setUserUid(user.uid));
     navigate("/dashboard");
   };
+
+  useEffect(() => {
+    console.log("user signed in");
+  }, []);
 
   return (
     <div className="sign-in-options">
