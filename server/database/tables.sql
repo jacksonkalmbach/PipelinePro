@@ -37,7 +37,10 @@ CREATE TABLE lead_notes (
 CREATE TABLE companies (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   company_name VARCHAR(255) NOT NULL,
-  address TEXT
+  address TEXT,
+  phone VARCHAR(20),
+  website VARCHAR(255),
+  created_at TIMESTAMP DEFAULT NOW()
 );
 
 -- Create the company_admins table
@@ -72,7 +75,7 @@ CREATE TABLE events (
   event_description TEXT NOT NULL,
   event_owner UUID NOT NULL REFERENCES users(id),
   event_participants UUID[] NULL,
-  lead UUID REFERENCES NULL leads(id)
+  lead UUID REFERENCES leads(id) NULL
 );
 
 -- Create the event_participants table
@@ -92,3 +95,7 @@ CREATE TABLE tasks (
   task_completed BOOLEAN NOT NULL DEFAULT FALSE,
   lead_id UUID REFERENCES leads(id)
 );
+
+
+INSERT INTO users (first_name, last_name, email, password, company_id, created_at, photo_url)
+VALUES ('Jackson', 'Kalmbach', 'jacksonrkalmbach@gmail.com', 'demop@ss4321', 3, NOW(),'https://media.licdn.com/dms/image/D4E03AQFseatAMo8cnA/profile-displayphoto-shrink_800_800/0/1679333449150?e=1688601600&v=beta&t=y0-TZHgzkwR9PGhpb0XD1zP5qagfuVSywOxO6KD1FOY');

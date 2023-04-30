@@ -13,6 +13,7 @@ const io = socketio(server, {
   },
 });
 
+const usersRouter = require("./routes/users");
 const leadsRouter = require("./routes/leads");
 const notesRouter = require("./routes/notes");
 const employeesRouter = require("./routes/employees");
@@ -37,6 +38,7 @@ io.on("connection", (socket) => {
 
 // ROUTES //
 
+app.use("/users", usersRouter);
 app.use("/leads", leadsRouter);
 app.use("/notes", notesRouter);
 app.use("/employees", employeesRouter);
