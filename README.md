@@ -4,9 +4,9 @@ PipelinePro is a Customer Relationship Manager built using the latest web techno
 
 ### PipelinePro TechStack
 
-Frontend: Typescript, React, SASS, Google Firebase, socket-io-client
+__**bold and underlined**__Frontend: Typescript, React, SASS, Google Firebase, socket-io-client
 
-Backend: Node.js, Express, PostgreSQL, socket-io
+__**bold and underlined**__Backend: Node.js, Express, PostgreSQL, socket-io
 
 ### Frontend
 
