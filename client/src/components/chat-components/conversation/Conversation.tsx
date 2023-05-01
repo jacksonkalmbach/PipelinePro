@@ -13,28 +13,20 @@ import "./Conversation.styles.scss";
 
 interface ConversationProps {
   id?: number;
-}
-
-interface SenderData {
-  id: number;
-  first_name: string;
-  last_name: string;
-  profile_pic: string;
+  newChat?: boolean;
 }
 
 const defaultMessageData = {
-  message_id: 0,
+  id: "",
   message_body: "",
-  message_recipient: 0,
-  message_sender: 0,
+  recipient: "",
+  sender: "",
   conversation_id: 0,
 };
 
-const Conversation = ({ id }: ConversationProps) => {
+const Conversation = ({ id, newChat }: ConversationProps) => {
   const dispatch = useDispatch();
-  const senderId = useSelector((state: any) => state.chat.conversationId);
   const [allMessages, setAllMessages] = useState([defaultMessageData]);
-  const newChat = useSelector((state: any) => state.chat.newChat);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
 
   const backtoAllChats = () => {
@@ -43,16 +35,18 @@ const Conversation = ({ id }: ConversationProps) => {
   };
 
   useEffect(() => {
-    try {
-      fetch(`http://localhost:5001/messages/conversation/1`)
-        .then((res) => res.json())
-        .then((data) => {
-          setAllMessages(data);
-        });
-    } catch (error) {
-      console.log("error fetching conversation", error);
+    if (!newChat) {
+      try {
+        fetch(`http://localhost:5001/chat/conversation/${id}`)
+          .then((res) => res.json())
+          .then((data) => {
+            setAllMessages(data);
+          });
+      } catch (error) {
+        console.log("error fetching conversation", error);
+      }
     }
-  }, [senderId]);
+  }, [id, newChat]);
 
   return (
     <div className="conversation-container">
@@ -101,15 +95,25 @@ const Conversation = ({ id }: ConversationProps) => {
               )}
             </div>
             <div className="messages-container">
-              {allMessages.map((message) => (
-                <Message
-                  key={message.message_id}
-                  message={message.message_body}
-                  recipient={message.message_recipient}
-                  sender={message.message_sender}
-                  conversationId={message.conversation_id}
-                />
-              ))}
+              {allMessages[0].id.length > 0 ? (
+                <>
+                  {allMessages.map((message) => {
+                    const { id, message_body, sender, recipient } = message;
+                    return (
+                      <Message
+                        key={id}
+                        message={message_body}
+                        recipient={recipient}
+                        sender={sender}
+                        conversationId={message.conversation_id}
+                      />
+                    );
+                  })}
+                </>
+              ) : (
+                <div className="no-messages">No messages yet</div>
+              )
+            }
             </div>
             <div className="new-message">
               <input className="write-message" placeholder="Aa" />

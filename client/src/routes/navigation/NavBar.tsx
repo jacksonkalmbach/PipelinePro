@@ -67,8 +67,8 @@ const NavBar = () => {
   };
 
   const handleLogoClick = () => {
-    navigate("/");
     dispatch(userSignOut());
+    navigate("/");
   };
 
   const handleLogout = () => {
@@ -78,8 +78,8 @@ const NavBar = () => {
   const handleExitDemo = () => {
     dispatch(userSignOut());
     navigate("/");
-    console.log("exit demo, user signed in? - NAVBAR", isSignedIn);
   };
+  console.log("exit demo, user signed in? - NAVBAR", isSignedIn);
 
   return (
     <nav className="navbar-container">

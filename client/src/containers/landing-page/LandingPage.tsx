@@ -36,11 +36,6 @@ const LandingPage = () => {
             </button>
           </div>
         </div>
-       
-      </div>
-      <div className="dashboard-sample">
-        <div className="background-color"></div>
-        <div className="sample"></div>
       </div>
     </div>
   );

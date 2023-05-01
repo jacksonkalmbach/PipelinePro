@@ -5,8 +5,8 @@ import "./Message.styles.scss";
 
 interface MessageProps {
   message: string;
-  sender: number;
-  recipient: number;
+  sender: string;
+  recipient: string;
   conversationId: number;
 }
 
@@ -22,7 +22,7 @@ const Message = ({
     <>
       <div
         className={`message-container ${
-          sender === Number(currentUserId) ? "sent" : "received"
+          sender === currentUserId ? "sent" : "received"
         }`}
       >
         {message}

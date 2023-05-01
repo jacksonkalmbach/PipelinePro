@@ -27,22 +27,14 @@ const Leads = () => {
     (state: any) => state.selectAllLeads.selectedLeads
   );
 
-  useEffect(() => {
-    fetch("http://localhost:5001/leads")
-      .then((res) => res.json())
-      .then((data) => {
-        setLeads(data);
-        setLeadCount(data.length);
-      });
-  }, []);
-
-  useEffect(() => {
-    socket.on("new-lead", (lead) => {
-      console.log("NEW LEAD - Leads component", lead);
-      setLeads((leads) => [...leads, lead]);
-      setLeadCount((leadCount) => (leadCount ? leadCount + 1 : 1));
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:5001/leads")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setLeads(data);
+  //       setLeadCount(data.length);
+  //     });
+  // }, []);
 
   return (
     <div className="leads-container">

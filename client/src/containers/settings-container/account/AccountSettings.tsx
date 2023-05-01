@@ -11,7 +11,7 @@ interface UserData {
   phone: string;
   company_name: string;
   job_title: string;
-  profile_pic: string;
+  photo_url: string;
 }
 
 const defaultUserData = {
@@ -21,7 +21,7 @@ const defaultUserData = {
   phone: "",
   company_name: "",
   job_title: "",
-  profile_pic: "",
+  photo_url: "",
 };
 
 const AccountSettings = () => {
@@ -33,9 +33,11 @@ const AccountSettings = () => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5001/employees/${currentUser}`)
+      fetch(`http://localhost:5001/users/${currentUser}`)
         .then((res) => res.json())
-        .then((data) => setUserData(data));
+        .then((data) => {
+          setUserData(data);
+        });
     } catch (error) {
       console.log("error fetching user data - account settings page", error);
     }
@@ -157,7 +159,7 @@ const AccountSettings = () => {
         </form>
         <div className="edit-photo">
           <div className="profile-pic-container">
-            <img className="photo" src={userData.profile_pic} alt="profile" />
+            <img className="photo" src={userData.photo_url} alt="profile" />
           </div>
           <div className="change-photo">
             Change Photo

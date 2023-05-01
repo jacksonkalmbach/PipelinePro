@@ -17,22 +17,22 @@ const Dashboard = () => {
 
   const currentUserId = useSelector((state: any) => state.userAuth.uid);
 
-  useEffect(() => {
-    fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLeads(data);
-      });
-  }, [currentUserId]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setLeads(data);
+  //     });
+  // }, [currentUserId]);
 
-  useEffect(() => {
-    fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTodaysEvents(data);
-      });
-  }, [currentUserId, todayDate]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setTodaysEvents(data);
+  //     });
+  // }, [currentUserId, todayDate]);
 
   return (
     <div className="dashboard-container">
