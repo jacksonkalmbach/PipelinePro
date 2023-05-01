@@ -28,11 +28,11 @@ interface LeadRowItemProps {
 }
 
 interface Employee {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
-  profile_pic: string;
+  photo_url: string;
   title: string;
 }
 
@@ -42,7 +42,6 @@ const LeadRowItem = ({
   lastName,
   email,
   phone,
-  photoURL,
   leadOwner,
   status,
   myLeads,
@@ -94,13 +93,14 @@ const LeadRowItem = ({
 
   useEffect(() => {
     if (leadOwner) {
-      fetch(`http://localhost:5001/employees/${leadOwner}`)
+      fetch(`http://localhost:5001/users/${leadOwner}`)
         .then((res) => res.json())
         .then((data) => {
           setOwnerData(data);
           setOwnerFirstName(data.first_name);
           setOwnerLastName(data.last_name);
-          setOwnerPhotoURL(data.profile_pic);
+          setOwnerPhotoURL(data.photo_url);
+          console.log("employee - LEADROWITEM", data);
         });
     }
   }, [leadOwner]);

@@ -22,7 +22,7 @@ const defaultCreateLeadState = {
 };
 
 interface Employee {
-  employee_id: string;
+  id: string;
   first_name: string;
   last_name: string;
   photo_url: string;
@@ -60,7 +60,6 @@ const CreateLead = () => {
       fetch("http://localhost:5001/users")
         .then((res) => res.json())
         .then((data) => {
-          console.log("data - CREATE LEAD", data);
           setEmployees(data);
         });
     } catch (error) {

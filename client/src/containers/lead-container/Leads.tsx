@@ -11,12 +11,12 @@ import LeadPreview from "../../components/lead-components/lead-preview/LeadPrevi
 import ContactConvert from "../../components/contact-convert/ContactConvert";
 
 interface LeadData {
-  lead_id: number;
+  lead_id: string;
   first_name: string;
   last_name: string;
   email: string;
   phone: string;
-  leadOwner: number;
+  leadOwner: string;
   lead_status: string;
 }
 
@@ -27,14 +27,15 @@ const Leads = () => {
     (state: any) => state.selectAllLeads.selectedLeads
   );
 
-  // useEffect(() => {
-  //   fetch("http://localhost:5001/leads")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setLeads(data);
-  //       setLeadCount(data.length);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("http://localhost:5001/leads")
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("data - LEADS", data);
+        setLeads(data);
+        setLeadCount(data.length);
+      });
+  }, []);
 
   return (
     <div className="leads-container">
