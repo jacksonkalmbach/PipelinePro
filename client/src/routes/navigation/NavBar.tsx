@@ -77,6 +77,8 @@ const NavBar = () => {
 
   const handleExitDemo = () => {
     dispatch(userSignOut());
+    navigate("/");
+    console.log("exit demo, user signed in? - NAVBAR", isSignedIn);
   };
 
   return (

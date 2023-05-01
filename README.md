@@ -7,3 +7,5 @@ For real-time updates, PipelinePro uses WebSockets, which allows it to push data
 On the backend, PipelinePro uses PostgreSQL, a powerful relational database management system that provides a robust and scalable data storage solution. The backend is built on a RESTful API architecture, which allows for easy integration with other systems and applications.
 
 Overall, our PipelinePro platform is designed to help you streamline your lead and contact management, stay organized, and improve your sales process. We hope you find our platform helpful and look forward to working with you!
+
+![PipelinePro Entity Relationship]("./other_files/PipelinePro_Entity_Relationship")
