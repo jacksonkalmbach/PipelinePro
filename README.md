@@ -1,6 +1,6 @@
 # Welcome to PipelinePro!
 
-PipelinePro is a Customer Relationship Manager built using the latest web technologies to provide a fast and reliable experience. PipelinePro allows you and your team to easily manage leads to close more deals.
+PipelinePro is a Customer Relationship Manager built using the latest web technologies to provide a fast and reliable experience. PipelinePro allows you and your team to easily manage leads and close more deals.
 
 ### PipelinePro TechStack
 
