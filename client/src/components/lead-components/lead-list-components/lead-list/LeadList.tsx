@@ -123,7 +123,7 @@ const LeadList = ({
         {filteredLeads
           ? filteredLeads.reverse().map((lead: any) => {
               const {
-                lead_id,
+                id,
                 first_name: firstName,
                 last_name: lastName,
                 email,
@@ -133,8 +133,8 @@ const LeadList = ({
               } = lead;
               return (
                 <LeadRowItem
-                  key={lead_id}
-                  id={lead_id}
+                  key={id}
+                  id={id}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}

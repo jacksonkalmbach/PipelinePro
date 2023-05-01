@@ -20,7 +20,7 @@ interface Lead {
   last_name: string;
   email: string;
   phone: string;
-  company: string;
+  company_name: string;
   job_title: string;
   lead_status: string;
   lead_owner: number;
@@ -32,7 +32,7 @@ const currentLeadDetails = {
   last_name: "",
   email: "",
   phone: "",
-  company: "",
+  company_name: "",
   job_title: "",
   lead_status: "",
   lead_owner: 0,
@@ -73,6 +73,7 @@ const LeadPreview = () => {
         fetch(`http://localhost:5001/leads/${leadId}`)
           .then((res) => res.json())
           .then((data) => {
+            console.log("data - LEAD PREVIEW", data);
             setCurrentLead(data);
           });
       } catch (error) {
@@ -87,7 +88,7 @@ const LeadPreview = () => {
       setLastName(currentLead.last_name);
       setEmail(currentLead.email);
       setPhone(currentLead.phone);
-      setCompany(currentLead.company);
+      setCompany(currentLead.company_name);
       setJobTitle(currentLead.job_title);
       setStatus(currentLead.lead_status);
     }
@@ -110,13 +111,13 @@ const LeadPreview = () => {
   useEffect(() => {
     if (currentLead) {
       try {
-        fetch(`http://localhost:5001/employees/${currentLead.lead_owner}`)
+        fetch(`http://localhost:5001/users/${currentLead.lead_owner}`)
           .then((res) => res.json())
           .then((data) => {
             setOwnerId(data.employee_id);
             setOwnerFirstName(data.first_name);
             setOwnerLastName(data.last_name);
-            setOwnerPhotoURL(data.profile_pic);
+            setOwnerPhotoURL(data.photo_url);
           });
       } catch (error) {
         console.log("error fetching lead owner", error);
