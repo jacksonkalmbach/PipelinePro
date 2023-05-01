@@ -8,4 +8,9 @@ On the backend, PipelinePro uses PostgreSQL, a powerful relational database mana
 
 Overall, our PipelinePro platform is designed to help you streamline your lead and contact management, stay organized, and improve your sales process. We hope you find our platform helpful and look forward to working with you!
 
-![PipelinePro Entity Relationship]("./other_files/PipelinePro_Entity_Relationship")
+## Backend
+
+PipelinePro leverages an SQL (PostgreSQL) database to store user data, leads, notes, tasks, and everything else! Due to the highly connected nature of the data, the team knew SQL would be the best choice.
+
+Curious to see how everthing connects together? Take a look:
+![PipelinePro Entity Relationship](./other_files/PipelinePro_Entity_Relationship.png)
