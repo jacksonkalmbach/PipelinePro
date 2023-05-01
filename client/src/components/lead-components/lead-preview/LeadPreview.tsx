@@ -15,7 +15,7 @@ import ConfirmDelete from "../confirm-delete/ConfirmDelete";
 import EditLead from "../edit-lead/EditLead";
 
 interface Lead {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   email: string;
@@ -27,7 +27,7 @@ interface Lead {
 }
 
 const currentLeadDetails = {
-  id: 0,
+  id: "",
   first_name: "",
   last_name: "",
   email: "",
@@ -52,7 +52,7 @@ const LeadPreview = () => {
 
   const [optionsOpen, setOptionsOpen] = useState(false);
 
-  const [ownerId, setOwnerId] = useState(0);
+  const [ownerId, setOwnerId] = useState("");
   const [ownerFirstName, setOwnerFirstName] = useState("");
   const [ownerLastName, setOwnerLastName] = useState("");
   const [ownerPhotoURL, setOwnerPhotoURL] = useState("");
@@ -235,7 +235,7 @@ const LeadPreview = () => {
               <div className="lead-owner-container">
                 Lead Owner
                 <div className="detail">
-                  {ownerId !== 0 ? (
+                  {ownerId !== "" ? (
                     <EmployeeSelect
                       id={ownerId}
                       firstName={ownerFirstName}

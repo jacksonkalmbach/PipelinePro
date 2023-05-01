@@ -77,7 +77,7 @@ const LeadNote = ({
           <span className="material-symbols-outlined">description</span>
           {Object.values(authorDetails).length > 0 && (
             <EmployeeSelect
-              id={Number(noteAuthor)}
+              id={noteAuthor}
               firstName={authorDetails.first_name}
               lastName={authorDetails.last_name}
               profilePic={authorDetails.profile_pic}

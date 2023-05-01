@@ -22,10 +22,10 @@ const defaultCreateLeadState = {
 };
 
 interface Employee {
-  employee_id: number;
+  employee_id: string;
   first_name: string;
   last_name: string;
-  profile_pic: string;
+  photo_url: string;
   email: string;
   phone: string;
   department: string;
@@ -33,17 +33,17 @@ interface Employee {
 }
 
 const defaultLeadOwner = {
-  employee_id: 0,
+  employee_id: "",
   first_name: "",
   last_name: "",
-  profile_pic: "",
+  photo_url: "",
 };
 
 interface selectedLeadOwner {
-  employee_id: number;
+  employee_id: string;
   first_name: string;
   last_name: string;
-  profile_pic: string;
+  photo_url: string;
 }
 
 const CreateLead = () => {
@@ -57,9 +57,10 @@ const CreateLead = () => {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:5001/employees/department/Sales")
+      fetch("http://localhost:5001/users")
         .then((res) => res.json())
         .then((data) => {
+          console.log("data - CREATE LEAD", data);
           setEmployees(data);
         });
     } catch (error) {
@@ -99,10 +100,10 @@ const CreateLead = () => {
     profilePic: string
   ) => {
     setSelectedLeadOwner({
-      employee_id: Number(ownerId),
+      employee_id: ownerId,
       first_name: firstName,
       last_name: lastName,
-      profile_pic: profilePic,
+      photo_url: profilePic,
     });
     setFormFields({ ...formFields, leadOwner: ownerId });
   };
@@ -260,7 +261,7 @@ const CreateLead = () => {
                             id={selectedLeadOwner.employee_id}
                             firstName={selectedLeadOwner.first_name}
                             lastName={selectedLeadOwner.last_name}
-                            profilePic={selectedLeadOwner.profile_pic}
+                            profilePic={selectedLeadOwner.photo_url}
                           />
                           <span
                             className="material-symbols-outlined"

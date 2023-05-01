@@ -14,14 +14,14 @@ import ConfirmDelete from "../lead-components/confirm-delete/ConfirmDelete";
 import EditLead from "../lead-components/edit-lead/EditLead";
 
 const defaultLeadData = {
-  lead_id: 0,
+  lead_id: "",
   first_name: "",
   last_name: "",
   email: "",
   phone: "",
   company: "",
   job_title: "",
-  lead_owner: 0,
+  lead_owner: "",
   lead_status: "",
   lead_owner_first_name: "",
   lead_owner_last_name: "",
@@ -29,14 +29,14 @@ const defaultLeadData = {
 };
 
 interface Lead {
-  lead_id: number;
+  lead_id: string;
   first_name: string;
   last_name: string;
   email: string;
   phone: string;
   company: string;
   job_title: string;
-  lead_owner: number;
+  lead_owner: string;
   lead_status: string;
   lead_owner_first_name: string;
   lead_owner_last_name: string;

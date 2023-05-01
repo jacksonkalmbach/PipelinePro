@@ -6,10 +6,10 @@ import "./LeadOwnerSearchList.styles.scss";
 
 interface LeadOwnerSearchListProps {
   employees: {
-    employee_id: number;
+    employee_id: string;
     first_name: string;
     last_name: string;
-    profile_pic: string;
+    photo_url: string;
     email: string;
     phone: string;
     department: string;
@@ -30,7 +30,7 @@ const LeadOwnerSearchList = ({
   return (
     <div className="lead-owner-search-list-container">
       {employees.map((employee) => {
-        const { employee_id, first_name, last_name, profile_pic } = employee;
+        const { employee_id, first_name, last_name, photo_url } = employee;
         return (
           <div className="employee-option">
             <EmployeeSelect
@@ -38,7 +38,7 @@ const LeadOwnerSearchList = ({
               key={employee_id}
               firstName={first_name}
               lastName={last_name}
-              profilePic={profile_pic}
+              profilePic={photo_url}
               onEmployeeSelected={onEmployeeSelected}
             />
           </div>

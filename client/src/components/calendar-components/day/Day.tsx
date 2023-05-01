@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import Event from "../event/Event";
 
@@ -37,9 +37,9 @@ const defaultEventData = {
 
 const Day = ({ day, date, past, otherMonth }: DayProps) => {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state: any) => state.userAuth.uid);
 
-  const [eventData, setEventData] = useState<EventData[]>([]);
-
+  const [eventData, setEventData] = useState<EventData[]>([defaultEventData]);
   const [eventName, setEventName] = useState<string>("");
 
   const isoDate = day.toISOString();
@@ -52,19 +52,18 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
 
   useEffect(() => {
     try {
-      fetch(`http://localhost:5001/events/${yearMonthDay}/3`)
+      fetch(`http://localhost:5001/events/${yearMonthDay}/${currentUser}`)
         .then((res) => res.json())
         .then((data) => {
-          console.log("fetched data", data);
-          console.log("eventData_name", data[0].event_name);
-          if (data[0].event_name !== undefined)
+          if (data.length > 0) {
             setEventName(data[0].event_name);
+          }
           setEventData(data);
         });
     } catch (error) {
       console.log("error fetching events in Day Component", error);
     }
-  }, [yearMonthDay]);
+  }, [yearMonthDay, currentUser]);
 
   return (
     <div

@@ -3,7 +3,7 @@ import React from "react";
 import "./EmployeeSelect.styles.scss";
 
 interface EmployeeSelectProps {
-  id?: number | undefined;
+  id?: string | undefined;
   firstName: string;
   lastName: string;
   profilePic?: string;

@@ -10,7 +10,7 @@ import EmployeeSelect from "../../employee-components/employee-select/EmployeeSe
 import "./ChatPreview.styles.scss";
 
 interface ChatPreviewProps {
-  senderId?: number;
+  senderId?: string;
   conversation_id: string;
   onClick?: () => void;
 }
@@ -43,7 +43,6 @@ const ChatPreview = ({
   );
 
   const handleChatPreviewClick = () => {
-    console.log("clicked");
     dispatch(setShowAllChats(false));
     dispatch(setConversationId(conversation_id));
     dispatch(setNewChat(false));
@@ -73,8 +72,6 @@ const ChatPreview = ({
       console.log("error fetching sender", error);
     }
   }, [senderId]);
-
-  console.log("selectedConversationId", selectedConversationId);
 
   return (
     <div className="chat-preview-container" onClick={handleChatPreviewClick}>

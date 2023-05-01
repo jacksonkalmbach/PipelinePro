@@ -8,14 +8,14 @@ import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus
 import "./EditLead.styles.scss";
 
 interface EditLeadProps {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   company: string;
   jobTitle: string;
-  leadOwner: number;
+  leadOwner: string;
   leadOwnerFirstName: string;
   leadOwnerLastName: string;
   leadOwnerPhotoURL: string;
