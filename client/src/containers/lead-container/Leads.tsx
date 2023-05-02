@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 
 import FilterAddLead from "../../components/lead-components/filter-add-leads/FilterAddLeads";
 import CreateLead from "../../components/lead-components/create-lead/CreateLead";
-import LeadList from "../../components/lead-components/lead-list-components/lead-list/LeadList";
+import List from "../../components/lead-components/lead-list-components/list/List";
 
 import "./Leads.styles.scss";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
@@ -49,7 +49,8 @@ const Leads = () => {
       </div>
       {leadSelected.length > 0 && <ContactConvert />}
       <div className="all-leads-list">
-        <LeadList
+        <List
+          type="leads"
           leads={leads}
           leadCount={leadCount}
           searchPlaceholder="Search all leads"

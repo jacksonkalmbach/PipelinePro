@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import "./Dashboard.styles.scss";
-import LeadList from "../../components/lead-components/lead-list-components/lead-list/LeadList";
+import List from "../../components/lead-components/lead-list-components/list/List";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
 import DashboardEvent from "../../components/calendar-components/dashboard-event/DashboardEvent";
 
@@ -45,7 +45,8 @@ const Dashboard = () => {
           <div className="my-leads">
             <h2>My leads</h2>
             <div className="my-leads-list">
-              <LeadList
+              <List
+                type="leads"
                 leads={leads}
                 searchPlaceholder="Search my leads"
                 myLeads={true}

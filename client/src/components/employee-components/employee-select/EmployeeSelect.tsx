@@ -3,13 +3,12 @@ import React from "react";
 import "./EmployeeSelect.styles.scss";
 
 interface EmployeeSelectProps {
-  id?: string | undefined;
+  id?: string | null;
   firstName: string;
   lastName: string;
   profilePic?: string;
   title?: string;
   nav?: boolean;
-  ai?: boolean;
   onEmployeeSelected?: (
     ownerId: string,
     ownerFirstName: string,
@@ -25,7 +24,6 @@ const EmployeeSelect = ({
   profilePic,
   title,
   nav,
-  ai,
   onEmployeeSelected,
 }: EmployeeSelectProps) => {
   const handleSelected = () => {

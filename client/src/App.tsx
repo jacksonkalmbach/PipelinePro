@@ -20,6 +20,7 @@ import NotificationSettings from "./containers/settings-container/notifications/
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
 import LandingPage from "./containers/landing-page/LandingPage";
 import Chat from "./containers/chat-container/Chat";
+import Company from "./containers/contacts-container/company/Company";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ const App: React.FC = () => {
                     <Route path="/contacts/*" element={<Contacts />}>
                       <Route path="leads" element={<Leads />} />
                       <Route path="contacts" element={<div>Contacts</div>} />
-                      <Route path="company" element={<div>Companies</div>}>
+                      <Route path="company" element={<Company />}>
                         <Route path="employees" element={<div>Employees</div>}>
                           <Route path=":id" element={<div>Employee</div>} />
                         </Route>

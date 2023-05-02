@@ -1,6 +1,6 @@
 @import "../../../../styles/variables";
 
-.leads-list-container {
+.list-container {
   display: flex;
   flex-direction: column;
   align-self: center;
@@ -8,7 +8,7 @@
   width: 100%;
   border: 1px solid $theme-lightgrey;
 
-  .leads-list-search {
+  .list-search {
     display: flex;
     height: fit-content;
     width: 40%;
@@ -17,14 +17,14 @@
     align-self: flex-start;
   }
 
-  .leads-list-filters {
+  .list-filters {
     display: flex;
     height: 4rem;
     align-items: center;
     background-color: rgb(248, 248, 248);
     padding: 6px 0;
 
-    .leads-list-filters__checkbox {
+    .list-filters__checkbox {
       color: $theme-lightgrey;
       display: flex;
       justify-content: center;
@@ -46,7 +46,7 @@
       }
     }
 
-    .leads-list-filters__name {
+    .list-filters__filter {
       display: flex;
       justify-content: flex-start;
       padding-left: 20px;
@@ -54,55 +54,6 @@
       font-weight: bold;
       color: $theme-grey;
       font-size: 12px;
-      height: 100%;
-      width: calc(90% / 4);
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .leads-list-filters__contact {
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 20px;
-      align-items: center;
-      font-weight: bold;
-      color: $theme-grey;
-      font-size: 12px;
-      font-weight: bold;
-      height: 100%;
-      width: calc(90% / 4);
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .leads-list-filters__status {
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 50px;
-      align-items: center;
-      font-weight: bold;
-      color: $theme-grey;
-      font-size: 12px;
-      height: 100%;
-      width: calc(90% / 4);
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-
-    .leads-list-filters__owner {
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 20px;
-      align-items: center;
-      color: $theme-grey;
-      font-size: 12px;
-      font-weight: bold;
       height: 100%;
       width: calc(90% / 4);
 

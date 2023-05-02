@@ -1,6 +1,6 @@
 @import "../../../../styles/variables.scss";
 
-.lead-row-item {
+.row-item-container {
   display: flex;
   padding: 20px 0;
   border: 1px solid $theme-lightgrey;
@@ -16,7 +16,7 @@
     background-color: #f6f7fd;
   }
 
-  .lead-row-item__checkbox {
+  .row-item__checkbox {
     color: $theme-lightgrey;
     display: flex;
     justify-content: center;
@@ -37,7 +37,7 @@
     }
   }
 
-  .lead-row-item__name {
+  .row-item__name {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -51,7 +51,7 @@
     }
   }
 
-  .lead-row-item__contact {
+  .row-item__contact {
     color: $theme-grey;
     display: flex;
     flex-direction: column;
@@ -63,19 +63,19 @@
     width: calc(90% / 4);
     gap: 5px;
 
-    .lead-row-item__contact_email {
+    .row-item__contact_email {
       display: flex;
       align-items: center;
       gap: 5px;
     }
-    .lead-row-item__contact_phone {
+    .row-item__contact_phone {
       display: flex;
       align-items: center;
       gap: 5px;
     }
   }
 
-  .lead-row-item__status {
+  .row-item__status {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -85,7 +85,7 @@
     width: calc(90% / 4);
   }
 
-  .lead-row-item__owner {
+  .row-item__owner {
     display: flex;
     justify-content: flex-start;
     color: $theme-grey;
@@ -95,32 +95,52 @@
     height: 100%;
     width: calc(90% / 4);
   }
+
+  .row-item__title {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+    font-weight: bold;
+    height: 100%;
+    width: calc(90% / 4);
+  }
+
+  .row-item__department {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: 20px;
+    font-weight: bold;
+    height: 100%;
+    width: calc(90% / 4);
+  }
 }
 
 @media (max-width: 767px) {
-  .lead-row-item {
+  .row-item {
     width: 100%;
 
-    .lead-row-item__checkbox {
+    .row-item__checkbox {
       display: none;
     }
 
-    .lead-row-item__name {
+    .row-item__name {
       width: 50%;
     }
 
-    .lead-row-item__contact {
+    .row-item__contact {
       display: none;
     }
 
-    .lead-row-item__status {
+    .row-item__status {
       display: flex;
       width: 50%;
       justify-content: flex-start;
       align-items: center;
     }
 
-    .lead-row-item__owner {
+    .row-item__owner {
       display: none;
     }
   }

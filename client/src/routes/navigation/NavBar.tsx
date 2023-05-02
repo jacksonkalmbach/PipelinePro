@@ -39,6 +39,7 @@ const NavBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
+    console.log("uid - navbar", uid);
     try {
       fetch(`http://localhost:5001/users/${uid}`)
         .then((res) => res.json())

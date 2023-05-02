@@ -52,7 +52,7 @@ const LeadNote = ({
     const getAuthorDetails = async () => {
       try {
         const response = await fetch(
-          `http://localhost:5001/employees/${noteAuthor}`
+          `http://localhost:5001/users/${noteAuthor}`
         );
         const employeeDetails = await response.json();
         console.log(employeeDetails);

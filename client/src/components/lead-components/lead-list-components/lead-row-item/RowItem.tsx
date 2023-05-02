@@ -4,27 +4,31 @@ import {
   setShowLeadPreview,
   setPreviewId,
 } from "../../../../store/reducers/leads/showLeadSlice";
-
-import LeadRowStatus from "../lead-row-status/LeadRowStatus";
-import EmployeeSelect from "../../../employee-components/employee-select/EmployeeSelect";
-
-import "./LeadRowItem.styles.scss";
 import {
   addSelectedLeads,
   removeSelectedLeads,
   setSelectAllLeads,
 } from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
-interface LeadRowItemProps {
-  id: number | null;
+import LeadRowStatus from "../lead-row-status/LeadRowStatus";
+import EmployeeSelect from "../../../employee-components/employee-select/EmployeeSelect";
+
+import "./RowItem.styles.scss";
+
+interface RowItemProps {
+  id: string | null;
+  employeeId: string | null;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   photoURL?: string;
+  jobTitle?: string;
+  department?: string;
   leadOwner?: string | undefined;
-  status: string;
+  status?: string;
   myLeads?: boolean;
+  type: string;
 }
 
 interface Employee {
@@ -36,8 +40,9 @@ interface Employee {
   title: string;
 }
 
-const LeadRowItem = ({
+const RowItem = ({
   id,
+  employeeId,
   firstName,
   lastName,
   email,
@@ -45,7 +50,11 @@ const LeadRowItem = ({
   leadOwner,
   status,
   myLeads,
-}: LeadRowItemProps) => {
+  jobTitle,
+  department,
+  photoURL,
+  type,
+}: RowItemProps) => {
   const dispatch = useDispatch();
   const [isSelected, setisSelected] = useState(false);
   const [ownerData, setOwnerData] = useState<Employee | null>(null);
@@ -107,13 +116,13 @@ const LeadRowItem = ({
 
   return (
     <div
-      className={`lead-row-item ${isSelected ? "selected" : ""}`}
+      className={`row-item-container ${isSelected ? "selected" : ""}`}
       onClick={handleLeadPreviewClick}
     >
-      {!myLeads && (
+      {type === "leads" && (
         <>
           <div
-            className={`lead-row-item__checkbox ${
+            className={`row-item__checkbox ${
               checkAll || isSelected ? "selected" : ""
             } ${isSelected ? "selected" : ""}}`}
             onClick={toggleSelected}
@@ -136,13 +145,26 @@ const LeadRowItem = ({
           </div>
         </>
       )}
-      <div className="lead-row-item__name">{firstName + " " + lastName}</div>
-      <div className="lead-row-item__contact">
-        <div className="lead-row-item__contact_email">
+      <div className="row-item__name">
+        {type === "employees" ? (
+          <>
+            <EmployeeSelect
+              id={employeeId}
+              firstName={firstName}
+              lastName={lastName}
+              profilePic={photoURL}
+            />
+          </>
+        ) : (
+          <>{firstName + " " + lastName}</>
+        )}
+      </div>
+      <div className="row-item__contact">
+        <div className="row-item__contact_email">
           <span className="material-symbols-outlined">mail</span>
           {email}
         </div>
-        <div className="lead-row-item__contact_phone">
+        <div className="row-item__contact_phone">
           <span className="material-symbols-outlined">call</span>
           {"(" +
             phone.slice(0, 3) +
@@ -152,21 +174,30 @@ const LeadRowItem = ({
             phone.slice(6, 10)}
         </div>
       </div>
-      <div className="lead-row-item__status">
-        <LeadRowStatus status={status} />
-      </div>
-      <div className="lead-row-item__owner">
-        {ownerData && (
-          <EmployeeSelect
-            id={leadOwner}
-            firstName={ownerFirstName}
-            lastName={ownerLastName}
-            profilePic={ownerPhotoURL}
-          />
-        )}
-      </div>
+      {status ? (
+        <>
+          <div className="row-item__status">
+            <LeadRowStatus status={status} />
+          </div>
+          <div className="row-item__owner">
+            {ownerData && (
+              <EmployeeSelect
+                id={leadOwner}
+                firstName={ownerFirstName}
+                lastName={ownerLastName}
+                profilePic={ownerPhotoURL}
+              />
+            )}
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="row-item__title">{jobTitle}</div>
+          <div className="row-item__department">{department}</div>
+        </>
+      )}
     </div>
   );
 };
 
-export default LeadRowItem;
+export default RowItem;

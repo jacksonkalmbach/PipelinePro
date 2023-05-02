@@ -57,7 +57,7 @@ const CreateLead = () => {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:5001/users")
+      fetch("http://localhost:5001/users/department/Sales")
         .then((res) => res.json())
         .then((data) => {
           setEmployees(data);

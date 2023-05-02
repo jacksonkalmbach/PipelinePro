@@ -3,35 +3,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSelectAllLeads } from "../../../../store/reducers/leads/selectAllLeadsSlice";
 
 import SearchBox from "../../../search-box-component/SearchBox";
-import LeadRowItem from "../lead-row-item/LeadRowItem";
+import RowItem from "../lead-row-item/RowItem";
 import LeadRowItemPlaceholder from "../lead-row-item/LeadRowItemPlaceholder";
 
-import "./LeadList.styles.scss";
+import "./List.styles.scss";
 
-interface LeadListProps {
+interface ListProps {
   leads: LeadData[];
   leadCount?: number | null;
   myLeads?: boolean;
   searchPlaceholder: string;
+  type: string;
 }
 
 interface LeadData {
-  lead_id: string;
+  lead_id?: string;
   first_name: string;
   last_name: string;
   email: string;
   phone: string;
-  leadOwner: string;
-  lead_status: string;
+  leadOwner?: string;
+  lead_status?: string;
+  job_title?: string;
+  department?: string;
 }
 
-const LeadList = ({
+const List = ({
   leads,
   leadCount,
   searchPlaceholder,
   myLeads,
-}: LeadListProps) => {
+  type,
+}: ListProps) => {
   const dispatch = useDispatch();
+  console.log("type - LIST", typeof type);
 
   const [searchField, setSearchField] = useState("");
   const [filteredLeads, setFilteredLeads] = useState<LeadData[]>(leads);
@@ -73,21 +78,19 @@ const LeadList = ({
   };
 
   return (
-    <div className="leads-list-container">
-      <div className="leads-list-search">
+    <div className="list-container">
+      <div className="list-search">
         <SearchBox
           className={"all-leads"}
           placeholder={searchPlaceholder}
           onChangeHandler={onSearchChange}
         />
       </div>
-      <div className="leads-list-filters">
-        {!myLeads && (
+      <div className="list-filters">
+        {type === "leads" && (
           <>
             <div
-              className={`leads-list-filters__checkbox ${
-                checkAll ? "checkAll" : ""
-              }`}
+              className={`list-filters__checkbox ${checkAll ? "checkAll" : ""}`}
               onClick={toggleCheckAll}
             >
               {checkAll ? (
@@ -102,21 +105,13 @@ const LeadList = ({
             </div>
           </>
         )}
-        <div className="leads-list-filters__name">
-          {/* <span className="material-symbols-outlined">unfold_more</span> */}
-          NAME
+        <div className="list-filters__filter">NAME</div>
+        <div className="list-filters__filter">CONTACT</div>
+        <div className="list-filters__filter">
+          {type === "leads" ? "STATUS" : "JOB TITLE"}
         </div>
-        <div className="leads-list-filters__contact">
-          {/* <span className="material-symbols-outlined">unfold_more</span> */}
-          CONTACT
-        </div>
-        <div className="leads-list-filters__status">
-          {/* <span className="material-symbols-outlined">unfold_more</span> */}
-          STATUS
-        </div>
-        <div className="leads-list-filters__owner">
-          {/* <span className="material-symbols-outlined">unfold_more</span> */}
-          LEAD OWNER
+        <div className="list-filters__filter">
+          {type === "leads" ? "LEAD OWNER" : "DEPARTMENT"}
         </div>
       </div>
       <div className="leads-list">
@@ -132,9 +127,10 @@ const LeadList = ({
                 lead_status: leadStatus,
               } = lead;
               return (
-                <LeadRowItem
+                <RowItem
                   key={id}
                   id={id}
+                  employeeId={lead.id}
                   firstName={firstName}
                   lastName={lastName}
                   email={email}
@@ -142,6 +138,10 @@ const LeadList = ({
                   leadOwner={leadOwner}
                   status={leadStatus}
                   myLeads={myLeads}
+                  jobTitle={lead.job_title}
+                  department={lead.department}
+                  photoURL={lead.photo_url}
+                  type={type}
                 />
               );
             })
@@ -151,4 +151,4 @@ const LeadList = ({
   );
 };
 
-export default LeadList;
+export default List;
