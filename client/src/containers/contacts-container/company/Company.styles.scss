@@ -1,0 +1,39 @@
+@import "../../../styles/variables.scss";
+
+.company-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  gap: 20px;
+  border: 1px solid red;
+
+  .company-header {
+    .company-header__logo {
+    }
+
+    .company-header__info {
+      border: 1px solid blue;
+    }
+    .company-header__info--name {
+    }
+    .company-header__info--location {
+    }
+    .company-header__info--phone {
+    }
+    .company-header__info--website {
+    }
+  }
+  .company-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 40%;
+    .company-body__employees {
+      .company-body__employees--list-container {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

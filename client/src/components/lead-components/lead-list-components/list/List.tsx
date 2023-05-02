@@ -87,7 +87,7 @@ const List = ({
         />
       </div>
       <div className="list-filters">
-        {type === "leads" && (
+        {type === "leads" ? (
           <>
             <div
               className={`list-filters__checkbox ${checkAll ? "checkAll" : ""}`}
@@ -104,6 +104,8 @@ const List = ({
               )}
             </div>
           </>
+        ) : (
+          <div className="list-filters__checkbox hide"></div>
         )}
         <div className="list-filters__filter">NAME</div>
         <div className="list-filters__filter">CONTACT</div>

@@ -41,6 +41,12 @@
         }
       }
 
+      &.hide {
+        .material-symbols-outlined {
+          display: none;
+        }
+      }
+
       :hover {
         cursor: pointer;
       }

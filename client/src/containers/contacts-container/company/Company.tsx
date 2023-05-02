@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import LeadList from "../../../components/lead-components/lead-list-components/list/List";
+
+import "./Company.styles.scss";
 
 interface CompanyData {
   company_name: string;
@@ -79,24 +83,26 @@ const Company = () => {
             </h1>
           </div>
           <div className="company-header__info--location">
-            <h2>{company.address}</h2>
+            <h3>{company.address}</h3>
           </div>
           <div className="company-header__info--phone">
-            <h2>{company.phone}</h2>
+            <h3>{company.phone}</h3>
           </div>
           <div className="company-header__info--website">
-            <h2>{company.website}</h2>
+            <h3>{company.website}</h3>
           </div>
         </div>
       </div>
       <div className="company-body">
         <div className="company-body__employees">
           <h1>Employees</h1>
-          <LeadList
-            leads={employees}
-            type="employees"
-            searchPlaceholder="Search Employees"
-          />
+          <div className="company-body__employees--list-container">
+            <LeadList
+              leads={employees}
+              type="employees"
+              searchPlaceholder="Search Employees"
+            />
+          </div>
         </div>
       </div>
     </div>

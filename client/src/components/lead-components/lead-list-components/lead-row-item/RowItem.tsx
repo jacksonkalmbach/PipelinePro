@@ -119,7 +119,7 @@ const RowItem = ({
       className={`row-item-container ${isSelected ? "selected" : ""}`}
       onClick={handleLeadPreviewClick}
     >
-      {type === "leads" && (
+      {type === "leads" ? (
         <>
           <div
             className={`row-item__checkbox ${
@@ -144,6 +144,8 @@ const RowItem = ({
             )}
           </div>
         </>
+      ) : (
+        <div className="row-item__checkbox hide"></div>
       )}
       <div className="row-item__name">
         {type === "employees" ? (
