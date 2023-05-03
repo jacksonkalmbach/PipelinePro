@@ -19,6 +19,7 @@ const notesRouter = require("./routes/notes");
 const employeesRouter = require("./routes/employees");
 const eventRouter = require("./routes/calendar/events");
 const chatRouter = require("./routes/chat");
+const companyRouter = require("./routes/company");
 
 app.use(cors());
 app.use(express.json());
@@ -44,6 +45,7 @@ app.use("/notes", notesRouter);
 app.use("/employees", employeesRouter);
 app.use("/events", eventRouter);
 app.use("/chat", chatRouter);
+app.use("/company", companyRouter);
 
 server.listen(5001, () => {
   console.log("Server is running on port 5001");

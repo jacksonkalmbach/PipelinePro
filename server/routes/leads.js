@@ -4,6 +4,7 @@ const pool = require("../db");
 
 // Create a lead
 router.post("/", async (req, res) => {
+  console.log(req.body);
   try {
     const {
       firstName,
@@ -16,7 +17,7 @@ router.post("/", async (req, res) => {
       leadOwner,
     } = req.body;
     const newLead = await pool.query(
-      "INSERT INTO leads (first_name, last_name, email, phone, company, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      "INSERT INTO leads (first_name, last_name, email, phone, company_name, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
         firstName,
         lastName,
@@ -49,9 +50,10 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const lead = await pool.query("SELECT * FROM leads WHERE lead_id = $1", [
-      id,
-    ]);
+    const lead = await pool.query(
+      "SELECT leads.*, companies.company_name FROM leads JOIN companies ON leads.company_id = companies.id WHERE leads.id = $1",
+      [id]
+    );
 
     res.json(lead.rows[0]);
   } catch (err) {
@@ -75,7 +77,6 @@ router.get("/employee/:id", async (req, res) => {
 
 // Update a lead
 router.put("/:id", async (req, res) => {
-  console.log("hit put route");
   try {
     console.log("req body", req.body);
     const { id } = req.params;

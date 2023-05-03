@@ -36,7 +36,6 @@ const List = ({
   type,
 }: ListProps) => {
   const dispatch = useDispatch();
-  console.log("type - LIST", typeof type);
 
   const [searchField, setSearchField] = useState("");
   const [filteredLeads, setFilteredLeads] = useState<LeadData[]>(leads);

@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
-import { userSignOut } from "../../store/reducers/user/userAuthSlice";
+import {
+  userSignOut,
+  setIsDemo,
+} from "../../store/reducers/user/userAuthSlice";
 import EmployeeSelect from "../../components/employee-components/employee-select/EmployeeSelect";
 import "./NavBar.scss";
 
@@ -32,6 +35,7 @@ const NavBar = () => {
   const pathname = location.pathname;
 
   const uid = useSelector((state: any) => state.userAuth.uid);
+  if (uid === 0) console.log("ERROR 0 !!!!!!!)", uid);
   const isSignedIn = useSelector((state: any) => state.userAuth.isSignedIn);
   const isDemo = useSelector((state: any) => state.userAuth.isDemo);
   const [userData, setUserData] = useState<UserData>(defaultUserData);
@@ -39,7 +43,6 @@ const NavBar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
-    console.log("uid - navbar", uid);
     try {
       fetch(`http://localhost:5001/users/${uid}`)
         .then((res) => res.json())
@@ -78,9 +81,9 @@ const NavBar = () => {
 
   const handleExitDemo = () => {
     dispatch(userSignOut());
+    dispatch(setIsDemo(false));
     navigate("/");
   };
-  console.log("exit demo, user signed in? - NAVBAR", isSignedIn);
 
   return (
     <nav className="navbar-container">
@@ -90,7 +93,7 @@ const NavBar = () => {
       <div className="hamburger-container" onClick={toggleSideNav}>
         <span className="material-symbols-outlined">menu</span>
       </div>
-      {isSignedIn ? (
+      {isSignedIn || isDemo ? (
         <>
           <div className="vertical-line"></div>
           <ul className="navbar-links">

@@ -15,6 +15,7 @@ interface LeadOwnerSearchListProps {
     department: string;
     job_title: string;
   }[];
+  type?: string;
   onEmployeeSelected?: (
     employee_id: string,
     first_name: string,

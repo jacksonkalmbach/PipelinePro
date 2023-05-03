@@ -28,12 +28,7 @@ const EmployeeSelect = ({
 }: EmployeeSelectProps) => {
   const handleSelected = () => {
     onEmployeeSelected &&
-      onEmployeeSelected(
-        id?.toString() || "",
-        firstName,
-        lastName,
-        profilePic || ""
-      );
+      onEmployeeSelected(id || "", firstName, lastName, profilePic || "");
   };
 
   return (

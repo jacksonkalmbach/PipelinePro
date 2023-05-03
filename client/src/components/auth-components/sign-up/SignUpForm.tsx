@@ -48,6 +48,7 @@ const SignUpForm = () => {
         body: JSON.stringify(user),
       });
       const data = await response.json();
+      console.log("HIT THE SIGN UP ROUTE", data);
       dispatch(setUserUid(data.id));
       dispatch(userSignIn());
       navigate(`/dashboard/${data.id}`);

@@ -31,7 +31,6 @@ const Leads = () => {
     fetch("http://localhost:5001/leads")
       .then((res) => res.json())
       .then((data) => {
-        console.log("data - LEADS", data);
         setLeads(data);
         setLeadCount(data.length);
       });

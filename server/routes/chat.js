@@ -32,4 +32,32 @@ router.get("/user/:id", async (req, res) => {
   }
 });
 
+// Create a new conversation
+router.post("/conversations", async (req, res) => {
+  try {
+    const { sender, recipient } = req.body;
+    const newConversation = await pool.query(
+      "INSERT INTO conversations (user_1, user_2) VALUES ($1, $2) RETURNING *",
+      [sender, recipient]
+    );
+    res.json(newConversation.rows[0]);
+  } catch (err) {
+    console.error(`Error creating new conversation, ${err.message}`);
+  }
+});
+
+// Create a new message
+router.post("/messages", async (req, res) => {
+  try {
+    const { conversation_id, sender, recipient, message_body } = req.body;
+    const newMessage = await pool.query(
+      "INSERT INTO messages (conversation_id, sender, recipient, message_body) VALUES ($1, $2, $3, $4) RETURNING *",
+      [conversation_id, sender, recipient, message_body]
+    );
+    res.json(newMessage.rows[0]);
+  } catch (err) {
+    console.error(`Error creating new message, ${err.message}`);
+  }
+});
+
 module.exports = router;

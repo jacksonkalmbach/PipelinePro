@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatPreview from "../../components/chat-components/chat-preview/ChatPreview";
 import Conversation from "../../components/chat-components/conversation/Conversation";
+import LeadOwnerSearchList from "../../components/lead-components/lead-owner-search-list/LeadOwnerSearchList";
 import SearchBox from "../../components/search-box-component/SearchBox";
 import {
   setConversationId,
@@ -13,6 +14,9 @@ import "./Chat.styles.scss";
 
 const Chat = () => {
   const dispatch = useDispatch();
+
+  const [allUsers, setAllUsers] = useState([]);
+
   const newChat = useSelector((state: any) => state.chat.newChat);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
   const currentUser = useSelector((state: any) => state.userAuth.uid);
@@ -20,6 +24,8 @@ const Chat = () => {
   const selectedConversationId = useSelector(
     (state: any) => state.chat.conversationId
   );
+
+  
 
   const handleNewConversation = () => {
     dispatch(setNewChat(true));
