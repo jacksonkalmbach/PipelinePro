@@ -24,7 +24,7 @@
   right: 0vw;
   bottom: 0;
 
-  .day-preview-lead-header {
+  .day-preview-header {
     padding: 1rem 0;
     display: flex;
     width: 100%;
@@ -32,13 +32,13 @@
     align-items: center;
     border-bottom: 1px solid $theme-lightgrey;
 
-    h1 {
+    .day-preview-header__title {
       font-size: 24px;
       font-weight: bold;
       padding-left: 3rem;
     }
 
-    .close-preview-day-button {
+    .day-preview-header__close-button {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -59,7 +59,7 @@
     width: 90%;
     padding: 1rem 0;
 
-    .day-preview-content-header {
+    .day-preview-content__header {
       display: flex;
       justify-content: space-between;
       align-items: center;

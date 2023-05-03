@@ -4,9 +4,9 @@ import {
   setNewChat,
   setShowAllChats,
 } from "../../../store/reducers/chat/chatSlice";
+
 import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 import LeadOwnerSearchList from "../../lead-components/lead-owner-search-list/LeadOwnerSearchList";
-
 import SearchBox from "../../search-box-component/SearchBox";
 import Message from "../message-component/Message";
 
@@ -22,7 +22,7 @@ const defaultMessageData = {
   message_body: "",
   recipient: "",
   sender: "",
-  conversation_id: 0,
+  conversation_id: "",
 };
 
 interface Employee {
@@ -48,7 +48,9 @@ const defaultEmployeeData = {
 
 const Conversation = ({ id, newChat }: ConversationProps) => {
   const dispatch = useDispatch();
+
   const currentUid = useSelector((state: any) => state.userAuth.uid);
+  const showAllChats = useSelector((state: any) => state.chat.showAllChats);
 
   const [allMessages, setAllMessages] = useState([defaultMessageData]);
   const [searchField, setSearchField] = useState("");
@@ -56,9 +58,8 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
     useState<Employee>(defaultEmployeeData);
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [filteredEmployees, setFilteredEmployees] = useState<Employee[]>([]);
-  const showAllChats = useSelector((state: any) => state.chat.showAllChats);
-
   const [newMessage, setNewMessage] = useState("");
+  const [otherUser, setOtherUser] = useState(defaultEmployeeData);
 
   const backtoAllChats = () => {
     dispatch(setNewChat(false));
@@ -108,12 +109,21 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
           .then((res) => res.json())
           .then((data) => {
             setAllMessages(data);
+            const otherUser =
+              data[0].sender === currentUid
+                ? data[0].recipient
+                : data[0].sender;
+            fetch(`http://localhost:5001/users/${otherUser}`)
+              .then((res) => res.json())
+              .then((data) => {
+                setOtherUser(data);
+              });
           });
       } catch (error) {
         console.log("error fetching conversation", error);
       }
     }
-  }, [id, newChat]);
+  }, [id, newChat, currentUid]);
 
   useEffect(() => {
     try {
@@ -236,24 +246,12 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
                 )
               ) : (
                 <div className="employee-name">
-                  {/* <EmployeeSelect
-                    id={1}
-                    firstName={
-                      senderData.first_name.length > 1
-                        ? senderData.first_name
-                        : ""
-                    }
-                    lastName={
-                      senderData.last_name.length > 1
-                        ? senderData.last_name
-                        : ""
-                    }
-                    profilePic={
-                      senderData.profile_pic.length > 1
-                        ? senderData.profile_pic
-                        : ""
-                    }
-                  /> */}
+                  <EmployeeSelect
+                    id={otherUser.id}
+                    firstName={otherUser.first_name}
+                    lastName={otherUser.last_name}
+                    profilePic={otherUser.photo_url}
+                  />
                 </div>
               )}
             </div>

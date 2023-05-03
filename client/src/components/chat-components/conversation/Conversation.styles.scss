@@ -11,8 +11,8 @@
   .send-to {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    width: calc(100% - 2rem);
     height: 10%;
     padding: 0 1rem;
     gap: 10px;
@@ -47,8 +47,8 @@
   .messages-container {
     display: flex;
     flex-direction: column;
-    min-width: calc(100% - 15xwpx);
-    border: 1px solid $theme-lightgrey;
+    min-width: calc(100% - 20px);
+    border-top: 1px solid $theme-lightgrey;
     gap: 20px;
     padding: 10px;
   }

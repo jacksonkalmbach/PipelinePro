@@ -7,7 +7,7 @@ interface MessageProps {
   message: string;
   sender: string;
   recipient: string;
-  conversationId: number;
+  conversationId: string;
 }
 
 const Message = ({
@@ -16,6 +16,7 @@ const Message = ({
   recipient,
   conversationId,
 }: MessageProps) => {
+  
   const currentUserId = useSelector((state: any) => state.userAuth.uid);
 
   return (

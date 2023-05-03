@@ -33,14 +33,16 @@ const EmployeeSelect = ({
 
   return (
     <div className="employee-select-container" onClick={handleSelected}>
-      <div className="profile-pic-container">
-        {profilePic !== "" ? (
-          <img src={profilePic} alt="profile" />
-        ) : (
-          <div className="profile-pic-initials">
-            {firstName[0] + lastName[0]}
-          </div>
-        )}
+      <div className="employee-select__photo">
+        <div className="profile-pic-container">
+          {profilePic !== "" ? (
+            <img src={profilePic} alt="profile" />
+          ) : (
+            <div className="profile-pic-initials">
+              {firstName[0] + lastName[0]}
+            </div>
+          )}
+        </div>
       </div>
       <div className="employee-details">
         <>
@@ -49,6 +51,11 @@ const EmployeeSelect = ({
           </div>
         </>
         {nav ? <div className="employee-title">{title}</div> : <></>}
+        {title && !nav ? (
+          <div className="employee-title preview">{title}</div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );
