@@ -6,6 +6,7 @@ import Event from "../event/Event";
 import {
   setShowDayPreview,
   setDatePreview,
+  setYearMonthDay,
 } from "../../../store/reducers/calendar/calendarSlice";
 
 import "./Day.styles.scss";
@@ -47,7 +48,8 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
 
   const handleShowDayPreview = () => {
     dispatch(setShowDayPreview(true));
-    dispatch(setDatePreview(day));
+    dispatch(setDatePreview(isoDate));
+    dispatch(setYearMonthDay(yearMonthDay));
   };
 
   useEffect(() => {

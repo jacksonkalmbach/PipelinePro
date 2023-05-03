@@ -9,9 +9,14 @@ const DayPreview = () => {
   const dispatch = useDispatch();
 
   const previewDate = useSelector((state: any) => state.calendar.datePreview);
-  const day = previewDate.getDate();
-  const month = previewDate.toLocaleString("default", { month: "long" });
-  const year = previewDate.getFullYear();
+
+  const date = new Date(previewDate);
+  const formattedDate = date.toLocaleString("default", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
 
   const [addNewEvent, setAddNewEvent] = useState(false);
 
@@ -28,9 +33,7 @@ const DayPreview = () => {
       <div className="overlay"></div>
       <div className="day-preview-container">
         <div className="day-preview-header">
-          <h1 className="day-preview-header__title">
-            {month + " " + day + ", " + year}
-          </h1>
+          <h1 className="day-preview-header__title">{formattedDate}</h1>
           <div
             className="day-preview-header__close-button"
             onClick={closeDayPreview}

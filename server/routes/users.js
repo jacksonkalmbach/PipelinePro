@@ -21,7 +21,6 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    console.log("id from get user", id);
     const user = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
     res.json(user.rows[0]);
   } catch (err) {

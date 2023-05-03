@@ -109,7 +109,6 @@ const RowItem = ({
           setOwnerFirstName(data.first_name);
           setOwnerLastName(data.last_name);
           setOwnerPhotoURL(data.photo_url);
-          console.log("employee - LEADROWITEM", data);
         });
     }
   }, [leadOwner]);
