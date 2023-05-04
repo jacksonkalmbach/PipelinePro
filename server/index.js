@@ -17,7 +17,7 @@ const usersRouter = require("./routes/users");
 const leadsRouter = require("./routes/leads");
 const notesRouter = require("./routes/notes");
 const employeesRouter = require("./routes/employees");
-const eventRouter = require("./routes/calendar/events");
+const eventRouter = require("./routes/events");
 const chatRouter = require("./routes/chat");
 const companyRouter = require("./routes/company");
 

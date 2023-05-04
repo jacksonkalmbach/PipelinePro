@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const pool = require("../../db");
+const pool = require("../db");
 
 // Create an event
 router.post("/", async (req, res) => {
@@ -37,6 +37,19 @@ router.get("/:date/:owner", async (req, res) => {
       [date, owner]
     );
     res.json(allEvents.rows);
+  } catch (err) {
+    console.error(err.message);
+  }
+});
+
+// Delete an event
+router.delete("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deleteEvent = await pool.query("DELETE FROM events WHERE id = $1", [
+      id,
+    ]);
+    res.json("Event was deleted!");
   } catch (err) {
     console.error(err.message);
   }

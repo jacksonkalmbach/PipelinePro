@@ -25,14 +25,14 @@ const Dashboard = () => {
       });
   }, [currentUserId]);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setTodaysEvents(data);
-  //     });
-  // }, [currentUserId, todayDate]);
+  useEffect(() => {
+    fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        setTodaysEvents(data);
+      });
+  }, [currentUserId, todayDate]);
 
   return (
     <div className="dashboard-container">
@@ -57,19 +57,25 @@ const Dashboard = () => {
         <div className="my-calendar">
           <h2>Today's Calendar</h2>
           <div className="today-events-container">
-            {todaysEvents.length > 0 ? (
-              todaysEvents.map((event: any) => {
-                const { event_name, event_time } = event;
-                return (
-                  <DashboardEvent
-                    eventTitle={event_name}
-                    eventTime={event_time}
-                  />
-                );
-              })
-            ) : (
-              <div className="no-events">No events today</div>
-            )}
+            <div className="today-events-container__content">
+              {todaysEvents.length > 0 ? (
+                todaysEvents.map((event: any) => {
+                  const { id, event_name, event_time, event_description } =
+                    event;
+                  return (
+                    <DashboardEvent
+                      key={id}
+                      eventId={id}
+                      eventTitle={event_name}
+                      eventTime={event_time}
+                      eventDescription={event_description}
+                    />
+                  );
+                })
+              ) : (
+                <div className="no-events">No Events Today</div>
+              )}
+            </div>
           </div>
         </div>
       </div>
