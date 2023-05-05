@@ -33,7 +33,7 @@ router.get("/:date/:owner", async (req, res) => {
   try {
     const { date, owner } = req.params;
     const allEvents = await pool.query(
-      "SELECT * FROM events WHERE event_date = $1 AND event_owner = $2",
+      "SELECT * FROM events WHERE event_date = $1 AND event_owner = $2 ORDER BY event_time ASC",
       [date, owner]
     );
     res.json(allEvents.rows);

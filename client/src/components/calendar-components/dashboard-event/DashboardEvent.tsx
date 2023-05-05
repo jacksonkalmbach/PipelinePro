@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./DashboardEvent.styles.scss";
 
 interface DashboardEventProps {
@@ -28,8 +26,6 @@ const DashboardEvent = ({
   } else if (Number(eventHour) === 0) {
     eventHour = "12";
   }
-
-  console.log("eventId - DashboardEvent.tsx", eventId);
 
   const handleEditEvent = () => {
     console.log("edit event");

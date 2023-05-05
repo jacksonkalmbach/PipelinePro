@@ -23,7 +23,7 @@ interface Lead {
   company_name: string;
   job_title: string;
   lead_status: string;
-  lead_owner: number;
+  lead_owner: string;
 }
 
 const currentLeadDetails = {
@@ -35,7 +35,7 @@ const currentLeadDetails = {
   company_name: "",
   job_title: "",
   lead_status: "",
-  lead_owner: 0,
+  lead_owner: "",
 };
 
 const LeadPreview = () => {
@@ -73,7 +73,6 @@ const LeadPreview = () => {
         fetch(`http://localhost:5001/leads/${leadId}`)
           .then((res) => res.json())
           .then((data) => {
-            console.log("data - LEAD PREVIEW", data);
             setCurrentLead(data);
           });
       } catch (error) {
@@ -312,17 +311,12 @@ const LeadPreview = () => {
               {addNote && <NewNote leadId={leadId} />}
               {notes.length > 0 &&
                 notes.map((note: any) => {
-                  const {
-                    note_id,
-                    note_title,
-                    note_body,
-                    created_at,
-                    created_by,
-                  } = note;
+                  const { id, note_title, note_body, created_at, created_by } =
+                    note;
                   return (
                     <LeadNote
-                      key={note_id}
-                      noteId={note_id}
+                      key={id}
+                      noteId={id}
                       noteTitle={note_title}
                       noteBody={note_body}
                       noteCreatedAt={created_at}

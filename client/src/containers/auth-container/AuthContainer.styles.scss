@@ -22,11 +22,19 @@
       align-items: center;
       height: 100px;
       width: auto;
+      padding: 0;
+      margin: 0;
 
       .logo {
         height: 100%;
         width: 100%;
       }
+    }
+
+    .toggle-container {
+      height: fit-content;
+      padding: 10px;
+      margin-top: 30px;
     }
 
     .auth-subtitle {

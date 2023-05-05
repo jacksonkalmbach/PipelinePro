@@ -126,7 +126,7 @@
 }
 
 @media (max-width: 767px) {
-  .row-item {
+  .row-item-container {
     width: 100%;
 
     .row-item__checkbox {
@@ -149,6 +149,10 @@
     }
 
     .row-item__owner {
+      display: none;
+    }
+
+    .row-item__department {
       display: none;
     }
   }

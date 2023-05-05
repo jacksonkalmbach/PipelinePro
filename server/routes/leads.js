@@ -11,19 +11,19 @@ router.post("/", async (req, res) => {
       lastName,
       email,
       phone,
-      company,
+      companyId,
       jobTitle,
       leadStatus,
       leadOwner,
     } = req.body;
     const newLead = await pool.query(
-      "INSERT INTO leads (first_name, last_name, email, phone, company_name, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      "INSERT INTO leads (first_name, last_name, email, phone, company_id, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
         firstName,
         lastName,
         email,
         phone,
-        company,
+        companyId,
         jobTitle,
         leadStatus,
         leadOwner,

@@ -28,7 +28,16 @@ router.get("/:id", async (req, res) => {
   } catch (err) {
     console.error(`Error getting company, ${err.message}`);
   }
-  console.log("res body", res);
+});
+
+// Get all companies
+router.get("/", async (req, res) => {
+  try {
+    const allCompanies = await pool.query("SELECT * FROM companies");
+    res.json(allCompanies.rows);
+  } catch (err) {
+    console.error(`Error getting all companies, ${err.message}`);
+  }
 });
 
 module.exports = router;

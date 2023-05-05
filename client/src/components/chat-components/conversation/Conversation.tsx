@@ -52,6 +52,7 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
   const currentUid = useSelector((state: any) => state.userAuth.uid);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
 
+  // const [socket, setSocket] = useState<any>(null);
   const [allMessages, setAllMessages] = useState([defaultMessageData]);
   const [searchField, setSearchField] = useState("");
   const [selectedEmployee, setSelectedEmployee] =
@@ -101,6 +102,10 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
   const handleClearEmployee = () => {
     setSelectedEmployee(defaultEmployeeData);
   };
+
+  // useEffect(() => {
+  //   setSocket(io("ws://localhost:5001"));
+  // }, []);
 
   useEffect(() => {
     if (!newChat) {
@@ -211,21 +216,25 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
               </span>
               {newChat ? (
                 selectedEmployee.id.length === 0 ? (
-                  <>
-                    <div className="search-container">
+                  <div className="search-container">
+                    <div className="search-box">
                       <SearchBox
                         className="seach-box"
                         placeholder="Search Employees"
                         onChangeHandler={onSearchChange}
                       />
-                      {searchField.length > 0 && (
-                        <LeadOwnerSearchList
-                          employees={filteredEmployees}
-                          onEmployeeSelected={onEmployeeSelect}
-                        />
-                      )}
                     </div>
-                  </>
+                    <div>
+                      <div className="search-list">
+                        {searchField.length > 0 && (
+                          <LeadOwnerSearchList
+                            employees={filteredEmployees}
+                            onEmployeeSelected={onEmployeeSelect}
+                          />
+                        )}
+                      </div>
+                    </div>
+                  </div>
                 ) : (
                   <>
                     <div className="selected-employee">
@@ -256,7 +265,7 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
               )}
             </div>
             <div className="messages-container">
-              {allMessages[0].id.length > 0 ? (
+              {allMessages[0].id.length > 0 && (
                 <>
                   {allMessages.map((message) => {
                     const { id, message_body, sender, recipient } = message;
@@ -271,8 +280,6 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
                     );
                   })}
                 </>
-              ) : (
-                <div className="no-messages"></div>
               )}
             </div>
             <div className="new-message">

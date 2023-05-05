@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
+import {
+  setShowCreateLead,
+  setShowCompanyList,
+} from "../../../store/reducers/leads/showLeadSlice";
+
 import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
 import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 import SearchBox from "../../search-box-component/SearchBox";
-
-import socket from "../../../utils/socket";
 import LeadOwnerSearchList from "../lead-owner-search-list/LeadOwnerSearchList";
 
 const defaultCreateLeadState = {
@@ -121,6 +123,12 @@ const CreateLead = () => {
   };
 
   const showCreateLead = useSelector((state: any) => state.showLead.value);
+  const selectedCompany = useSelector(
+    (state: any) => state.showLead.selectedCompanyName
+  );
+  const selectedCompanyId = useSelector(
+    (state: any) => state.showLead.selectedCompanyId
+  );
 
   const handleCloseCreateLead = () => {
     dispatch(setShowCreateLead(false));
@@ -130,10 +138,15 @@ const CreateLead = () => {
     setFormFields(defaultCreateLeadState);
   };
 
+  const handleShowCompanyList = () => {
+    dispatch(setShowCompanyList(true));
+    formFields.company = selectedCompany;
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const body = { ...formFields };
+      const body = { ...formFields, companyId: selectedCompanyId };
       const response = fetch("http://localhost:5001/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -239,6 +252,8 @@ const CreateLead = () => {
                       name="company"
                       placeholder="e.g. Google"
                       onChange={handleInputChange}
+                      value={selectedCompany}
+                      onClick={handleShowCompanyList}
                     />
                   </div>
                   <div className="form-group">

@@ -81,9 +81,13 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
       >
         {day.getDate()}
       </div>
-      {eventData && eventData[0] && eventData[0].event_name && (
-        <Event eventName={eventName} />
-      )}
+      <div className="events">
+        {eventData &&
+          eventName[0] &&
+          eventData.map((event) => {
+            return <Event eventName={event.event_name} />;
+          })}
+      </div>
     </div>
   );
 };

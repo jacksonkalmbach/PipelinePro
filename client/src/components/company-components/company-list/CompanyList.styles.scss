@@ -1,0 +1,101 @@
+@import "../../../styles/variables.scss";
+
+.company-list-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  height: 40vh;
+  width: 55vw;
+  background-color: white;
+
+  z-index: 9999;
+  border: 5px solid $theme-lightgrey;
+  border-radius: 15px;
+  padding: 5px;
+
+  .search-add-company {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    .search-box-container {
+      width: 65%;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: flex-end;
+      width: 30%;
+      align-items: center;
+      padding: 10px 0;
+
+      .add-company-button {
+        background-color: $primary-color;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 10px;
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .company-list-header {
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid $theme-black;
+    border-top: 1px solid $theme-black;
+    background-color: $theme-lightgrey;
+    padding: 10px 0;
+    justify-content: space-around;
+
+    .company-list-title {
+      color: $theme-black;
+    }
+  }
+
+  p {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .company-list {
+    width: 100%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    .company {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid $theme-lightgrey;
+
+      &:hover {
+        cursor: pointer;
+        background-color: $theme-lightgrey;
+      }
+
+      .info-item {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+  }
+}
+.company-list::-webkit-scrollbar {
+  display: none;
+}

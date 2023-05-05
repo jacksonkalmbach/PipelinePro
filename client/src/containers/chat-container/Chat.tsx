@@ -15,8 +15,6 @@ import "./Chat.styles.scss";
 const Chat = () => {
   const dispatch = useDispatch();
 
-  const [allUsers, setAllUsers] = useState([]);
-
   const newChat = useSelector((state: any) => state.chat.newChat);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
   const currentUser = useSelector((state: any) => state.userAuth.uid);
@@ -24,8 +22,6 @@ const Chat = () => {
   const selectedConversationId = useSelector(
     (state: any) => state.chat.conversationId
   );
-
-  
 
   const handleNewConversation = () => {
     dispatch(setNewChat(true));
@@ -48,7 +44,9 @@ const Chat = () => {
         .then((data) => {
           setAllConversations(data);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log("error fetching conversations in Chat.tsx", error);
+    }
   }, [currentUser]);
 
   return (
@@ -61,13 +59,6 @@ const Chat = () => {
               <span className="material-symbols-outlined">edit_square</span>
             </div>
           </h1>
-          <div className="search-container">
-            <SearchBox
-              className="search-container"
-              placeholder="Search Chats"
-              onChangeHandler={() => {}}
-            />
-          </div>
           <div className="all-chats">
             {allConversations.map((conversation: any) => {
               const uniqueKey =

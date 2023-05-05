@@ -58,7 +58,9 @@ const DayPreview = () => {
     try {
       fetch(`http://localhost:5001/events/${ymd}/${uid}`)
         .then((res) => res.json())
-        .then((data) => setEvents(data));
+        .then((data) => {
+          setEvents(data);
+        });
     } catch (error) {
       console.log("error getting events in DayPreview.tsx");
     }

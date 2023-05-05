@@ -9,9 +9,10 @@ import {
 
 import { setSelectAllLeads } from "../../store/reducers/leads/selectAllLeadsSlice";
 
-import "./ContactConvert.styles.scss";
 import ConfirmDelete from "../lead-components/confirm-delete/ConfirmDelete";
 import EditLead from "../lead-components/edit-lead/EditLead";
+
+import "./ContactConvert.styles.scss";
 
 const defaultLeadData = {
   lead_id: "",
@@ -81,7 +82,7 @@ const ContactConvert = () => {
           .then((data) => {
             setLeadData(data);
           });
-        fetch(`http://localhost:5001/employees/${leadData.lead_owner}`)
+        fetch(`http://localhost:5001/users/${leadData.lead_owner}`)
           .then((res) => res.json())
           .then((data) => {
             setLeadData((prevState) => ({

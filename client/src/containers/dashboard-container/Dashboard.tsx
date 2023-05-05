@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import "./Dashboard.styles.scss";
 import List from "../../components/lead-components/lead-list-components/list/List";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
 import DashboardEvent from "../../components/calendar-components/dashboard-event/DashboardEvent";
+
+import "./Dashboard.styles.scss";
 
 const Dashboard = () => {
   const [leads, setLeads] = useState([]);
@@ -18,20 +19,28 @@ const Dashboard = () => {
   const currentUserId = useSelector((state: any) => state.userAuth.uid);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setLeads(data);
-      });
+    try {
+      fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setLeads(data);
+        });
+    } catch (error) {
+      console.log("Error fetching user in Dashboard.tsx", error);
+    }
   }, [currentUserId]);
 
   useEffect(() => {
-    fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setTodaysEvents(data);
-      });
+    try {
+      fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setTodaysEvents(data);
+        });
+    } catch (error) {
+      console.log("Error fetching events in Dashboard.tsx", error);
+    }
   }, [currentUserId, todayDate]);
 
   return (
@@ -55,7 +64,7 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="my-calendar">
-          <h2>Today's Calendar</h2>
+          <h2>Today's Events</h2>
           <div className="today-events-container">
             <div className="today-events-container__content">
               {todaysEvents.length > 0 ? (

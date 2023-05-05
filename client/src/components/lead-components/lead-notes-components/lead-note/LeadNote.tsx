@@ -22,14 +22,14 @@ interface AuthorDetails {
   id: string;
   first_name: string;
   last_name: string;
-  profile_pic: string;
+  photo_url: string;
 }
 
 const defaultAuthorDetails = {
   id: "",
   first_name: "",
   last_name: "",
-  profile_pic: "",
+  photo_url: "",
 };
 
 const LeadNote = ({
@@ -55,7 +55,6 @@ const LeadNote = ({
           `http://localhost:5001/users/${noteAuthor}`
         );
         const employeeDetails = await response.json();
-        console.log(employeeDetails);
         setAuthorDetails(employeeDetails);
       } catch (error) {
         console.log(error);
@@ -68,6 +67,7 @@ const LeadNote = ({
     dispatch(showConfirmDelete(true));
     dispatch(setDeleteType("note"));
     dispatch(setDeleteId(noteId));
+    console.log("delete note", noteId);
   };
 
   return (
@@ -80,7 +80,7 @@ const LeadNote = ({
               id={noteAuthor}
               firstName={authorDetails.first_name}
               lastName={authorDetails.last_name}
-              profilePic={authorDetails.profile_pic}
+              profilePic={authorDetails.photo_url}
             />
           )}
         </div>

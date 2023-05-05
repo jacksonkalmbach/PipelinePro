@@ -16,7 +16,7 @@ const defaultNewNote = {
 };
 
 const NewNote = ({ leadId }: NewNoteProps) => {
-  const noteAuthor = Number(useSelector((state: any) => state.userAuth.uid));
+  const noteAuthor = useSelector((state: any) => state.userAuth.uid);
   const [newNote, setNewNote] = useState(defaultNewNote);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteBody, setNoteBody] = useState("");

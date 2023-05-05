@@ -1,4 +1,3 @@
-import socket from "../../utils/socket";
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -9,6 +8,7 @@ import List from "../../components/lead-components/lead-list-components/list/Lis
 import "./Leads.styles.scss";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
 import ContactConvert from "../../components/contact-convert/ContactConvert";
+import CompanyList from "../../components/company-components/company-list/CompanyList";
 
 interface LeadData {
   lead_id: string;
@@ -40,6 +40,7 @@ const Leads = () => {
     <div className="leads-container">
       <div className="count-and-create">
         <div className="leads-count">{leadCount} Leads</div>
+        <CompanyList />
         <CreateLead />
         <LeadPreview />
         <div className="filters-and-add-lead">

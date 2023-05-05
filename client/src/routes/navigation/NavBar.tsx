@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
+
 import {
   userSignOut,
   setIsDemo,
 } from "../../store/reducers/user/userAuthSlice";
+
 import EmployeeSelect from "../../components/employee-components/employee-select/EmployeeSelect";
+
 import "./NavBar.scss";
 
 interface UserData {
@@ -35,9 +38,9 @@ const NavBar = () => {
   const pathname = location.pathname;
 
   const uid = useSelector((state: any) => state.userAuth.uid);
-  if (uid === 0) console.log("ERROR 0 !!!!!!!)", uid);
   const isSignedIn = useSelector((state: any) => state.userAuth.isSignedIn);
   const isDemo = useSelector((state: any) => state.userAuth.isDemo);
+
   const [userData, setUserData] = useState<UserData>(defaultUserData);
   const [sideNavVisible, setSideNavVisible] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -72,11 +75,14 @@ const NavBar = () => {
 
   const handleLogoClick = () => {
     dispatch(userSignOut());
+    dispatch(setIsDemo(false));
     navigate("/");
   };
 
   const handleLogout = () => {
     dispatch(userSignOut());
+    dispatch(setIsDemo(false));
+    navigate("/");
   };
 
   const handleExitDemo = () => {
@@ -100,6 +106,16 @@ const NavBar = () => {
             <li className="navbar-link">{currentSection}</li>
             <li className="navbar-link">
               <div className="account">
+                {isDemo && (
+                  <Link className="navbar-link" to="/">
+                    <button
+                      className="get-started-button"
+                      onClick={handleExitDemo}
+                    >
+                      Exit Demo
+                    </button>
+                  </Link>
+                )}
                 <div onClick={showDropdownOptions}>
                   <EmployeeSelect
                     id={uid}
@@ -135,16 +151,6 @@ const NavBar = () => {
                     </div>
                   )}
                 </div>
-                {isDemo && (
-                  <Link className="navbar-link" to="/">
-                    <button
-                      className="get-started-button"
-                      onClick={handleExitDemo}
-                    >
-                      Exit Demo
-                    </button>
-                  </Link>
-                )}
               </div>
             </li>
           </ul>

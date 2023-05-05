@@ -2,16 +2,9 @@ const http = require("http");
 const express = require("express");
 const cors = require("cors");
 const pool = require("./db");
-const socketio = require("socket.io");
 
 const app = express();
 const server = http.createServer(app);
-const io = socketio(server, {
-  cors: {
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"],
-  },
-});
 
 const usersRouter = require("./routes/users");
 const leadsRouter = require("./routes/leads");
@@ -23,19 +16,6 @@ const companyRouter = require("./routes/company");
 
 app.use(cors());
 app.use(express.json());
-
-// SOCKET.IO //
-io.on("connection", (socket) => {
-  console.log("socket id", socket.id);
-  socket.on("new-lead", (lead) => {
-    console.log("new lead - server file", lead);
-    io.emit("new-lead", lead);
-  });
-
-  socket.on("delete-lead", (lead) => {
-    io.emit("delete-lead", lead);
-  });
-});
 
 // ROUTES //
 

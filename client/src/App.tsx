@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userSignIn } from "./store/reducers/user/userAuthSlice";
-import socket from "./utils/socket";
 
 import "./App.css";
+
+// Components
 import MainSectionsNavbar from "./components/navigation-components/main-section-navbar/MainSectionsNavbar";
 import NavBar from "./routes/navigation/NavBar";
 import Leads from "./containers/lead-container/Leads";
@@ -36,14 +37,6 @@ const App: React.FC = () => {
       }, 1000);
     }
   }, [isDemo, userIsSignedIn, dispatch]);
-
-  useEffect(() => {
-    if (userIsSignedIn) {
-      socket.on("connect", () => {
-        console.log("connected");
-      });
-    }
-  }, [userIsSignedIn]);
 
   return (
     <>

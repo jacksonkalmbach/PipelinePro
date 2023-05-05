@@ -106,12 +106,12 @@ const List = ({
         ) : (
           <div className="list-filters__checkbox hide"></div>
         )}
-        <div className="list-filters__filter">NAME</div>
-        <div className="list-filters__filter">CONTACT</div>
-        <div className="list-filters__filter">
+        <div className="list-filters__filter name">NAME</div>
+        <div className="list-filters__filter contact">CONTACT</div>
+        <div className="list-filters__filter status">
           {type === "leads" ? "STATUS" : "JOB TITLE"}
         </div>
-        <div className="list-filters__filter">
+        <div className="list-filters__filter owner">
           {type === "leads" ? "LEAD OWNER" : "DEPARTMENT"}
         </div>
       </div>

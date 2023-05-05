@@ -3,36 +3,135 @@
 .company-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 100%;
-  gap: 20px;
-  border: 1px solid red;
+  justify-content: flex-start;
+  align-items: center;
+  width: calc(100% - 40px);
+  height: 82vh;
+  padding: 20px;
 
   .company-header {
+    width: calc(100% - 40px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+
     .company-header__logo {
     }
 
     .company-header__info {
-      border: 1px solid blue;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+
+      .company-header__additional-details {
+        display: flex;
+        gap: 30px;
+        margin: 0;
+        padding: 0;
+
+        .company-header__info--location {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $theme-grey;
+          gap: 10px;
+        }
+
+        .company-header__info--phone {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $theme-grey;
+          gap: 10px;
+        }
+
+        .company-header__info--website {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-decoration: none;
+          color: $theme-grey;
+          gap: 10px;
+
+          .link {
+            text-decoration: none;
+          }
+
+          h3 {
+            color: $theme-grey;
+            text-decoration: none;
+          }
+        }
+      }
     }
     .company-header__info--name {
-    }
-    .company-header__info--location {
-    }
-    .company-header__info--phone {
-    }
-    .company-header__info--website {
     }
   }
   .company-body {
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 40%;
+    height: 80%;
+
     .company-body__employees {
+      height: 100%;
+
       .company-body__employees--list-container {
         width: 100%;
         height: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .company-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 90vw;
+    .company-header {
+      width: 90vw;
+      justify-content: center;
+      align-items: center;
+      padding-left: 0;
+      text-align: center;
+
+      .company-header__additional-details {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        height: 30vh;
+        border: 1px solid red;
+        padding: 0;
+        margin: 0;
+
+        .company-header__info--location {
+          flex-direction: column;
+        }
+
+        .company-header__info--phone {
+          flex-direction: column;
+        }
+
+        .company-header__info--website {
+          flex-direction: column;
+
+          .link {
+            text-decoration: none;
+          }
+
+          h3 {
+            color: $theme-grey;
+            text-decoration: none;
+          }
+        }
       }
     }
   }

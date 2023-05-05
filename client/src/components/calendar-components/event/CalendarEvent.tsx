@@ -3,7 +3,7 @@ import React from "react";
 import "./CalendarEvent.styles.scss";
 
 interface CalendarEventProps {
-  eventName: string;
+  eventName: string | undefined;
 }
 
 const CalendarEvent = ({ eventName }: CalendarEventProps) => {
