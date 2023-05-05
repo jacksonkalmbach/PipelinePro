@@ -52,7 +52,6 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
   const currentUid = useSelector((state: any) => state.userAuth.uid);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
 
-  // const [socket, setSocket] = useState<any>(null);
   const [allMessages, setAllMessages] = useState([defaultMessageData]);
   const [searchField, setSearchField] = useState("");
   const [selectedEmployee, setSelectedEmployee] =
@@ -102,10 +101,6 @@ const Conversation = ({ id, newChat }: ConversationProps) => {
   const handleClearEmployee = () => {
     setSelectedEmployee(defaultEmployeeData);
   };
-
-  // useEffect(() => {
-  //   setSocket(io("ws://localhost:5001"));
-  // }, []);
 
   useEffect(() => {
     if (!newChat) {

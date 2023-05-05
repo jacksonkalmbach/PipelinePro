@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -49,6 +49,8 @@ interface selectedLeadOwner {
 }
 
 const CreateLead = () => {
+  const { ws } = useContext(UserContext);
+
   const dispatch = useDispatch();
 
   const [formFields, setFormFields] = useState(defaultCreateLeadState);
@@ -147,14 +149,16 @@ const CreateLead = () => {
     event.preventDefault();
     try {
       const body = { ...formFields, companyId: selectedCompanyId };
-      const response = fetch("http://localhost:5001/leads", {
+      const response = await fetch("http://localhost:5001/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(response);
-      resetFormFields();
-      setCreateLeadSuccess(true);
+      if (response.ok) {
+        ws.emit("new-lead");
+        resetFormFields();
+        setCreateLeadSuccess(true);
+      }
     } catch (err) {
       console.log(err);
     }

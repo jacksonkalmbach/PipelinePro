@@ -39,7 +39,9 @@ router.post("/", async (req, res) => {
 // Get all leads
 router.get("/", async (req, res) => {
   try {
-    const allLeads = await pool.query("SELECT * FROM leads");
+    const allLeads = await pool.query(
+      "SELECT * FROM leads ORDER BY created_at DESC"
+    );
     res.json(allLeads.rows);
   } catch (err) {
     console.error(`Error getting all leads, ${err.message}`);
@@ -97,10 +99,9 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteLead = await pool.query(
-      "DELETE FROM leads WHERE lead_id = $1",
-      [id]
-    );
+    const deleteLead = await pool.query("DELETE FROM leads WHERE id = $1", [
+      id,
+    ]);
     res.json("Lead was deleted!");
   } catch (err) {
     console.error(err.message);

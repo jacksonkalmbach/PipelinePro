@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../context/UserContext";
 import { useSelector } from "react-redux";
 
 import FilterAddLead from "../../components/lead-components/filter-add-leads/FilterAddLeads";
@@ -21,6 +22,7 @@ interface LeadData {
 }
 
 const Leads = () => {
+  const { ws } = useContext(UserContext);
   const [leads, setLeads] = useState<LeadData[]>([]);
   const [leadCount, setLeadCount] = useState<number | null>(0);
   const leadSelected = useSelector(
@@ -34,7 +36,22 @@ const Leads = () => {
         setLeads(data);
         setLeadCount(data.length);
       });
-  }, []);
+
+    const handleUpdateLeads = () => {
+      fetch("http://localhost:5001/leads")
+        .then((res) => res.json())
+        .then((data) => {
+          setLeads(data);
+          setLeadCount(data.length);
+        });
+    };
+
+    ws.on("update-leads", handleUpdateLeads);
+
+    return () => {
+      ws.off("update-leads", handleUpdateLeads);
+    };
+  }, [ws]);
 
   return (
     <div className="leads-container">
