@@ -4,10 +4,13 @@
   position: relative;
   z-index: 9999;
   min-height: fit-content;
-  max-height: 5rem;
   width: calc(fit-content + 2rem);
   background-color: white;
   overflow-y: scroll;
+  width: 100%;
+  border: 1px solid blue;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
   .employee-option {
     &:hover {
@@ -15,4 +18,8 @@
       background-color: $theme-lightgrey;
     }
   }
+}
+
+.lead-owner-search-list-container::-webkit-scrollbar {
+  display: none;
 }

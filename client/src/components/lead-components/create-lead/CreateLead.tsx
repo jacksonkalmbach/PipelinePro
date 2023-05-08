@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 import "./CreateLead.styles.scss";
 import { useDispatch, useSelector } from "react-redux";
-import { setShowCreateLead } from "../../../store/reducers/leads/showLeadSlice";
+import {
+  setShowCreateLead,
+  setShowCompanyList,
+} from "../../../store/reducers/leads/showLeadSlice";
+
 import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
 import EmployeeSelect from "../../employee-components/employee-select/EmployeeSelect";
 import SearchBox from "../../search-box-component/SearchBox";
-
-import socket from "../../../utils/socket";
 import LeadOwnerSearchList from "../lead-owner-search-list/LeadOwnerSearchList";
 
 const defaultCreateLeadState = {
@@ -47,6 +49,8 @@ interface selectedLeadOwner {
 }
 
 const CreateLead = () => {
+  const { ws } = useContext(UserContext);
+
   const dispatch = useDispatch();
 
   const [formFields, setFormFields] = useState(defaultCreateLeadState);
@@ -57,7 +61,7 @@ const CreateLead = () => {
 
   useEffect(() => {
     try {
-      fetch("http://localhost:5001/users")
+      fetch("http://localhost:5001/users/department/Sales")
         .then((res) => res.json())
         .then((data) => {
           setEmployees(data);
@@ -121,6 +125,12 @@ const CreateLead = () => {
   };
 
   const showCreateLead = useSelector((state: any) => state.showLead.value);
+  const selectedCompany = useSelector(
+    (state: any) => state.showLead.selectedCompanyName
+  );
+  const selectedCompanyId = useSelector(
+    (state: any) => state.showLead.selectedCompanyId
+  );
 
   const handleCloseCreateLead = () => {
     dispatch(setShowCreateLead(false));
@@ -130,18 +140,25 @@ const CreateLead = () => {
     setFormFields(defaultCreateLeadState);
   };
 
+  const handleShowCompanyList = () => {
+    dispatch(setShowCompanyList(true));
+    formFields.company = selectedCompany;
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const body = { ...formFields };
-      const response = fetch("http://localhost:5001/leads", {
+      const body = { ...formFields, companyId: selectedCompanyId };
+      const response = await fetch("http://localhost:5001/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
       });
-      console.log(response);
-      resetFormFields();
-      setCreateLeadSuccess(true);
+      if (response.ok) {
+        ws.emit("new-lead");
+        resetFormFields();
+        setCreateLeadSuccess(true);
+      }
     } catch (err) {
       console.log(err);
     }
@@ -239,6 +256,8 @@ const CreateLead = () => {
                       name="company"
                       placeholder="e.g. Google"
                       onChange={handleInputChange}
+                      value={selectedCompany}
+                      onClick={handleShowCompanyList}
                     />
                   </div>
                   <div className="form-group">

@@ -50,12 +50,12 @@ const Calendar = () => {
     today.getFullYear(),
     today.getMonth(),
     today.getDate() - today.getDay()
-  ); // Sunday of this week
+  );
   const endOfWeek = new Date(
     today.getFullYear(),
     today.getMonth(),
     today.getDate() + (6 - today.getDay())
-  ); // Saturday of this week
+  );
 
   for (let i = startOfWeek.getDate(); i <= endOfWeek.getDate(); i++) {
     const day = new Date(yearState, monthState - 1, i);

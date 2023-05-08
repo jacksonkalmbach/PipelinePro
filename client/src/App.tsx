@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userSignIn } from "./store/reducers/user/userAuthSlice";
-import socket from "./utils/socket";
 
 import "./App.css";
+
+// Components
 import MainSectionsNavbar from "./components/navigation-components/main-section-navbar/MainSectionsNavbar";
 import NavBar from "./routes/navigation/NavBar";
 import Leads from "./containers/lead-container/Leads";
@@ -20,6 +21,7 @@ import NotificationSettings from "./containers/settings-container/notifications/
 import BillingSettings from "./containers/settings-container/billing/BillingSettings";
 import LandingPage from "./containers/landing-page/LandingPage";
 import Chat from "./containers/chat-container/Chat";
+import Company from "./containers/contacts-container/company/Company";
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -35,14 +37,6 @@ const App: React.FC = () => {
       }, 1000);
     }
   }, [isDemo, userIsSignedIn, dispatch]);
-
-  useEffect(() => {
-    if (userIsSignedIn) {
-      socket.on("connect", () => {
-        console.log("connected");
-      });
-    }
-  }, [userIsSignedIn]);
 
   return (
     <>
@@ -66,7 +60,7 @@ const App: React.FC = () => {
                     <Route path="/contacts/*" element={<Contacts />}>
                       <Route path="leads" element={<Leads />} />
                       <Route path="contacts" element={<div>Contacts</div>} />
-                      <Route path="company" element={<div>Companies</div>}>
+                      <Route path="company" element={<Company />}>
                         <Route path="employees" element={<div>Employees</div>}>
                           <Route path=":id" element={<div>Employee</div>} />
                         </Route>
@@ -117,5 +111,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-//     {isDemo && !isLoaded ? (

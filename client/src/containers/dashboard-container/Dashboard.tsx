@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import "./Dashboard.styles.scss";
-import LeadList from "../../components/lead-components/lead-list-components/lead-list/LeadList";
+import List from "../../components/lead-components/lead-list-components/list/List";
 import LeadPreview from "../../components/lead-components/lead-preview/LeadPreview";
 import DashboardEvent from "../../components/calendar-components/dashboard-event/DashboardEvent";
+
+import "./Dashboard.styles.scss";
 
 const Dashboard = () => {
   const [leads, setLeads] = useState([]);
@@ -17,58 +18,73 @@ const Dashboard = () => {
 
   const currentUserId = useSelector((state: any) => state.userAuth.uid);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setLeads(data);
-  //     });
-  // }, [currentUserId]);
+  useEffect(() => {
+    try {
+      fetch(`http://localhost:5001/leads/employee/${currentUserId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setLeads(data);
+        });
+    } catch (error) {
+      console.log("Error fetching user in Dashboard.tsx", error);
+    }
+  }, [currentUserId]);
 
-  // useEffect(() => {
-  //   fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setTodaysEvents(data);
-  //     });
-  // }, [currentUserId, todayDate]);
+  useEffect(() => {
+    try {
+      fetch(`http://localhost:5001/events/${todayDate}/${currentUserId}`)
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setTodaysEvents(data);
+        });
+    } catch (error) {
+      console.log("Error fetching events in Dashboard.tsx", error);
+    }
+  }, [currentUserId, todayDate]);
 
   return (
     <div className="dashboard-container">
       <LeadPreview />
       <div className="dashboard-content">
         <div className="activity-leads-container">
-          <div className="my-activity">
-            <h2>My activity</h2>
-          </div>
           <div className="my-leads">
             <h2>My leads</h2>
             <div className="my-leads-list">
-              <LeadList
+              <List
+                type="leads"
                 leads={leads}
                 searchPlaceholder="Search my leads"
                 myLeads={true}
               />
             </div>
           </div>
+          <div className="my-activity">
+            <h2>My activity</h2>
+          </div>
         </div>
         <div className="my-calendar">
-          <h2>Today's Calendar</h2>
+          <h2>Today's Events</h2>
           <div className="today-events-container">
-            {todaysEvents.length > 0 ? (
-              todaysEvents.map((event: any) => {
-                const { event_name, event_time } = event;
-                return (
-                  <DashboardEvent
-                    eventTitle={event_name}
-                    eventTime={event_time}
-                  />
-                );
-              })
-            ) : (
-              <div className="no-events">No events today</div>
-            )}
+            <div className="today-events-container__content">
+              {todaysEvents.length > 0 ? (
+                todaysEvents.map((event: any) => {
+                  const { id, event_name, event_time, event_description } =
+                    event;
+                  return (
+                    <DashboardEvent
+                      key={id}
+                      eventId={id}
+                      eventTitle={event_name}
+                      eventTime={event_time}
+                      eventDescription={event_description}
+                    />
+                  );
+                })
+              ) : (
+                <div className="no-events">No Events Today</div>
+              )}
+            </div>
           </div>
         </div>
       </div>

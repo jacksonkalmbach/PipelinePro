@@ -37,4 +37,13 @@
       color: rgb(196, 196, 196);
     }
   }
+
+  .events {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow: hidden;
+  }
 }

@@ -39,7 +39,7 @@ const AccountSettings = () => {
           setUserData(data);
         });
     } catch (error) {
-      console.log("error fetching user data - account settings page", error);
+      console.log("error fetching user data - Account Settings", error);
     }
   }, [currentUser]);
 

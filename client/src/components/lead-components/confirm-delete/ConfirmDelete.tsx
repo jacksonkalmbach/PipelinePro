@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 import { useSelector, useDispatch } from "react-redux";
 import { removeSelectedLeads } from "../../../store/reducers/leads/selectAllLeadsSlice";
 import {
@@ -13,10 +14,9 @@ interface ConfirmDeleteProps {
 }
 
 const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
+  const { ws } = useContext(UserContext);
   const dispatch = useDispatch();
   const deleteType = useSelector((state: any) => state.showLead.deleteType);
-
-  console.log("deleteType - CONFIRM DELETE", deleteType);
 
   const selectedLeads = useSelector(
     (state: any) => state.selectAllLeads.selectedLeads
@@ -34,26 +34,28 @@ const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
     });
   };
 
-  const confirmDeleteLead = (id: string) => {
+  const confirmDeleteLead = async (id: string) => {
     try {
       if (deleteType === "lead") {
-        fetch(`http://localhost:5001/leads/${id}`, {
+        const response = await fetch(`http://localhost:5001/leads/${id}`, {
           method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
-        dispatch(setShowLeadPreview(false));
-        dispatch(removeSelectedLeads(id));
+        });
+
+        if (response.ok) {
+          ws.emit("delete-lead");
+          dispatch(setShowLeadPreview(false));
+          dispatch(removeSelectedLeads(id));
+        }
       } else if (deleteType === "note") {
-        fetch(`http://localhost:5001/notes/${deleteId}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
+        const response = await fetch(
+          `http://localhost:5001/notes/${deleteId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          ws.emit("delete-note");
+        }
       } else {
         console.log("delete");
       }

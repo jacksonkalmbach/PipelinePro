@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setDeleteType,
@@ -20,10 +21,10 @@ interface Lead {
   last_name: string;
   email: string;
   phone: string;
-  company: string;
+  company_name: string;
   job_title: string;
   lead_status: string;
-  lead_owner: number;
+  lead_owner: string;
 }
 
 const currentLeadDetails = {
@@ -32,14 +33,15 @@ const currentLeadDetails = {
   last_name: "",
   email: "",
   phone: "",
-  company: "",
+  company_name: "",
   job_title: "",
   lead_status: "",
-  lead_owner: 0,
+  lead_owner: "",
 };
 
 const LeadPreview = () => {
   const dispatch = useDispatch();
+  const { ws } = useContext(UserContext);
 
   const [currentLead, setCurrentLead] = useState<Lead>(currentLeadDetails);
   const [firstName, setFirstName] = useState("");
@@ -87,7 +89,7 @@ const LeadPreview = () => {
       setLastName(currentLead.last_name);
       setEmail(currentLead.email);
       setPhone(currentLead.phone);
-      setCompany(currentLead.company);
+      setCompany(currentLead.company_name);
       setJobTitle(currentLead.job_title);
       setStatus(currentLead.lead_status);
     }
@@ -101,6 +103,20 @@ const LeadPreview = () => {
           .then((data) => {
             setNotes(data);
           });
+
+        const handleUpdateNotes = () => {
+          fetch("http://localhost:5001/leads")
+            .then((res) => res.json())
+            .then((data) => {
+              setNotes(data);
+            });
+        };
+
+        ws.on("update-notes", handleUpdateNotes);
+
+        return () => {
+          ws.off("update-notes", handleUpdateNotes);
+        };
       } catch (error) {
         console.log("error fetching lead notes", error);
       }
@@ -110,13 +126,13 @@ const LeadPreview = () => {
   useEffect(() => {
     if (currentLead) {
       try {
-        fetch(`http://localhost:5001/employees/${currentLead.lead_owner}`)
+        fetch(`http://localhost:5001/users/${currentLead.lead_owner}`)
           .then((res) => res.json())
           .then((data) => {
             setOwnerId(data.employee_id);
             setOwnerFirstName(data.first_name);
             setOwnerLastName(data.last_name);
-            setOwnerPhotoURL(data.profile_pic);
+            setOwnerPhotoURL(data.photo_url);
           });
       } catch (error) {
         console.log("error fetching lead owner", error);
@@ -311,17 +327,12 @@ const LeadPreview = () => {
               {addNote && <NewNote leadId={leadId} />}
               {notes.length > 0 &&
                 notes.map((note: any) => {
-                  const {
-                    note_id,
-                    note_title,
-                    note_body,
-                    created_at,
-                    created_by,
-                  } = note;
+                  const { id, note_title, note_body, created_at, created_by } =
+                    note;
                   return (
                     <LeadNote
-                      key={note_id}
-                      noteId={note_id}
+                      key={id}
+                      noteId={id}
                       noteTitle={note_title}
                       noteBody={note_body}
                       noteCreatedAt={created_at}

@@ -4,25 +4,26 @@ const pool = require("../db");
 
 // Create a lead
 router.post("/", async (req, res) => {
+  console.log(req.body);
   try {
     const {
       firstName,
       lastName,
       email,
       phone,
-      company,
+      companyId,
       jobTitle,
       leadStatus,
       leadOwner,
     } = req.body;
     const newLead = await pool.query(
-      "INSERT INTO leads (first_name, last_name, email, phone, company, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+      "INSERT INTO leads (first_name, last_name, email, phone, company_id, job_title, lead_status, lead_owner) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
       [
         firstName,
         lastName,
         email,
         phone,
-        company,
+        companyId,
         jobTitle,
         leadStatus,
         leadOwner,
@@ -38,7 +39,9 @@ router.post("/", async (req, res) => {
 // Get all leads
 router.get("/", async (req, res) => {
   try {
-    const allLeads = await pool.query("SELECT * FROM leads");
+    const allLeads = await pool.query(
+      "SELECT * FROM leads ORDER BY created_at DESC"
+    );
     res.json(allLeads.rows);
   } catch (err) {
     console.error(`Error getting all leads, ${err.message}`);
@@ -49,9 +52,10 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const lead = await pool.query("SELECT * FROM leads WHERE lead_id = $1", [
-      id,
-    ]);
+    const lead = await pool.query(
+      "SELECT leads.*, companies.company_name FROM leads JOIN companies ON leads.company_id = companies.id WHERE leads.id = $1",
+      [id]
+    );
 
     res.json(lead.rows[0]);
   } catch (err) {
@@ -75,14 +79,13 @@ router.get("/employee/:id", async (req, res) => {
 
 // Update a lead
 router.put("/:id", async (req, res) => {
-  console.log("hit put route");
   try {
     console.log("req body", req.body);
     const { id } = req.params;
     const { firstName, lastName, email, phone, company, jobTitle, leadStatus } =
       req.body;
     const updateLead = await pool.query(
-      "UPDATE leads SET first_name = $1, last_name = $2, email = $3, phone = $4, company = $5, job_title = $6, lead_status = $7 WHERE lead_id = $8",
+      "UPDATE leads SET first_name = $1, last_name = $2, email = $3, phone = $4, company_id = $5, job_title = $6, lead_status = $7 WHERE id = $8",
       [firstName, lastName, email, phone, company, jobTitle, leadStatus, id]
     );
 
@@ -96,10 +99,9 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const deleteLead = await pool.query(
-      "DELETE FROM leads WHERE lead_id = $1",
-      [id]
-    );
+    const deleteLead = await pool.query("DELETE FROM leads WHERE id = $1", [
+      id,
+    ]);
     res.json("Lead was deleted!");
   } catch (err) {
     console.error(err.message);

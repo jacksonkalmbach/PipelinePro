@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Event from "../event/Event";
+import Event from "../event/CalendarEvent";
 
 import {
   setShowDayPreview,
   setDatePreview,
+  setYearMonthDay,
 } from "../../../store/reducers/calendar/calendarSlice";
 
 import "./Day.styles.scss";
@@ -47,7 +48,8 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
 
   const handleShowDayPreview = () => {
     dispatch(setShowDayPreview(true));
-    dispatch(setDatePreview(day));
+    dispatch(setDatePreview(isoDate));
+    dispatch(setYearMonthDay(yearMonthDay));
   };
 
   useEffect(() => {
@@ -79,9 +81,13 @@ const Day = ({ day, date, past, otherMonth }: DayProps) => {
       >
         {day.getDate()}
       </div>
-      {eventData && eventData[0] && eventData[0].event_name && (
-        <Event eventName={eventName} />
-      )}
+      <div className="events">
+        {eventData &&
+          eventName[0] &&
+          eventData.map((event) => {
+            return <Event eventName={event.event_name} />;
+          })}
+      </div>
     </div>
   );
 };

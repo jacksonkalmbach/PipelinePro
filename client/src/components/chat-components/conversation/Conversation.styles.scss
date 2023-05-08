@@ -11,8 +11,8 @@
   .send-to {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 100%;
+    justify-content: flex-start;
+    width: calc(100% - 2rem);
     height: 10%;
     padding: 0 1rem;
     gap: 10px;
@@ -21,16 +21,51 @@
       display: none;
     }
 
+    .selected-employee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .material-symbols-outlined {
+        display: flex;
+        cursor: pointer;
+        color: $theme-grey;
+      }
+    }
+
     .search-container {
-      width: 90%;
+      display: flex;
+      position: relative;
+      width: 50%;
+      height: 100%;
+      align-items: center;
+      justify-content: center;
+
+      .search-box {
+        flex: 1;
+        border: transparent;
+      }
+
+      .search-list {
+        position: absolute;
+        top: 90%;
+        left: 0;
+        width: 100%;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      .search-list::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
   .messages-container {
     display: flex;
     flex-direction: column;
-    min-width: calc(100% - 15xwpx);
-    border: 1px solid $theme-lightgrey;
+    min-width: calc(100% - 20px);
+    border-top: 1px solid $theme-lightgrey;
     gap: 20px;
     padding: 10px;
   }
@@ -85,6 +120,10 @@
       width: 95%;
       display: flex;
       justify-content: flex-start;
+
+      .search-container {
+        width: 100%;
+      }
 
       .employee-name {
         padding-right: 10px;

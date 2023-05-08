@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ChatPreview from "../../components/chat-components/chat-preview/ChatPreview";
 import Conversation from "../../components/chat-components/conversation/Conversation";
+import LeadOwnerSearchList from "../../components/lead-components/lead-owner-search-list/LeadOwnerSearchList";
 import SearchBox from "../../components/search-box-component/SearchBox";
 import {
   setConversationId,
@@ -13,6 +14,7 @@ import "./Chat.styles.scss";
 
 const Chat = () => {
   const dispatch = useDispatch();
+
   const newChat = useSelector((state: any) => state.chat.newChat);
   const showAllChats = useSelector((state: any) => state.chat.showAllChats);
   const currentUser = useSelector((state: any) => state.userAuth.uid);
@@ -42,7 +44,9 @@ const Chat = () => {
         .then((data) => {
           setAllConversations(data);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log("error fetching conversations in Chat.tsx", error);
+    }
   }, [currentUser]);
 
   return (
@@ -55,13 +59,6 @@ const Chat = () => {
               <span className="material-symbols-outlined">edit_square</span>
             </div>
           </h1>
-          <div className="search-container">
-            <SearchBox
-              className="search-container"
-              placeholder="Search Chats"
-              onChangeHandler={() => {}}
-            />
-          </div>
           <div className="all-chats">
             {allConversations.map((conversation: any) => {
               const uniqueKey =

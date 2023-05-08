@@ -1,7 +1,10 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { showEditLead } from "../../../store/reducers/leads/showLeadSlice";
+import {
+  showEditLead,
+  setShowCompanyList,
+} from "../../../store/reducers/leads/showLeadSlice";
 
 import LeadRowStatus from "../lead-list-components/lead-row-status/LeadRowStatus";
 
@@ -38,8 +41,17 @@ const EditLead = ({
 }: EditLeadProps) => {
   const dispatch = useDispatch();
 
+  const [isButtonActive, setIsButtonActive] = useState(false);
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const [editStatus, setEditStatus] = useState(leadStatus);
+  const [selectedCompany, setSelectedCompany] = useState(company);
+
+  const selectedCompanyName = useSelector(
+    (state: any) => state.showLead.selectedCompanyName
+  );
+  const selectedCompanyId = useSelector(
+    (state: any) => state.showLead.selectedCompanyId
+  );
 
   const [formFields, setFormFields] = useState({
     firstName,
@@ -52,13 +64,26 @@ const EditLead = ({
     leadStatus,
   });
 
+  useEffect(() => {
+    setSelectedCompany(selectedCompanyName);
+  }, [selectedCompanyName]);
+
+  useEffect(() => {
+    updateSuccess && setTimeout(() => dispatch(showEditLead(false)), 1200);
+  }, [updateSuccess, dispatch]);
+
   const handleCloseEdit = () => {
     dispatch(showEditLead(false));
+  };
+
+  const handleEditCompany = () => {
+    dispatch(setShowCompanyList(true));
   };
 
   const handleInputChange = (event: any) => {
     const { name, value } = event.target;
     setFormFields({ ...formFields, [name]: value });
+    setIsButtonActive(true);
   };
 
   const handleLeadStatusChange = (status: string): void => {
@@ -75,7 +100,7 @@ const EditLead = ({
       fetch(`http://localhost:5001/leads/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formFields),
+        body: JSON.stringify({ ...formFields, company: selectedCompanyId }),
       });
       setUpdateSuccess(true);
     } catch (error) {
@@ -86,14 +111,14 @@ const EditLead = ({
   return (
     <div className="edit-lead-container">
       {updateSuccess ? (
-        <>
-          <div className="close-edit-lead" onClick={handleCloseEdit}>
-            <span className="material-symbols-outlined">close</span>
+        <div className="create-success">
+          <div className="update-success">
+            <div className="material-symbols-border animate">
+              <span className="material-symbols-outlined">check_circle</span>
+            </div>
+            Lead Updated!
           </div>
-          <div className="success-icon">
-            <span className="material-symbols-outlined">done</span>Lead Updated!
-          </div>
-        </>
+        </div>
       ) : (
         <>
           <div className="close-edit-lead" onClick={handleCloseEdit}>
@@ -160,8 +185,9 @@ const EditLead = ({
                   id="company-input"
                   name="company"
                   placeholder={company}
-                  value={formFields.company}
+                  value={selectedCompany}
                   onChange={handleInputChange}
+                  onClick={handleEditCompany}
                 />
               </div>
               <div className="form-group">
@@ -219,7 +245,10 @@ const EditLead = ({
                   />
                 </div>
               </div>
-              <button className="update-lead-button" type="submit">
+              <button
+                className={`update-lead-button ${isButtonActive && "update"}`}
+                type="submit"
+              >
                 Update Lead
               </button>
             </form>

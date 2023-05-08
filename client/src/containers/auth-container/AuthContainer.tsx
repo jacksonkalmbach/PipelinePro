@@ -18,7 +18,7 @@ const AuthContainer = () => {
         <div className="logo-container">
           <img className="logo" src="../assets/pp-logo-black.png" alt="logo" />
         </div>
-        <div>
+        <div className="toggle-container">
           {authChoice === "signin" ? (
             <h1 className="auth-subtitle">Welcome Back</h1>
           ) : (

@@ -8,6 +8,9 @@ const initialState = {
   deleteType: "",
   deleteId: "",
   editLead: false,
+  showCompanyList: false,
+  selectedCompanyName: "",
+  selectedCompanyId: "",
 };
 
 export const showLeadSlice = createSlice({
@@ -17,6 +20,16 @@ export const showLeadSlice = createSlice({
     setShowCreateLead: (state, action) => {
       state.value = action.payload;
     },
+    setShowCompanyList: (state, action) => {
+      state.showCompanyList = action.payload;
+    },
+    setSelectedCompanyName: (state, action) => {
+      state.selectedCompanyName = action.payload;
+    },
+    setSelectedCompanyId: (state, action) => {
+      state.selectedCompanyId = action.payload;
+    },
+
     setStartHidden: (state) => {
       state.value = false;
     },
@@ -50,6 +63,9 @@ export const {
   setDeleteType,
   setDeleteId,
   showEditLead,
+  setShowCompanyList,
+  setSelectedCompanyName,
+  setSelectedCompanyId,
 } = showLeadSlice.actions;
 
 export default showLeadSlice.reducer;

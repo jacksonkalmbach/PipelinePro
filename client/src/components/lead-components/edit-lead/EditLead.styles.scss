@@ -11,7 +11,7 @@
   transform: translate(50%, -50%);
   width: fit-content;
   height: fit-content;
-  z-index: 9999;
+  z-index: 9901;
   padding: 40px;
 
   display: flex;
@@ -114,6 +114,7 @@
         border-radius: 5px;
         width: fit-content;
         align-self: flex-end;
+        background-color: $secondary-color;
 
         &:hover {
           cursor: pointer;
@@ -122,6 +123,47 @@
         &:active {
           transform: scale(0.95);
         }
+      }
+    }
+  }
+}
+
+.create-success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+
+  .update-success {
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    color: #24a16e;
+    font-size: 2rem;
+
+    .material-symbols-border {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #e5f4ec;
+      height: 3rem;
+      width: 3rem;
+      border-radius: 50%;
+      border: 1px solid #e5f4ec;
+      background-color: #e5f4ec;
+
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 1, "wght" 500, "GRAD" 0, "opsz" 48;
+        color: #24a16e;
+        font-size: 2rem;
+      }
+
+      &.animate {
+        animation-name: pulse;
+        animation-duration: 1s;
+        animation-fill-mode: both;
       }
     }
   }

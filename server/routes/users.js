@@ -28,4 +28,42 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// Get all users by department
+router.get("/department/:department", async (req, res) => {
+  try {
+    const { department } = req.params;
+    const users = await pool.query(
+      "SELECT * FROM users WHERE department = $1",
+      [department]
+    );
+    res.json(users.rows);
+  } catch (err) {
+    console.error(`Error getting users by department, ${err.message}`);
+  }
+});
+
+// Get all users by company
+router.get("/company/:company", async (req, res) => {
+  try {
+    const { company } = req.params;
+    const users = await pool.query(
+      "SELECT * FROM users WHERE company_id = $1",
+      [company]
+    );
+    res.json(users.rows);
+  } catch (err) {
+    console.error(`Error getting users by company, ${err.message}`);
+  }
+});
+
+// Get all users
+router.get("/", async (req, res) => {
+  try {
+    const allUsers = await pool.query("SELECT * FROM users");
+    res.json(allUsers.rows);
+  } catch (err) {
+    console.error(`Error getting all users, ${err.message}`);
+  }
+});
+
 module.exports = router;

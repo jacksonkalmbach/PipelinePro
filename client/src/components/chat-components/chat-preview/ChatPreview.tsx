@@ -16,14 +16,14 @@ interface ChatPreviewProps {
 }
 
 const defaultSender = {
-  id: 0,
+  id: "",
   first_name: "",
   last_name: "",
   photo_url: "",
 };
 
 interface Sender {
-  id: number;
+  id: string;
   first_name: string;
   last_name: string;
   photo_url: string;
@@ -35,12 +35,10 @@ const ChatPreview = ({
   conversation_id,
 }: ChatPreviewProps) => {
   const dispatch = useDispatch();
+
   const [sender, setSender] = useState<Sender>(defaultSender);
   const [isLoaded, setIsLoaded] = useState(false);
   const [lastMessage, setLastMessage] = useState("");
-  const selectedConversationId = useSelector(
-    (state: any) => state.chat.conversationId
-  );
 
   const handleChatPreviewClick = () => {
     dispatch(setShowAllChats(false));
@@ -81,9 +79,10 @@ const ChatPreview = ({
           firstName={sender.first_name}
           lastName={sender.last_name}
           profilePic={sender.photo_url}
+          title={lastMessage}
         />
       )}
-      <div className="last-message">{lastMessage}</div>
+      {/* <div className="last-message">{lastMessage}</div> */}
     </div>
   );
 };
