@@ -14,11 +14,20 @@ const io = new Server(server, {
   },
 });
 
+app.get("/", function (req, res) {
+  res.sendFile(
+    path.join(__dirname + "../client/build/index.html"),
+    function (err) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+
 // Socket.io //
 
 io.on("connection", (socket) => {
-  console.log("a user connected");
-
   socket.on("new-lead", () => {
     io.emit("update-leads");
   });
@@ -29,6 +38,14 @@ io.on("connection", (socket) => {
 
   socket.on("sign-in", () => {
     console.log("user signed in");
+  });
+
+  socket.on("new-note", () => {
+    io.emit("update-notes");
+  });
+
+  socket.on("delete-note", () => {
+    io.emit("update-notes");
   });
 
   socket.on("disconnect", () => {
@@ -57,6 +74,8 @@ app.use("/events", eventRouter);
 app.use("/chat", chatRouter);
 app.use("/company", companyRouter);
 
-server.listen(5001, () => {
-  console.log("Server is running on port 5001");
+const PORT = process.env.PORT || 5001;
+
+server.listen(PORT, () => {
+  console.log("Server is running on port" + PORT);
 });

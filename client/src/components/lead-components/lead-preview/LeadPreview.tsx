@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { UserContext } from "../../../context/UserContext";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setDeleteType,
@@ -40,6 +41,7 @@ const currentLeadDetails = {
 
 const LeadPreview = () => {
   const dispatch = useDispatch();
+  const { ws } = useContext(UserContext);
 
   const [currentLead, setCurrentLead] = useState<Lead>(currentLeadDetails);
   const [firstName, setFirstName] = useState("");
@@ -101,6 +103,20 @@ const LeadPreview = () => {
           .then((data) => {
             setNotes(data);
           });
+
+        const handleUpdateNotes = () => {
+          fetch("http://localhost:5001/leads")
+            .then((res) => res.json())
+            .then((data) => {
+              setNotes(data);
+            });
+        };
+
+        ws.on("update-notes", handleUpdateNotes);
+
+        return () => {
+          ws.off("update-notes", handleUpdateNotes);
+        };
       } catch (error) {
         console.log("error fetching lead notes", error);
       }

@@ -47,13 +47,15 @@ const ConfirmDelete = ({ selectedId }: ConfirmDeleteProps) => {
           dispatch(removeSelectedLeads(id));
         }
       } else if (deleteType === "note") {
-        fetch(`http://localhost:5001/notes/${deleteId}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            console.log(data);
-          });
+        const response = await fetch(
+          `http://localhost:5001/notes/${deleteId}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          ws.emit("delete-note");
+        }
       } else {
         console.log("delete");
       }

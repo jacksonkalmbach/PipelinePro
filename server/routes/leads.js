@@ -85,7 +85,7 @@ router.put("/:id", async (req, res) => {
     const { firstName, lastName, email, phone, company, jobTitle, leadStatus } =
       req.body;
     const updateLead = await pool.query(
-      "UPDATE leads SET first_name = $1, last_name = $2, email = $3, phone = $4, company = $5, job_title = $6, lead_status = $7 WHERE lead_id = $8",
+      "UPDATE leads SET first_name = $1, last_name = $2, email = $3, phone = $4, company_id = $5, job_title = $6, lead_status = $7 WHERE id = $8",
       [firstName, lastName, email, phone, company, jobTitle, leadStatus, id]
     );
 

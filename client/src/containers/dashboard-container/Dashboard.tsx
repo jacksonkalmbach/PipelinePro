@@ -48,9 +48,6 @@ const Dashboard = () => {
       <LeadPreview />
       <div className="dashboard-content">
         <div className="activity-leads-container">
-          <div className="my-activity">
-            <h2>My activity</h2>
-          </div>
           <div className="my-leads">
             <h2>My leads</h2>
             <div className="my-leads-list">
@@ -61,6 +58,9 @@ const Dashboard = () => {
                 myLeads={true}
               />
             </div>
+          </div>
+          <div className="my-activity">
+            <h2>My activity</h2>
           </div>
         </div>
         <div className="my-calendar">
