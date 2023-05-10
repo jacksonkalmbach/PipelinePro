@@ -9,7 +9,6 @@ interface NumberProps {
 
 const Number = ({ date, day }: NumberProps) => {
   const number = day.getDate();
-  console.log(date, day);
 
   return (
     <div

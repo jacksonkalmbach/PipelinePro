@@ -47,3 +47,11 @@
     overflow: hidden;
   }
 }
+
+@media (max-width: 767px) {
+  .day {
+    .events {
+      display: none;
+    }
+  }
+}

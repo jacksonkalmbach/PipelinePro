@@ -94,6 +94,10 @@
       }
     }
   }
+
+  .day-events {
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -118,7 +122,7 @@
 
       .days-container {
         .day-name {
-          justify-content: space-between;
+          justify-content: space-around;
           .name {
             display: none;
           }
@@ -126,18 +130,6 @@
           .letter {
             display: flex;
           }
-        }
-
-        .days {
-          display: none;
-        }
-
-        .this-week {
-          display: flex;
-          justify-content: space-around;
-          align-items: center;
-          width: 100%;
-          // display: none;
         }
       }
     }

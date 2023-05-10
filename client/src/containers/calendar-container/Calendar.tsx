@@ -12,6 +12,8 @@ const Calendar = () => {
     (state: any) => state.calendar.showDayPreview
   );
 
+  const [events, setEvents] = useState([]);
+
   const date = new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -128,6 +130,8 @@ const Calendar = () => {
             <div className="days">{days}</div>
             <div className="this-week">{thisWeek}</div>
           </div>
+        </div>
+        <div className="day-events">
         </div>
       </div>
     </>

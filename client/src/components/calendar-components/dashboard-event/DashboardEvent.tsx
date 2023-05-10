@@ -58,17 +58,14 @@ const DashboardEvent = ({
             <p className="description">{eventDescription}</p>
           )}
         </div>
-        <div className="body-container__edit-delete-event">
-          <span className="material-symbols-outlined" onClick={handleEditEvent}>
-            edit
-          </span>
+        {/* <div className="body-container__edit-delete-event">
           <span
             className="material-symbols-outlined"
             onClick={handleDeleteEvent}
           >
             delete
           </span>
-        </div>
+        </div> */}
       </div>
     </div>
   );
