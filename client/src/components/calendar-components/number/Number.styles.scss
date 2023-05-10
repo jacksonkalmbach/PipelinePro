@@ -1,0 +1,16 @@
+@import "../../../styles/variables.scss";
+
+.number-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  height: 2rem;
+  width: 2rem;
+
+  &.today {
+    background-color: $primary-color;
+    color: white;
+  }
+}

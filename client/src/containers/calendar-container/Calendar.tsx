@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 
 import DayPreview from "../../components/calendar-components/day-preview/DayPreview";
 import Day from "../../components/calendar-components/day/Day";
+import Number from "../../components/calendar-components/number/Number";
 
 import "./Calendar.styles.scss";
 
@@ -59,7 +60,8 @@ const Calendar = () => {
 
   for (let i = startOfWeek.getDate(); i <= endOfWeek.getDate(); i++) {
     const day = new Date(yearState, monthState - 1, i);
-    thisWeek.push(<Day key={i * Math.random()} day={day} date={date} />);
+    // thisWeek.push(<Day key={i * Math.random()} day={day} date={date} />);
+    thisWeek.push(<Number day={day} date={date} />);
   }
 
   const handlePreviousMonth = () => {

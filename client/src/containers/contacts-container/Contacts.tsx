@@ -26,11 +26,7 @@ const Contacts = () => {
 
   return (
     <div className="contacts-container">
-      <SectionNavbar
-        section={"contacts"}
-        sectionTitles={["Leads, Contacts, Company"]}
-      />
-      
+      <SectionNavbar section={"contacts"} sectionTitles={["Leads, Company"]} />
     </div>
   );
 };

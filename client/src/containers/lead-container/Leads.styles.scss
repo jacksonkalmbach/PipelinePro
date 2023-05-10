@@ -12,24 +12,35 @@
   padding: 20px;
   overflow-y: hidden;
 
-  .leads-count {
-    font-family: $font-family;
-    font-size: 50px;
-    font-weight: 600;
-    color: #000;
-    margin-left: 30px;
-    width: fit-content;
-    padding: 0;
+  .count-and-create {
+    // border: 1px solid red;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+
+    .leads-count {
+      font-family: $font-family;
+      font-size: 50px;
+      font-weight: 600;
+      color: #000;
+      margin-left: 30px;
+      width: fit-content;
+      padding: 0;
+    }
+
+    .filters-and-add-lead {
+      width: 50%;
+    }
   }
 
   .all-leads-list {
-    height: 540px;
+    height: 600px;
   }
 }
 
 @media (max-width: 767px) {
   .leads-container {
-    height: 86vh;
+    
     width: 90vw;
 
     .count-and-create {

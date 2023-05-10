@@ -346,7 +346,9 @@
 @media (max-width: 767px) {
   .lead-preview-container {
     width: 100vw;
+    height: 90vh;
     overflow-y: scroll;
+    top: 0;
 
     .lead-preview-header {
       height: fit-content;

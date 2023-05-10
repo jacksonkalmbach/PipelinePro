@@ -35,7 +35,7 @@ const SectionNavbar = ({ section, sectionTitles }: SectionNavbarProps) => {
             Leads
           </Link>
         </div>
-        <div
+        {/* <div
           className={`contacts-section ${
             selectedSection === 1 ? "selected" : ""
           }`}
@@ -44,7 +44,7 @@ const SectionNavbar = ({ section, sectionTitles }: SectionNavbarProps) => {
           <Link to="/contacts/contacts" className="link">
             Contacts
           </Link>
-        </div>
+        </div> */}
         <div
           className={`contacts-section ${
             selectedSection === 2 ? "selected" : ""

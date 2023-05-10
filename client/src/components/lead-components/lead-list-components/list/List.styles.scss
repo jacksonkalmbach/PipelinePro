@@ -5,7 +5,7 @@
   flex-direction: column;
   align-self: center;
   max-height: 100%;
-  width: 100%;
+  width: 99%;
   border: 1px solid $theme-lightgrey;
 
   .list-search {
@@ -88,12 +88,12 @@
 
 @media (max-width: 767px) {
   .list-container {
-    width: 100%;
+    width: 99%;
     overflow-x: hidden;
 
     .list-search {
       align-self: center;
-      width: 90%;
+      width: calc(90% - 40px);
       padding: 20px 0;
     }
 
